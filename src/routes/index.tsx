@@ -16,6 +16,7 @@ import olegAsset from "@/assets/oleg-davidovich.png.asset.json";
 import larisaAsset from "@/assets/larisa-kiseleva.png.asset.json";
 import aleksandraAsset from "@/assets/aleksandra-grechushenko.png.asset.json";
 import alekseyAsset from "@/assets/aleksey-farafonov.png.asset.json";
+import icebergAsset from "@/assets/iceberg.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -855,7 +856,13 @@ function Bridge() {
   return (
     <section className="py-24">
       <Container className="grid gap-12 md:grid-cols-2 md:items-center">
-        <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-primary via-primary/80 to-accent" />
+        <div className="flex aspect-[4/5] items-center justify-center rounded-3xl bg-white p-6">
+          <img
+            src={icebergAsset.url}
+            alt="Айсберг — метафора скрытого кассового разрыва"
+            className="h-full w-full object-contain"
+          />
+        </div>
         <div>
           <h2 className="text-4xl font-black leading-tight tracking-tight md:text-5xl">
             Знакомо ощущение, когда вы вливаете деньги в рекламу, а продажи стоят на месте?
@@ -871,15 +878,32 @@ function Bridge() {
           </p>
         </div>
       </Container>
-      <Container className="mt-16">
-        <div className="rounded-3xl border border-border bg-secondary p-8 md:p-12 text-center">
-          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-foreground md:text-xl">
-            Нажмите на кнопку ниже и узнайте, не происходит ли у вас кассового разрыва,
-            который вы не замечаете. Мы проведём вам бесплатную диагностику
-            и дадим вашу личную стратегию для вашего бизнеса.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <CtaButton>Получить бесплатную диагностику</CtaButton>
+      <Container className="mt-20">
+        <div className="relative overflow-hidden rounded-[2rem] bg-primary p-10 text-primary-foreground md:p-16">
+          <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-accent/30 blur-3xl" />
+          <div className="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-primary-foreground/10 blur-3xl" />
+          <div className="relative grid gap-10 md:grid-cols-[1.4fr_1fr] md:items-center">
+            <div>
+              <div className="text-xs font-black uppercase tracking-[0.18em] text-primary-foreground/70">Бесплатная диагностика</div>
+              <h3 className="mt-5 text-3xl font-black leading-tight tracking-tight md:text-4xl">
+                Узнайте, нет ли у вас скрытого кассового разрыва — пока он не разрушил бизнес.
+              </h3>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-primary-foreground/85 md:text-lg">
+                Проведём бесплатную диагностику вашей бизнес-модели и дадим личную стратегию
+                под ваш бизнес. Без обязательств — только конкретные цифры и решения.
+              </p>
+              <ul className="mt-6 grid gap-2 text-sm text-primary-foreground/85 md:text-base">
+                <li>— Найдём, где утекают деньги</li>
+                <li>— Покажем точки роста на ближайшие 90 дней</li>
+                <li>— Личная стратегия в подарок</li>
+              </ul>
+            </div>
+            <div className="flex flex-col items-start gap-4 md:items-end">
+              <CtaButton variant="ghost">Получить диагностику</CtaButton>
+              <p className="text-sm text-primary-foreground/70">
+                Берём не всех — 4 компании в неделю.
+              </p>
+            </div>
           </div>
         </div>
       </Container>
