@@ -18,28 +18,39 @@ export const Route = createFileRoute("/")({
 const comparison = [
   {
     problem: "Оторванность от реальности региона",
-    mba: "Дают глобальные масштабные решения и кейсы корпораций, которые не приземляются в Липецке.",
-    us: "Берём мировые тренды и переводим их в реальность региона — конкретно под вашу отрасль и рынок.",
+    mba: "Вам дают масштабные кейсы международных гигантов вроде IKEA или Леруа Мерлен. Но бизнес-практики мировых корпораций абсолютно не применимы для розницы или производства в Липецке.",
+    usTitle: "Полная адаптация под регион.",
+    us: "Мы берём фундаментальную мировую практику и перекладываем её строго на суровую конъюнктуру вашего города, учитывая местный рынок, ресурсы и логистику.",
   },
   {
-    problem: "Знания без сборки",
-    mba: "Сгружают гору запчастей: маркетинг, финансы, HR. Собирать в гараже вы должны сами.",
-    us: "IKEA для вашего бизнеса: на консилиумах собираем модель руками, шаг за шагом.",
+    problem: "Слепота к личной стратегии",
+    mba: "Вас учат просто «растить показатели». Никто не проверяет, подходит ли этот бизнес вам лично. Предприниматель годами выгорает и саботирует процессы, не понимая причин.",
+    usTitle: "Работа с бизнес-психологом и коучем.",
+    us: "Мы проверяем бизнес-модель на синхронность с вашей личностью. Если проект вам претит, вовремя найдём скрытый саботаж и перестроим формат так, чтобы вы кайфовали от управления.",
+  },
+  {
+    problem: "Игнорирование трендов рынка",
+    mba: "Вам дают устаревшие академические учебники. Собственник думает, что бизнес не растёт, потому что «в России сейчас тяжело», и упускает реальные изменения в законах и налогах.",
+    usTitle: "Внедрение актуальных трендов.",
+    us: "Мы показываем, куда реально катится рынок прямо сейчас, и внедряем новые тренды работы в вашу модель, чтобы вы не хватались за всё подряд, а били в одну цель.",
   },
   {
     problem: "Психологический блок на продажи",
-    mba: "Стандартные скрипты и схемы воронки. Не работают, если у собственника страх перед продажами.",
-    us: "Снимаем ощущение «впаривания» у собственника и команды. Что, как и кому продавать без стресса.",
+    mba: "Вам дают стандартные скрипты и схемы воронки продаж. Но они не работают, если у самого собственника или его команды есть внутренний дискомфорт и страх перед продажами.",
+    usTitle: "Проработка барьеров.",
+    us: "Мы помогаем собственнику и ключевой команде избавиться от ощущения «впаривания», убираем дискомфорт и даём чёткое понимание: что, как и кому продавать без стресса.",
   },
   {
     problem: "Смертельные привычки в управлении",
-    mba: "Обучение не лезет в старые привычки: дробление на 10 ИП, налоговые риски, «пронесёт».",
-    us: "Разбираем управленческие паттерны и пересобираем под управляемую систему.",
+    mba: "Обучение не лезет в ваши старые привычки. Предприниматель по привычке дробит компанию на 10 ИП, плодит дикие налоговые риски и думает: «Я так 100 раз делал, пронесёт». Система становится неуправляемой.",
+    usTitle: "Защита от юридических и налоговых мин.",
+    us: "Мы жёстко вскрываем старые, опасные привычки управления, которые морально умерли. Пересобираем структуру компании, защищая уязвимые места до того, как прилетит проверка.",
   },
   {
     problem: "Скрытые финансовые дыры",
-    mba: "Учат абстрактному бухучёту. Собственник годами живёт в иллюзии роста из-за оборотных денег.",
-    us: "Заставляем пересчитать реальные цифры. Подсвечиваем и ликвидируем кассовый разрыв.",
+    mba: "Вас учат абстрактному бухучёту. При этом собственник может годами жить в иллюзии, что компания растёт, просто потому что есть постоянный поток оборотных денег.",
+    usTitle: "Поиск невидимых кассовых разрывов.",
+    us: "На консилиумах мы заставляем вас полностью пересчитать реальные цифры. Мы подсветим и ликвидируем кассовый разрыв до того, как он физически разрушит и бизнес, и вас.",
   },
 ];
 
@@ -257,40 +268,37 @@ function Problem() {
 
 function Comparison() {
   return (
-    <section className="bg-secondary/40 py-24">
-      <Container>
-        <Eyebrow>Сравнение</Eyebrow>
-        <h2 className="mt-6 max-w-3xl text-4xl font-black tracking-tight md:text-5xl">
-          MBA и онлайн-курсы vs школа Кремневой
-        </h2>
-
-        <div className="mt-12 overflow-hidden rounded-3xl border border-border bg-card">
-          <div className="hidden grid-cols-[1.1fr_1.4fr_1.4fr] gap-px bg-border text-xs font-bold uppercase tracking-[0.14em] md:grid">
-            <div className="bg-card px-6 py-4 text-foreground/60">Критерий</div>
-            <div className="bg-card px-6 py-4 text-foreground/60">Стандарт MBA / онлайн-курсы</div>
-            <div className="bg-card px-6 py-4 text-primary">Школа Кремневой</div>
-          </div>
-          <div className="divide-y divide-border">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] py-24 text-white">
+      <div className="pointer-events-none absolute -right-32 top-10 h-96 w-96 rounded-full bg-emerald-400/10 blur-3xl" />
+      <div className="pointer-events-none absolute -left-32 bottom-10 h-96 w-96 rounded-full bg-emerald-300/10 blur-3xl" />
+      <Container className="relative">
+        <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-sm">
+          <div className="divide-y divide-white/10">
             {comparison.map((row) => (
-              <div key={row.problem} className="grid gap-6 p-6 md:grid-cols-[1.1fr_1.4fr_1.4fr] md:gap-px md:bg-border md:p-0">
-                <div className="md:bg-card md:p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground md:hidden">Критерий</p>
-                  <p className="mt-1 text-lg font-bold text-foreground md:mt-0">{row.problem}</p>
+              <div
+                key={row.problem}
+                className="grid gap-5 p-6 md:grid-cols-[0.9fr_1.4fr_1.4fr] md:gap-8 md:p-8"
+              >
+                <div>
+                  <p className="text-lg font-bold leading-snug text-white md:text-xl">
+                    {row.problem}
+                  </p>
                 </div>
-                <div className="md:bg-card md:p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground md:hidden">MBA / онлайн</p>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground md:mt-0">{row.mba}</p>
+                <div>
+                  <p className="text-sm leading-relaxed text-white/65">{row.mba}</p>
                 </div>
-                <div className="rounded-2xl bg-secondary p-5 md:rounded-none md:bg-card md:p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-primary md:hidden">Школа Кремневой</p>
-                  <p className="mt-1 text-sm leading-relaxed text-foreground md:mt-0">{row.us}</p>
+                <div className="rounded-2xl bg-white/[0.04] p-5 md:bg-transparent md:p-0">
+                  <p className="text-base font-bold leading-snug text-emerald-200 md:text-lg">
+                    {row.usTitle}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/80">{row.us}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <p className="mt-10 max-w-3xl text-base text-muted-foreground">
+        <p className="mt-10 max-w-3xl text-base text-white/70">
           Если узнали свои проблемы — запишитесь на составление бесплатной бизнес-стратегии.
           Это ни к чему не обязывает, и мы ничего не будем продавать.
         </p>
