@@ -1318,3 +1318,115 @@ function Footer() {
     </footer>
   );
 }
+
+function LeadDialog() {
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [messenger, setMessenger] = useState("");
+  const [contact, setContact] = useState<"call" | "write">("call");
+  const [sent, setSent] = useState(false);
+
+  useEffect(() => {
+    const handler = () => {
+      setSent(false);
+      setOpen(true);
+    };
+    window.addEventListener("open-lead-dialog", handler);
+    return () => window.removeEventListener("open-lead-dialog", handler);
+  }, []);
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: backend hookup — пока просто фиксируем состояние «отправлено»
+    console.log("lead", { name, phone, messenger, contact });
+    setSent(true);
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Оставьте заявку</DialogTitle>
+          <DialogDescription>
+            Свяжемся с вами в удобном формате — позвоним или напишем в мессенджер.
+          </DialogDescription>
+        </DialogHeader>
+        {sent ? (
+          <div className="py-6 text-center">
+            <p className="text-lg font-semibold text-primary">Заявка принята ✓</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Свяжемся с вами в ближайшее время.
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={submit} className="space-y-4">
+            <div>
+              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Ваше имя
+              </label>
+              <Input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Имя" />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Телефон
+              </label>
+              <Input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+                placeholder="+7 (___) ___-__-__"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Мессенджер (Telegram, WhatsApp, MAX, VK — любой)
+              </label>
+              <Input
+                value={messenger}
+                onChange={(e) => setMessenger(e.target.value)}
+                placeholder="@username или ссылка"
+              />
+            </div>
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Как с вами связаться
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setContact("call")}
+                  className={`rounded-md border px-3 py-2 text-sm font-semibold transition-colors ${
+                    contact === "call"
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-background hover:bg-secondary"
+                  }`}
+                >
+                  Позвонить
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setContact("write")}
+                  className={`rounded-md border px-3 py-2 text-sm font-semibold transition-colors ${
+                    contact === "write"
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-background hover:bg-secondary"
+                  }`}
+                >
+                  Написать
+                </button>
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Отправить заявку <ArrowRight className="h-4 w-4" />
+            </button>
+          </form>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}
