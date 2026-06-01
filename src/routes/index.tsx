@@ -433,7 +433,7 @@ function Hero() {
           <span className="inline-block rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white">
             Практическая бизнес-школа
           </span>
-          <h1 className="mt-8 text-5xl font-black leading-[0.95] tracking-tight text-white md:text-7xl">
+          <h1 className="mt-8 text-5xl font-black leading-[0.95] tracking-tight md:text-7xl bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
             Пересобери свою<br />бизнес-модель
           </h1>
           <p className="mt-6 text-xl font-semibold text-white/90 md:text-2xl">
@@ -462,8 +462,8 @@ function Quiz() {
     <section className="border-y border-border bg-secondary/50">
       <Container className="py-20 md:py-24">
         <div className="max-w-4xl">
-          <h2 className="text-4xl font-black leading-[1.1] tracking-tight text-foreground md:text-5xl lg:text-6xl">
-            Какой вы собственник <span className="text-primary">и где ваши</span> невидимые источники дохода?
+          <h2 className="text-3xl font-black leading-[1.1] tracking-tight md:text-4xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
+            Какой вы собственник и где ваши невидимые источники дохода?
           </h2>
           <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
             Нажмите на кнопку ниже, чтобы понять, какой бизнес подходит под вашу личность,
@@ -522,9 +522,9 @@ function Problem() {
     <section className="py-24">
       <Container className="grid items-center gap-12 md:grid-cols-[1.1fr_1fr]">
         <div>
-          <h2 className="text-4xl font-black leading-tight tracking-tight md:text-5xl">
+          <h2 className="text-4xl font-black leading-tight tracking-tight md:text-5xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
             Большинство бизнес-школ дают ценные знания,<br />
-            <span className="text-primary">но выдают их как запчасти от автомобиля.</span>
+            но выдают их как запчасти от автомобиля.
           </h2>
           <p className="mt-8 max-w-xl text-lg text-muted-foreground">
             Вам сгружают гору классных деталей — маркетинг, финансы, HR — а дальше
@@ -606,7 +606,7 @@ function Teachers() {
   return (
     <section className="bg-white py-24 text-neutral-900">
       <Container>
-        <h2 className="max-w-3xl text-4xl font-black tracking-tight text-neutral-900 md:text-5xl">
+        <h2 className="max-w-3xl text-4xl font-black tracking-tight md:text-5xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
           Преподаватели
         </h2>
         <p className="mt-6 max-w-3xl text-lg text-neutral-600">
@@ -657,12 +657,12 @@ function Programs() {
 
         <div className="mt-8 rounded-3xl border border-border bg-card p-8 md:p-12">
           <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">Каталог</p>
-          <h3 className="mt-3 text-3xl font-black tracking-tight md:text-4xl">Выберите направление</h3>
+          <h3 className="mt-3 text-3xl font-black tracking-tight md:text-4xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">Выберите направление</h3>
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {programs.map((p, i) => (
               <article key={p.title} className="flex flex-col rounded-2xl border border-border bg-muted/60 p-6 transition-colors hover:bg-muted">
                 <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-primary">{p.tag}</p>
-                <h4 className="mt-3 text-lg font-bold leading-snug text-foreground">{p.title}</h4>
+                <h4 className="mt-3 text-lg font-bold leading-snug bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">{p.title}</h4>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
                 <button
                   onClick={() => setOpenIdx(i)}
@@ -710,7 +710,7 @@ function ProgramDialog({ program, onClose }: { program: ProgramDetail | null; on
             <div className="rounded-t-lg bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-8 text-white md:p-10">
               <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-200">{program.tag}</p>
               <DialogHeader className="mt-3 space-y-3">
-                <DialogTitle className="text-3xl font-black tracking-tight md:text-4xl text-white text-left">
+                <DialogTitle className="text-3xl font-black tracking-tight md:text-4xl text-left bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
                   {program.title}
                 </DialogTitle>
                 <DialogDescription className="text-sm leading-relaxed text-white/85 md:text-base text-left">
