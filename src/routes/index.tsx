@@ -658,17 +658,33 @@ function Programs() {
         <div className="mt-8 rounded-3xl border border-border bg-card p-8 md:p-12">
           <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">Каталог</p>
           <h3 className="mt-3 text-3xl font-black tracking-tight md:text-4xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">Выберите направление</h3>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {programs.map((p, i) => (
-              <article key={p.title} className="flex flex-col rounded-2xl border border-border bg-muted/60 p-6 transition-colors hover:bg-muted">
-                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-primary">{p.tag}</p>
-                <h4 className="mt-3 text-lg font-bold leading-snug bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">{p.title}</h4>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+              <article
+                key={p.title}
+                className="group relative flex flex-col rounded-3xl border border-emerald-100/70 bg-white p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_32px_64px_-16px_rgba(6,78,59,0.18)]"
+              >
+                <div className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-tr-3xl bg-gradient-to-br from-emerald-100/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-emerald-400/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+                <span className="self-start rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[#059669]">
+                  {p.tag}
+                </span>
+
+                <h4 className="mt-6 text-2xl font-bold leading-snug bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
+                  {p.title}
+                </h4>
+
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {p.desc}
+                </p>
+
                 <button
                   onClick={() => setOpenIdx(i)}
-                  className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-primary hover:bg-secondary"
+                  className="mt-8 inline-flex w-fit items-center gap-2 rounded-xl border border-emerald-100 bg-emerald-50/60 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#064e3b] transition-all duration-300 hover:bg-[#064e3b] hover:text-white"
                 >
-                  Подробнее <ArrowRight className="h-3.5 w-3.5" />
+                  Подробнее
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
               </article>
             ))}
