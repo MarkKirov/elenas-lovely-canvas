@@ -723,6 +723,15 @@ function ProgramDialog({ program, onClose }: { program: ProgramDetail | null; on
                           Блоки: {m.blocks}
                         </div>
                       )}
+                      {m.points && (
+                        <ul className="mt-3 space-y-2">
+                          {m.points.map((p) => (
+                            <li key={p} className="rounded-lg border border-border bg-background px-3 py-2 text-sm leading-snug text-foreground/85">
+                              {p}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                     </div>
                   ))}
                 </div>
