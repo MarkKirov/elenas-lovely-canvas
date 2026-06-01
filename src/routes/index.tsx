@@ -595,6 +595,158 @@ function Programs() {
   );
 }
 
+function ProgramDialog({ program, onClose }: { program: ProgramDetail | null; onClose: () => void }) {
+  const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const handleClose = (open: boolean) => {
+    if (!open) {
+      onClose();
+      setTimeout(() => {
+        setSent(false);
+        setPhone("");
+        setName("");
+      }, 200);
+    }
+  };
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phone.trim()) return;
+    setSent(true);
+  };
+
+  return (
+    <Dialog open={!!program} onOpenChange={handleClose}>
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-0 gap-0">
+        {program && (
+          <>
+            <div className="rounded-t-lg bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-8 text-white md:p-10">
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-200">{program.tag}</p>
+              <DialogHeader className="mt-3 space-y-3">
+                <DialogTitle className="text-3xl font-black tracking-tight md:text-4xl text-white text-left">
+                  {program.title}
+                </DialogTitle>
+                <DialogDescription className="text-sm leading-relaxed text-white/85 md:text-base text-left">
+                  {program.desc}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {program.meta.map((m) => (
+                  <span key={m} className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-semibold">
+                    {m}
+                  </span>
+                ))}
+              </div>
+              <ul className="mt-6 space-y-2">
+                {program.highlights.map((h) => (
+                  <li key={h} className="rounded-xl bg-white/10 px-4 py-2.5 text-sm leading-snug">
+                    {h}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-8 p-8 md:p-10">
+              {program.host && (
+                <div className="rounded-2xl border border-border bg-muted/40 p-5 md:p-6">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">{program.host.role}</p>
+                  <div className="mt-4 flex flex-col gap-5 md:flex-row md:items-start">
+                    <img
+                      src={program.host.img}
+                      alt={program.host.name}
+                      className="h-32 w-32 flex-shrink-0 rounded-xl object-cover md:h-36 md:w-36"
+                    />
+                    <div className="flex-1">
+                      <h4 className="text-xl font-black md:text-2xl">{program.host.name}</h4>
+                      <ul className="mt-3 space-y-2">
+                        {program.host.bullets.map((b) => (
+                          <li key={b} className="flex gap-2 text-sm leading-relaxed text-foreground/80">
+                            <span className="mt-2 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div>
+                <h4 className="text-lg font-black md:text-xl">Что получат участники</h4>
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                  {program.outcomes.map((o) => (
+                    <div key={o} className="rounded-xl border border-emerald-200/60 bg-emerald-50/50 p-4 text-sm leading-relaxed">
+                      {o}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-lg font-black md:text-xl">Программа</h4>
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                  {program.modules.map((m) => (
+                    <div key={m.label} className="rounded-xl bg-muted/60 p-4">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary">{m.label}</p>
+                      <p className="mt-2 font-bold leading-snug">{m.title}</p>
+                      {m.sub && <p className="mt-1 text-sm text-muted-foreground">{m.sub}</p>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-2xl bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-6 text-white md:p-8">
+                {sent ? (
+                  <div className="py-4 text-center">
+                    <p className="text-xl font-black">Спасибо! Заявка отправлена.</p>
+                    <p className="mt-2 text-sm text-white/80">Свяжемся с вами в ближайшее время.</p>
+                  </div>
+                ) : (
+                  <>
+                    <h4 className="text-xl font-black md:text-2xl">Узнайте, подойдёт ли вам эта программа</h4>
+                    <p className="mt-2 text-sm text-white/80">
+                      Оставьте телефон — перезвоним, зададим короткие вопросы и расскажем, ваша ли это программа.
+                    </p>
+                    <form onSubmit={submit} className="mt-5 grid gap-3 md:grid-cols-[1fr_1fr_auto]">
+                      <Input
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Ваше имя"
+                        className="bg-white text-foreground placeholder:text-muted-foreground"
+                        maxLength={100}
+                      />
+                      <Input
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        required
+                        type="tel"
+                        placeholder="+7 ___ ___ __ __"
+                        className="bg-white text-foreground placeholder:text-muted-foreground"
+                        maxLength={20}
+                      />
+                      <button
+                        type="submit"
+                        className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-2 text-sm font-bold uppercase tracking-wider text-[#04140f] hover:bg-white/90"
+                      >
+                        Узнать <ArrowRight className="h-4 w-4" />
+                      </button>
+                    </form>
+                    <p className="mt-3 text-[11px] text-white/60">
+                      Оставляя заявку, вы соглашаетесь на обработку персональных данных.
+                    </p>
+                  </>
+                )}
+              </div>
+            </div>
+          </>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 function Bridge() {
   return (
     <section className="py-24">
