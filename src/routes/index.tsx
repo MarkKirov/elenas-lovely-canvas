@@ -991,8 +991,7 @@ function Fit() {
   return (
     <section className="py-24">
       <Container>
-        <Eyebrow>Кому подойдёт</Eyebrow>
-        <h2 className="mt-6 max-w-5xl text-4xl font-black leading-[1.05] tracking-tight md:text-6xl bg-gradient-to-r from-[#0a2e22] via-[#1a7a5c] to-[#0d4d3a] bg-clip-text text-transparent">
+        <h2 className="max-w-5xl text-4xl font-black leading-[1.05] tracking-tight md:text-6xl bg-gradient-to-r from-[#0a2e22] via-[#1a7a5c] to-[#0d4d3a] bg-clip-text text-transparent">
           Если вы нашли себя хотя бы в трёх пунктах ниже — наше обучение вам поможет
         </h2>
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
