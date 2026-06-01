@@ -17,6 +17,21 @@ import larisaAsset from "@/assets/larisa-kiseleva.png.asset.json";
 import aleksandraAsset from "@/assets/aleksandra-grechushenko.png.asset.json";
 import alekseyAsset from "@/assets/aleksey-farafonov.png.asset.json";
 import icebergAsset from "@/assets/iceberg.png.asset.json";
+import programPeaks from "@/assets/program-peaks.png.asset.json";
+import programCompass from "@/assets/program-compass.png.asset.json";
+import programWheel from "@/assets/program-wheel.png.asset.json";
+import programTent from "@/assets/program-tent.png.asset.json";
+import programCards from "@/assets/program-cards.png.asset.json";
+import programArrows from "@/assets/program-arrows.png.asset.json";
+
+const programImages = [
+  programPeaks.url,
+  programCompass.url,
+  programWheel.url,
+  programTent.url,
+  programCards.url,
+  programArrows.url,
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -658,35 +673,46 @@ function Programs() {
         <div className="mt-8 rounded-3xl border border-border bg-card p-8 md:p-12">
           <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">Каталог</p>
           <h3 className="mt-3 text-3xl font-black tracking-tight md:text-4xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">Выберите направление</h3>
-          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {programs.map((p, i) => (
-              <article
+              <button
                 key={p.title}
-                className="group relative flex flex-col rounded-3xl border border-emerald-100/70 bg-white p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_32px_64px_-16px_rgba(6,78,59,0.18)]"
+                type="button"
+                onClick={() => setOpenIdx(i)}
+                className="group relative aspect-[4/5] overflow-hidden rounded-3xl border border-emerald-900/10 text-left transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_32px_64px_-16px_rgba(6,78,59,0.35)]"
               >
-                <div className="pointer-events-none absolute right-0 top-0 h-28 w-28 rounded-tr-3xl bg-gradient-to-br from-emerald-100/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-emerald-400/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <img
+                  src={programImages[i % programImages.length]}
+                  alt=""
+                  className="absolute inset-0 h-full w-full scale-110 object-cover blur-[6px] saturate-[1.05] transition-all duration-700 group-hover:scale-100 group-hover:blur-0"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#04140f] via-[#04140f]/55 to-[#04140f]/15 transition-opacity duration-500 group-hover:from-[#04140f]/95 group-hover:via-[#04140f]/55" />
 
-                <span className="self-start rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-[#059669]">
-                  {p.tag}
-                </span>
+                <div className="relative flex h-full flex-col justify-between p-7 text-white md:p-8">
+                  <span className="self-start rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white backdrop-blur-md">
+                    {p.tag}
+                  </span>
 
-                <h4 className="mt-6 text-2xl font-bold leading-snug bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
-                  {p.title}
-                </h4>
+                  <div>
+                    <h4 className="text-2xl font-black leading-[1.1] tracking-tight md:text-[26px]">
+                      {p.title}
+                    </h4>
 
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {p.desc}
-                </p>
+                    <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-out group-hover:grid-rows-[1fr]">
+                      <div className="overflow-hidden">
+                        <p className="mt-4 text-sm leading-relaxed text-white/85 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                          {p.desc}
+                        </p>
+                      </div>
+                    </div>
 
-                <button
-                  onClick={() => setOpenIdx(i)}
-                  className="mt-8 inline-flex w-fit items-center gap-2 rounded-xl border border-emerald-100 bg-emerald-50/60 px-5 py-3 text-[11px] font-bold uppercase tracking-[0.18em] text-[#064e3b] transition-all duration-300 hover:bg-[#064e3b] hover:text-white"
-                >
-                  Подробнее
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                </button>
-              </article>
+                    <div className="mt-5 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-emerald-300">
+                      Подробнее
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                    </div>
+                  </div>
+                </div>
+              </button>
             ))}
           </div>
         </div>
