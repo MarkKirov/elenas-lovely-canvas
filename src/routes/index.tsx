@@ -548,6 +548,8 @@ function Teachers() {
 }
 
 function Programs() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const active = openIdx !== null ? programs[openIdx] : null;
   return (
     <section className="py-24">
       <Container>
@@ -572,12 +574,15 @@ function Programs() {
           <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">Каталог</p>
           <h3 className="mt-3 text-3xl font-black tracking-tight md:text-4xl">Выберите направление</h3>
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {programs.map((p) => (
+            {programs.map((p, i) => (
               <article key={p.title} className="flex flex-col rounded-2xl bg-muted/60 p-6 transition-colors hover:bg-muted">
                 <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-primary">{p.tag}</p>
                 <h4 className="mt-3 text-lg font-bold leading-snug text-foreground">{p.title}</h4>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
-                <button className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-primary hover:bg-secondary">
+                <button
+                  onClick={() => setOpenIdx(i)}
+                  className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-primary hover:bg-secondary"
+                >
                   Подробнее <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               </article>
@@ -585,6 +590,7 @@ function Programs() {
           </div>
         </div>
       </Container>
+      <ProgramDialog program={active} onClose={() => setOpenIdx(null)} />
     </section>
   );
 }
