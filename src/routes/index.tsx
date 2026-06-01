@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -385,6 +385,19 @@ const fitPoints = [
   { title: "Чувствуете внутренний саботаж", desc: "Испытываете жёсткий конфликт бизнеса и личности, из-за чего прокрастинируете, выгораете, а команда заражается вашим саботажем." },
 ];
 
+function openLeadDialog() {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("open-lead-dialog"));
+  }
+}
+
+function scrollToPrograms(e: React.MouseEvent) {
+  e.preventDefault();
+  if (typeof document !== "undefined") {
+    document.getElementById("programs")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -400,6 +413,7 @@ function Index() {
       <Fit />
       <Faq />
       <Footer />
+      <LeadDialog />
     </div>
   );
 }
@@ -433,7 +447,15 @@ function Header() {
           <div>Соединяем мировые бизнес-практики</div>
           <div>с реальностью Липецка и личностью собственника</div>
         </div>
-        <div className="hidden md:block" aria-hidden="true" />
+        <div className="hidden md:flex md:justify-end">
+          <a
+            href="#programs"
+            onClick={scrollToPrograms}
+            className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-secondary px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+          >
+            Смотреть программы <ArrowRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
       </Container>
     </header>
   );
@@ -469,11 +491,12 @@ function Hero() {
             без круглосуточной пахоты?
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <button className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#04140f] transition-colors hover:bg-white/90">
+            <button
+              type="button"
+              onClick={openLeadDialog}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#04140f] transition-colors hover:bg-white/90"
+            >
               Записаться на диагностику <ArrowRight className="h-4 w-4" />
-            </button>
-            <button className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white/10">
-              Смотреть программы <ArrowRight className="h-4 w-4" />
             </button>
           </div>
         </div>
@@ -617,7 +640,11 @@ function Comparison() {
           Это ни к чему не обязывает.
         </p>
         <div className="mt-6">
-          <button className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-primary shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+          <button
+            type="button"
+            onClick={openLeadDialog}
+            className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-primary shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+          >
             Получить стратегию <ArrowRight className="h-4 w-4" />
           </button>
         </div>
@@ -667,7 +694,7 @@ function Programs() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const active = openIdx !== null ? programs[openIdx] : null;
   return (
-    <section className="py-24">
+    <section id="programs" className="scroll-mt-24 py-24">
       <Container>
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-8 md:p-12 text-white shadow-xl">
           <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/15 blur-3xl" />
@@ -989,7 +1016,11 @@ function Bridge() {
                   Берём не всех — только 4 компании в неделю
                 </div>
               </div>
-              <button className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary-foreground/50 bg-primary-foreground/15 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground backdrop-blur transition-colors hover:bg-primary-foreground/25">
+              <button
+                type="button"
+                onClick={openLeadDialog}
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary-foreground/50 bg-primary-foreground/15 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground backdrop-blur transition-colors hover:bg-primary-foreground/25"
+              >
                 Получить диагностику <ArrowRight className="h-4 w-4" />
               </button>
             </div>
@@ -1285,5 +1316,117 @@ function Footer() {
         </div>
       </Container>
     </footer>
+  );
+}
+
+function LeadDialog() {
+  const [open, setOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [messenger, setMessenger] = useState("");
+  const [contact, setContact] = useState<"call" | "write">("call");
+  const [sent, setSent] = useState(false);
+
+  useEffect(() => {
+    const handler = () => {
+      setSent(false);
+      setOpen(true);
+    };
+    window.addEventListener("open-lead-dialog", handler);
+    return () => window.removeEventListener("open-lead-dialog", handler);
+  }, []);
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // TODO: backend hookup — пока просто фиксируем состояние «отправлено»
+    console.log("lead", { name, phone, messenger, contact });
+    setSent(true);
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle>Оставьте заявку</DialogTitle>
+          <DialogDescription>
+            Свяжемся с вами в удобном формате — позвоним или напишем в мессенджер.
+          </DialogDescription>
+        </DialogHeader>
+        {sent ? (
+          <div className="py-6 text-center">
+            <p className="text-lg font-semibold text-primary">Заявка принята ✓</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Свяжемся с вами в ближайшее время.
+            </p>
+          </div>
+        ) : (
+          <form onSubmit={submit} className="space-y-4">
+            <div>
+              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Ваше имя
+              </label>
+              <Input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Имя" />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Телефон
+              </label>
+              <Input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+                placeholder="+7 (___) ___-__-__"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Мессенджер (Telegram, WhatsApp, MAX, VK — любой)
+              </label>
+              <Input
+                value={messenger}
+                onChange={(e) => setMessenger(e.target.value)}
+                placeholder="@username или ссылка"
+              />
+            </div>
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Как с вами связаться
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => setContact("call")}
+                  className={`rounded-md border px-3 py-2 text-sm font-semibold transition-colors ${
+                    contact === "call"
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-background hover:bg-secondary"
+                  }`}
+                >
+                  Позвонить
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setContact("write")}
+                  className={`rounded-md border px-3 py-2 text-sm font-semibold transition-colors ${
+                    contact === "write"
+                      ? "border-primary bg-primary text-primary-foreground"
+                      : "border-border bg-background hover:bg-secondary"
+                  }`}
+                >
+                  Написать
+                </button>
+              </div>
+            </div>
+            <button
+              type="submit"
+              className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:bg-primary/90"
+            >
+              Отправить заявку <ArrowRight className="h-4 w-4" />
+            </button>
+          </form>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 }
