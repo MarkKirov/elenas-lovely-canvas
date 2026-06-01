@@ -185,23 +185,6 @@ function Quiz() {
             Пройти диагностику <ArrowRight className="h-5 w-5" />
           </button>
 
-          <p className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.12em] text-primary">
-            <span className="inline-block h-2 w-2 rounded-full bg-red-500" />
-            Берём 4 компании в неделю. Осталось 1 место.
-          </p>
-
-          <div className="mt-10 flex flex-col items-start">
-            <button className="group flex items-center gap-4 rounded-full border-2 border-primary bg-background px-10 py-5 text-base font-bold text-primary shadow-lg transition-all duration-300 hover:bg-primary hover:text-primary-foreground">
-              <span>Начать диагностику</span>
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary transition-colors group-hover:bg-primary-foreground">
-                <ArrowRight className="h-4 w-4 text-primary-foreground transition-colors group-hover:text-primary" />
-              </span>
-            </button>
-            <p className="mt-4 text-sm font-medium text-muted-foreground">
-              Тест займёт не более 5 минут
-            </p>
-          </div>
-
           <div className="relative mt-16">
             <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-primary/20 opacity-30 blur-3xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-primary p-8 text-primary-foreground shadow-2xl md:p-12">
@@ -229,6 +212,18 @@ function Quiz() {
                   компании прямо сейчас.
                 </p>
               </div>
+            </div>
+
+            <div className="mt-10 flex flex-col items-start">
+              <button className="group flex items-center gap-4 rounded-full border-2 border-primary bg-background px-10 py-5 text-base font-bold text-primary shadow-lg transition-all duration-300 hover:bg-primary hover:text-primary-foreground">
+                <span>Начать диагностику</span>
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary transition-colors group-hover:bg-primary-foreground">
+                  <ArrowRight className="h-4 w-4 text-primary-foreground transition-colors group-hover:text-primary" />
+                </span>
+              </button>
+              <p className="mt-4 text-sm font-medium text-muted-foreground">
+                Тест займёт не более 5 минут
+              </p>
             </div>
           </div>
         </div>
