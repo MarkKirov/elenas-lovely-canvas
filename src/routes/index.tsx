@@ -694,7 +694,7 @@ function Programs() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const active = openIdx !== null ? programs[openIdx] : null;
   return (
-    <section className="py-24">
+    <section id="programs" className="scroll-mt-24 py-24">
       <Container>
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-8 md:p-12 text-white shadow-xl">
           <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/15 blur-3xl" />
