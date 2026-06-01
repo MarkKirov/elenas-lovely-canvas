@@ -898,11 +898,38 @@ function Bridge() {
                 <li>— Личная стратегия в подарок</li>
               </ul>
             </div>
-            <div className="flex flex-col items-start gap-4 md:items-end">
+            <div className="flex flex-col items-stretch gap-5">
+              <div className="rounded-2xl border border-primary-foreground/20 bg-primary-foreground/5 p-6 backdrop-blur">
+                <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-[0.18em] text-primary-foreground/70">
+                  <span>Места на этой неделе</span>
+                  <span className="rounded-full bg-accent px-2.5 py-1 text-[10px] text-accent-foreground">Осталось 1</span>
+                </div>
+                <div className="mt-5 grid grid-cols-4 gap-2">
+                  {[0, 1, 2, 3].map((i) => {
+                    const taken = i < 3;
+                    return (
+                      <div
+                        key={i}
+                        className={
+                          "relative aspect-square rounded-xl border " +
+                          (taken
+                            ? "border-primary-foreground/10 bg-primary-foreground/5 text-primary-foreground/30"
+                            : "border-accent bg-accent/15 text-accent")
+                        }
+                      >
+                        <div className="absolute inset-0 flex items-center justify-center text-2xl font-black">
+                          {taken ? "×" : "01"}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="mt-4 flex items-center gap-2 text-xs text-primary-foreground/70">
+                  <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-accent" />
+                  Берём не всех — только 4 компании в неделю
+                </div>
+              </div>
               <CtaButton variant="ghost">Получить диагностику</CtaButton>
-              <p className="text-sm text-primary-foreground/70">
-                Берём не всех — 4 компании в неделю.
-              </p>
             </div>
           </div>
         </div>
