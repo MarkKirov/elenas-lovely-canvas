@@ -150,7 +150,7 @@ function Hero() {
         <div className="max-w-3xl">
           <Eyebrow>Практическая бизнес-школа</Eyebrow>
           <h1 className="mt-8 text-5xl font-black leading-[0.95] tracking-tight text-primary md:text-7xl">
-            Пересоберите свою<br />бизнес-модель
+            Пересобери свою<br />бизнес-модель
           </h1>
           <p className="mt-6 text-xl font-semibold text-foreground/80 md:text-2xl">
             …чтобы она работала на тебя, а не ты на неё.
