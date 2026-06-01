@@ -199,9 +199,6 @@ function Quiz() {
                 </svg>
               </div>
               <div className="relative z-10">
-                <div className="mb-6 inline-block rounded-full bg-primary-foreground/90 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-primary">
-                  Гарантированный бонус
-                </div>
                 <h3 className="mb-6 text-2xl font-bold leading-tight md:text-3xl">
                   Сразу после теста вы получаете бронь на бесплатный подбор стратегии
                 </h3>
