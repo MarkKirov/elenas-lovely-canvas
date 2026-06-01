@@ -9,38 +9,65 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DiagnostikaRouteImport } from './routes/diagnostika'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiDiagnostikaAnalyzeRouteImport } from './routes/api/diagnostika.analyze'
 
+const DiagnostikaRoute = DiagnostikaRouteImport.update({
+  id: '/diagnostika',
+  path: '/diagnostika',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiDiagnostikaAnalyzeRoute = ApiDiagnostikaAnalyzeRouteImport.update({
+  id: '/api/diagnostika/analyze',
+  path: '/api/diagnostika/analyze',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/diagnostika': typeof DiagnostikaRoute
+  '/api/diagnostika/analyze': typeof ApiDiagnostikaAnalyzeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/diagnostika': typeof DiagnostikaRoute
+  '/api/diagnostika/analyze': typeof ApiDiagnostikaAnalyzeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/diagnostika': typeof DiagnostikaRoute
+  '/api/diagnostika/analyze': typeof ApiDiagnostikaAnalyzeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/diagnostika' | '/api/diagnostika/analyze'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/diagnostika' | '/api/diagnostika/analyze'
+  id: '__root__' | '/' | '/diagnostika' | '/api/diagnostika/analyze'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DiagnostikaRoute: typeof DiagnostikaRoute
+  ApiDiagnostikaAnalyzeRoute: typeof ApiDiagnostikaAnalyzeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/diagnostika': {
+      id: '/diagnostika'
+      path: '/diagnostika'
+      fullPath: '/diagnostika'
+      preLoaderRoute: typeof DiagnostikaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/diagnostika/analyze': {
+      id: '/api/diagnostika/analyze'
+      path: '/api/diagnostika/analyze'
+      fullPath: '/api/diagnostika/analyze'
+      preLoaderRoute: typeof ApiDiagnostikaAnalyzeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DiagnostikaRoute: DiagnostikaRoute,
+  ApiDiagnostikaAnalyzeRoute: ApiDiagnostikaAnalyzeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
