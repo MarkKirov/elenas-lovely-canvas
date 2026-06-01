@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import logoAsset from "@/assets/to-logo-full-light.svg.asset.json";
 import carPartsAsset from "@/assets/car-frame.jpg.asset.json";
+import elenaAsset from "@/assets/elena-kremneva.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -321,28 +322,32 @@ function Comparison() {
 
 function Teachers() {
   const items = [
-    { name: "Елена Кремнева", role: "Основатель школы", note: "Бизнес-практик, методолог пересборки моделей." },
-    { name: "Партнёр-практик", role: "Оборот >1 млрд ₽", note: "Региональная конъюнктура, продажи, найм." },
-    { name: "Партнёр-практик", role: "Финансы и кассовые разрывы", note: "Подсветка реальных цифр компании." },
-    { name: "Партнёр-практик", role: "Операционка и процессы", note: "От хаоса к управляемой системе." },
+    { name: "Елена Кремнева", role: "Основатель бизнес-школы", note: "Бизнес-практик, методолог пересборки моделей.", img: elenaAsset.url },
+    { name: "Партнёр-практик", role: "Оборот >1 млрд ₽", note: "Региональная конъюнктура, продажи, найм.", img: null },
+    { name: "Партнёр-практик", role: "Финансы и кассовые разрывы", note: "Подсветка реальных цифр компании.", img: null },
+    { name: "Партнёр-практик", role: "Операционка и процессы", note: "От хаоса к управляемой системе.", img: null },
   ];
   return (
-    <section className="py-24">
+    <section className="bg-white py-24 text-neutral-900">
       <Container>
-        <h2 className="max-w-3xl text-4xl font-black tracking-tight md:text-5xl">
+        <h2 className="max-w-3xl text-4xl font-black tracking-tight text-neutral-900 md:text-5xl">
           Преподаватели
         </h2>
-        <p className="mt-6 max-w-3xl text-lg text-muted-foreground">
+        <p className="mt-6 max-w-3xl text-lg text-neutral-600">
           Жёсткие бизнес-практики. Каждый — признанный спец в своей среде,
           знает изнутри всю региональную конъюнктуру и не работает по мёртвым учебникам.
         </p>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((p, i) => (
-            <div key={i} className="group rounded-3xl border border-border bg-card p-6 transition-colors hover:border-primary/50">
-              <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-secondary to-accent" />
+            <div key={i} className="group rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-lg">
+              {p.img ? (
+                <img src={p.img} alt={p.name} className="aspect-[4/5] w-full rounded-2xl object-cover" />
+              ) : (
+                <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-neutral-100 to-neutral-200" />
+              )}
               <p className="mt-5 text-xs font-bold uppercase tracking-[0.14em] text-primary">{p.role}</p>
-              <p className="mt-2 text-xl font-bold leading-tight">{p.name}</p>
-              <p className="mt-3 text-sm text-muted-foreground">{p.note}</p>
+              <p className="mt-2 text-xl font-bold leading-tight text-neutral-900">{p.name}</p>
+              <p className="mt-3 text-sm text-neutral-600">{p.note}</p>
             </div>
           ))}
         </div>
