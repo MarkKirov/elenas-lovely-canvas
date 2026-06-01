@@ -366,7 +366,7 @@ function Programs() {
     <section className="bg-secondary/40 py-24">
       <Container>
         <div className="rounded-3xl border border-border bg-card p-8 md:p-12">
-          <div className="grid gap-10 md:grid-cols-[1.5fr_1fr]">
+          <div className="grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-stretch">
             <div>
               <Eyebrow>Каталог школы</Eyebrow>
               <h2 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Программы</h2>
@@ -377,12 +377,20 @@ function Programs() {
               </p>
               <div className="mt-8"><CtaButton>Записаться на диагностику</CtaButton></div>
             </div>
-            <div className="rounded-2xl bg-secondary p-6">
-              <p className="text-xs font-bold uppercase tracking-[0.14em] text-primary">Форматы</p>
-              <p className="mt-3 text-2xl font-bold text-foreground">6 программ и интенсивов</p>
-              <p className="mt-3 text-sm text-muted-foreground">
-                Основной путь — через диагностику: подбираем формат под стадию бизнеса
-                и задачу собственника.
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 p-7 text-white shadow-xl md:p-8">
+              <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/15 blur-3xl" />
+              <div className="pointer-events-none absolute -bottom-12 -left-8 h-44 w-44 rounded-full bg-emerald-300/25 blur-3xl" />
+              <p className="relative text-[11px] font-bold uppercase tracking-[0.14em] text-white/80">Подход</p>
+              <p className="relative mt-3 text-lg font-semibold leading-snug md:text-xl">
+                Курс построен на стыке академических знаний и личной инженерии собственника.
+              </p>
+              <p className="relative mt-4 text-sm leading-relaxed text-white/90 md:text-base">
+                Мы берём мировую теорию управления и препарируем её под конъюнктуру Липецка.
+                Это не универсальная лекция, а прикладной конструктор.
+              </p>
+              <p className="relative mt-4 text-sm leading-relaxed text-white/90 md:text-base">
+                Каждый модуль — жёсткая связка: нашли ошибку в цифрах, убрали внутренний
+                саботаж, внедрили рабочее решение.
               </p>
             </div>
           </div>
