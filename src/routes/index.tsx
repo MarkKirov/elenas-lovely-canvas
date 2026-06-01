@@ -985,11 +985,19 @@ function Fit() {
         <h2 className="mt-6 max-w-4xl text-4xl font-black tracking-tight md:text-5xl">
           Приходите на аудит бизнес-модели, если узнаёте себя хотя бы в 3 пунктах
         </h2>
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <p className="mt-6 max-w-3xl text-2xl font-bold leading-snug md:text-3xl bg-gradient-to-r from-[#0a2e22] via-[#1a7a5c] to-[#0d4d3a] bg-clip-text text-transparent">
+          Если вы нашли себя хотя бы в трёх пунктах ниже — наше обучение вам поможет
+        </p>
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {fitPoints.map((p, i) => (
-            <div key={p.title} className="rounded-3xl border border-border bg-card p-7">
-              <div className="text-xs font-black tracking-[0.14em] text-primary">0{i + 1}</div>
-              <h3 className="mt-4 text-xl font-bold leading-snug">{p.title}</h3>
+            <div
+              key={p.title}
+              className="group rounded-3xl border border-border/80 bg-gradient-to-br from-card to-secondary/40 p-7 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+            >
+              <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-black text-primary">
+                {String(i + 1).padStart(2, "0")}
+              </div>
+              <h3 className="mt-4 text-lg font-bold leading-snug">{p.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
             </div>
           ))}
