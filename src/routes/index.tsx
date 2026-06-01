@@ -1113,11 +1113,83 @@ function Faq() {
 }
 
 function Footer() {
+  const nav = ["Главная", "Программы", "Тренинги", "Вопросы", "Эксперты", "О нас", "Контакты"];
   return (
-    <footer className="border-t border-border py-10">
-      <Container className="flex flex-col items-start justify-between gap-4 text-sm text-muted-foreground md:flex-row md:items-center">
-        <p>© Бизнес-школа Елены Кремневой · Липецк</p>
-        <p>Прототип. Контент будет уточняться.</p>
+    <footer className="border-t border-border bg-secondary/40">
+      <Container className="py-16">
+        <div className="grid gap-12 md:grid-cols-3">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+              Тактика основателя
+            </p>
+            <h3 className="mt-3 text-2xl font-black leading-tight tracking-tight">
+              Школа практического роста бизнеса
+            </h3>
+            <p className="mt-4 max-w-sm text-sm text-muted-foreground">
+              Никакой воды. Только система, прибыль и трансформация.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <CtaButton>Оставить заявку</CtaButton>
+              <button className="rounded-full border border-border bg-background px-6 py-3 text-sm font-bold uppercase tracking-wider transition-colors hover:bg-secondary">
+                Образование
+              </button>
+            </div>
+          </div>
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80">
+              Навигация
+            </p>
+            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+              {nav.map((item) => (
+                <li key={item}>
+                  <a href="#" className="transition-colors hover:text-primary">
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80">
+              Контакты
+            </p>
+            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+              <li><a href="mailto:kredo48@mail.ru" className="hover:text-primary">kredo48@mail.ru</a></li>
+              <li><a href="tel:+74742711808" className="hover:text-primary">+7 4742 711 808</a></li>
+              <li>г. Липецк, ул. Коцаря С.Л., 10А, пом. 7</li>
+            </ul>
+            <p className="mt-6 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80">
+              Социальные сети
+            </p>
+            <div className="mt-4 flex gap-3">
+              {["TG", "MAX", "VK"].map((s) => (
+                <a key={s} href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background text-xs font-bold text-primary transition-colors hover:bg-secondary">
+                  {s}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="mt-14 grid gap-6 border-t border-border pt-8 md:grid-cols-2 md:items-end">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80">
+              Подпишитесь на новости
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Получайте обновления по программам и тренингам школы.
+            </p>
+            <a href="#" className="mt-3 inline-block text-sm font-bold text-primary hover:underline">
+              Подписаться →
+            </a>
+          </div>
+          <div className="text-sm text-muted-foreground md:text-right">
+            <p>© 2026 Тактика основателя. Все права защищены.</p>
+            <p className="mt-2 space-x-4">
+              <a href="#" className="hover:text-primary">Политика конфиденциальности</a>
+              <a href="#" className="hover:text-primary">Публичная оферта</a>
+            </p>
+          </div>
+        </div>
       </Container>
     </footer>
   );
