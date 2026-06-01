@@ -1100,7 +1100,7 @@ function Faq() {
 }
 
 function Footer() {
-  const nav = ["Главная", "Программы", "Тренинги", "Вопросы", "Эксперты", "О нас", "Контакты"];
+  const nav = ["Программы", "Тренинги", "Вопросы", "Эксперты", "Контакты"];
   return (
     <footer className="border-t border-border bg-secondary/40">
       <Container className="py-16">
@@ -1112,14 +1112,8 @@ function Footer() {
             <h3 className="mt-3 text-2xl font-black leading-tight tracking-tight">
               Школа практического роста бизнеса
             </h3>
-            <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-              Никакой воды. Только система, прибыль и трансформация.
-            </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <CtaButton>Оставить заявку</CtaButton>
-              <button className="rounded-full border border-border bg-background px-6 py-3 text-sm font-bold uppercase tracking-wider transition-colors hover:bg-secondary">
-                Образование
-              </button>
             </div>
           </div>
           <div>
