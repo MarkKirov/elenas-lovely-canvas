@@ -857,8 +857,7 @@ function Bridge() {
       <Container className="grid gap-12 md:grid-cols-2 md:items-center">
         <div className="aspect-[4/5] rounded-3xl bg-gradient-to-br from-primary via-primary/80 to-accent" />
         <div>
-          <Eyebrow>Экран-мост</Eyebrow>
-          <h2 className="mt-6 text-4xl font-black leading-tight tracking-tight md:text-5xl">
+          <h2 className="text-4xl font-black leading-tight tracking-tight md:text-5xl">
             Знакомо ощущение, когда вы вливаете деньги в рекламу, а продажи стоят на месте?
           </h2>
           <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
@@ -870,7 +869,18 @@ function Bridge() {
             По нашей статистике, 8 из 10 липецких предпринимателей прямо сейчас находятся
             в кассовом разрыве — но узнают об этом только на нашем консилиуме.
           </p>
-          <div className="mt-8"><CtaButton>Перестать тушить пожары</CtaButton></div>
+        </div>
+      </Container>
+      <Container className="mt-16">
+        <div className="rounded-3xl border border-border bg-secondary p-8 md:p-12 text-center">
+          <p className="mx-auto max-w-3xl text-lg leading-relaxed text-foreground md:text-xl">
+            Нажмите на кнопку ниже и узнайте, не происходит ли у вас кассового разрыва,
+            который вы не замечаете. Мы проведём вам бесплатную диагностику
+            и дадим вашу личную стратегию для вашего бизнеса.
+          </p>
+          <div className="mt-8 flex justify-center">
+            <CtaButton>Получить бесплатную диагностику</CtaButton>
+          </div>
         </div>
       </Container>
     </section>
