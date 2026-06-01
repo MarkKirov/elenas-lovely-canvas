@@ -16,6 +16,7 @@ import olegAsset from "@/assets/oleg-davidovich.png.asset.json";
 import larisaAsset from "@/assets/larisa-kiseleva.png.asset.json";
 import aleksandraAsset from "@/assets/aleksandra-grechushenko.png.asset.json";
 import alekseyAsset from "@/assets/aleksey-farafonov.png.asset.json";
+import icebergAsset from "@/assets/iceberg.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
