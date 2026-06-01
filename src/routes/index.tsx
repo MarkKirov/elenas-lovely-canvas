@@ -305,7 +305,9 @@ function Comparison() {
 
         <p className="mt-10 max-w-3xl text-base text-white/70">
           Если узнали свои проблемы — запишитесь на составление бесплатной бизнес-стратегии.
-          Это ни к чему не обязывает, и мы ничего не будем продавать.
+        </p>
+        <p className="mt-2 max-w-3xl text-base text-white/70">
+          Это ни к чему не обязывает.
         </p>
         <div className="mt-6">
           <button className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-primary shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
