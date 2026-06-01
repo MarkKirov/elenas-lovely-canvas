@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import logoAsset from "@/assets/to-logo-full-light.svg.asset.json";
+import carPartsAsset from "@/assets/car-parts.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -232,17 +233,23 @@ function Quiz() {
 function Problem() {
   return (
     <section className="py-24">
-      <Container>
-        <Eyebrow>Подход</Eyebrow>
-        <h2 className="mt-6 max-w-4xl text-4xl font-black leading-tight tracking-tight md:text-5xl">
-          Большинство бизнес-школ дают ценные знания,<br />
-          <span className="text-primary">но выдают их как запчасти от автомобиля.</span>
-        </h2>
-        <p className="mt-8 max-w-3xl text-lg text-muted-foreground">
-          Вам сгружают гору классных деталей — маркетинг, финансы, HR — а дальше
-          вы должны сами как-то собрать всё это в гараже и понять, куда и как применять.
-          Несколько лет назад мы с коллегами из «Сколково» увидели это и собрали другую школу.
-        </p>
+      <Container className="grid items-center gap-12 md:grid-cols-[1.1fr_1fr]">
+        <div>
+          <h2 className="text-4xl font-black leading-tight tracking-tight md:text-5xl">
+            Большинство бизнес-школ дают ценные знания,<br />
+            <span className="text-primary">но выдают их как запчасти от автомобиля.</span>
+          </h2>
+          <p className="mt-8 max-w-xl text-lg text-muted-foreground">
+            Вам сгружают гору классных деталей — маркетинг, финансы, HR — а дальше
+            вы должны сами как-то собрать всё это в гараже и понять, куда и как применять.
+          </p>
+        </div>
+        <img
+          src={carPartsAsset.url}
+          alt="Разобранный автомобиль на запчасти — визуализация подхода"
+          className="w-full rounded-3xl"
+          loading="lazy"
+        />
       </Container>
     </section>
   );
