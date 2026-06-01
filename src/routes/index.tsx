@@ -162,23 +162,31 @@ function Header() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <Container className="py-20 md:py-28">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] text-white">
+      <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/15 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-12 -left-8 h-44 w-44 rounded-full bg-emerald-300/25 blur-3xl" />
+      <Container className="relative z-10 py-20 md:py-28">
         <div className="max-w-3xl">
-          <Eyebrow>Практическая бизнес-школа</Eyebrow>
-          <h1 className="mt-8 text-5xl font-black leading-[0.95] tracking-tight text-primary md:text-7xl">
+          <span className="inline-block rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white">
+            Практическая бизнес-школа
+          </span>
+          <h1 className="mt-8 text-5xl font-black leading-[0.95] tracking-tight text-white md:text-7xl">
             Пересобери свою<br />бизнес-модель
           </h1>
-          <p className="mt-6 text-xl font-semibold text-foreground/80 md:text-2xl">
+          <p className="mt-6 text-xl font-semibold text-white/90 md:text-2xl">
             …чтобы она работала на тебя, а не ты на неё.
           </p>
-          <p className="mt-10 max-w-2xl text-lg text-muted-foreground md:text-xl">
+          <p className="mt-10 max-w-2xl text-lg text-white/80 md:text-xl">
             Как Липецкому предпринимателю найти скрытые источники дохода и вырасти
             без круглосуточной пахоты?
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <CtaButton>Записаться на диагностику</CtaButton>
-            <CtaButton variant="ghost">Смотреть программы</CtaButton>
+            <button className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#04140f] transition-colors hover:bg-white/90">
+              Записаться на диагностику <ArrowRight className="h-4 w-4" />
+            </button>
+            <button className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white/10">
+              Смотреть программы <ArrowRight className="h-4 w-4" />
+            </button>
           </div>
         </div>
       </Container>
