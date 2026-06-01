@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import logoAsset from "@/assets/to-logo-full-light.svg.asset.json";
 import carPartsAsset from "@/assets/car-frame.jpg.asset.json";
 import elenaAsset from "@/assets/elena-kremneva.jpg.asset.json";
+import olegAsset from "@/assets/oleg-davidovich.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -323,7 +324,7 @@ function Comparison() {
 function Teachers() {
   const items = [
     { name: "Елена Кремнева", role: "Основатель бизнес-школы", note: "Бизнес-практик, методолог пересборки моделей.", img: elenaAsset.url },
-    { name: "Партнёр-практик", role: "Оборот >1 млрд ₽", note: "Региональная конъюнктура, продажи, найм.", img: null },
+    { name: "Олег Давидович", role: "Ведущий тренинга", note: "Преподаватель программ MBA и Executive MBA ИБДА РАНХиГС. Системы управления проектами.", img: olegAsset.url },
     { name: "Партнёр-практик", role: "Финансы и кассовые разрывы", note: "Подсветка реальных цифр компании.", img: null },
     { name: "Партнёр-практик", role: "Операционка и процессы", note: "От хаоса к управляемой системе.", img: null },
   ];
@@ -339,9 +340,9 @@ function Teachers() {
         </p>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((p, i) => (
-            <div key={i} className="group rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-lg">
+            <div key={i} className="group flex h-full flex-col rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-lg">
               {p.img ? (
-                <img src={p.img} alt={p.name} className="aspect-[4/5] w-full rounded-2xl object-cover" />
+                <img src={p.img} alt={p.name} className="aspect-[4/5] w-full rounded-2xl object-cover object-top" />
               ) : (
                 <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-neutral-100 to-neutral-200" />
               )}
