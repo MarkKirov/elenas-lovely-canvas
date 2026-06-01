@@ -6,6 +6,7 @@ import elenaAsset from "@/assets/elena-kremneva.jpg.asset.json";
 import olegAsset from "@/assets/oleg-davidovich.png.asset.json";
 import larisaAsset from "@/assets/larisa-kiseleva.png.asset.json";
 import aleksandraAsset from "@/assets/aleksandra-grechushenko.png.asset.json";
+import alekseyAsset from "@/assets/aleksey-farafonov.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -329,6 +330,7 @@ function Teachers() {
     { name: "Олег Давидович", role: "Ведущий тренинга", note: "Преподаватель программ MBA и Executive MBA ИБДА РАНХиГС. Системы управления проектами.", img: olegAsset.url },
     { name: "Лариса Киселева", role: "Ведущий тренинга", note: "Эксперт по управленческим изменениям и стратегическому развитию. Стаж 25+ лет. Ментор и спикер «Сколково».", img: larisaAsset.url },
     { name: "Александра Гречушенко", role: "Ведущий тренинга", note: "Бизнес-психолог, ментор, коуч, бизнес-тренер. Работает с предпринимателями на стыке психологии управления и бизнес-результатов.", img: aleksandraAsset.url },
+    { name: "Алексей Фарафонов", role: "Ведущий тренинга", note: "Основатель ООО «ОНСОФТ», эксперт по внедрению ИИ. 15+ лет в разработке ПО, 220+ проектов по автоматизации.", img: alekseyAsset.url },
   ];
   return (
     <section className="bg-white py-24 text-neutral-900">
@@ -340,17 +342,17 @@ function Teachers() {
           Жёсткие бизнес-практики. Каждый — признанный спец в своей среде,
           знает изнутри всю региональную конъюнктуру и не работает по мёртвым учебникам.
         </p>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
           {items.map((p, i) => (
-            <div key={i} className="group flex h-full flex-col rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-lg">
+            <div key={i} className="group flex h-full flex-col rounded-3xl border border-neutral-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-lg">
               {p.img ? (
                 <img src={p.img} alt={p.name} className="aspect-[4/5] w-full rounded-2xl object-cover object-top" />
               ) : (
                 <div className="aspect-[4/5] rounded-2xl bg-gradient-to-br from-neutral-100 to-neutral-200" />
               )}
-              <p className="mt-5 text-xs font-bold uppercase tracking-[0.14em] text-primary">{p.role}</p>
-              <p className="mt-2 text-xl font-bold leading-tight text-neutral-900">{p.name}</p>
-              <p className="mt-3 text-sm text-neutral-600">{p.note}</p>
+              <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.14em] text-primary">{p.role}</p>
+              <p className="mt-2 text-lg font-bold leading-tight text-neutral-900">{p.name}</p>
+              <p className="mt-2 text-sm text-neutral-600">{p.note}</p>
             </div>
           ))}
         </div>
