@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import logoAsset from "@/assets/taktika-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
