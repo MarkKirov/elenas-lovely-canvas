@@ -978,27 +978,40 @@ function Outcomes() {
 }
 
 function Fit() {
+  const accents = [
+    "from-emerald-500/20 to-emerald-500/0 text-emerald-600",
+    "from-amber-500/20 to-amber-500/0 text-amber-600",
+    "from-rose-500/20 to-rose-500/0 text-rose-600",
+    "from-sky-500/20 to-sky-500/0 text-sky-600",
+    "from-violet-500/20 to-violet-500/0 text-violet-600",
+    "from-teal-500/20 to-teal-500/0 text-teal-600",
+    "from-orange-500/20 to-orange-500/0 text-orange-600",
+    "from-fuchsia-500/20 to-fuchsia-500/0 text-fuchsia-600",
+  ];
   return (
     <section className="py-24">
       <Container>
         <Eyebrow>Кому подойдёт</Eyebrow>
-        <h2 className="mt-6 max-w-4xl text-4xl font-black tracking-tight md:text-5xl">
-          Приходите на аудит бизнес-модели, если узнаёте себя хотя бы в 3 пунктах
-        </h2>
-        <p className="mt-6 max-w-3xl text-2xl font-bold leading-snug md:text-3xl bg-gradient-to-r from-[#0a2e22] via-[#1a7a5c] to-[#0d4d3a] bg-clip-text text-transparent">
+        <h2 className="mt-6 max-w-5xl text-4xl font-black leading-[1.05] tracking-tight md:text-6xl bg-gradient-to-r from-[#0a2e22] via-[#1a7a5c] to-[#0d4d3a] bg-clip-text text-transparent">
           Если вы нашли себя хотя бы в трёх пунктах ниже — наше обучение вам поможет
-        </p>
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        </h2>
+        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {fitPoints.map((p, i) => (
             <div
               key={p.title}
-              className="group rounded-3xl border border-border/80 bg-gradient-to-br from-card to-secondary/40 p-7 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+              className="group relative overflow-hidden rounded-3xl border border-border/80 bg-card p-7 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
             >
-              <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-black text-primary">
+              <div className={`pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gradient-to-br ${accents[i % accents.length]} blur-2xl opacity-70 transition-opacity group-hover:opacity-100`} />
+              <div className={`pointer-events-none absolute right-4 top-3 text-7xl font-black leading-none ${accents[i % accents.length].split(" ").pop()} opacity-10 select-none`}>
                 {String(i + 1).padStart(2, "0")}
               </div>
-              <h3 className="mt-4 text-lg font-bold leading-snug">{p.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+              <div className={`relative inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br ${accents[i % accents.length]} ring-1 ring-border`}>
+                <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              </div>
+              <h3 className="relative mt-5 text-lg font-bold leading-snug">{p.title}</h3>
+              <p className="relative mt-3 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
             </div>
           ))}
         </div>
