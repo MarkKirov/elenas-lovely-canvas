@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import logoAsset from "@/assets/taktika-logo.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -128,22 +129,13 @@ function CtaButton({ children, variant = "solid" }: { children: React.ReactNode;
 }
 
 function Header() {
-  const links = ["Программы", "Подход", "Преподаватели", "Результаты", "Контакты"];
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
       <Container className="flex h-20 items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-primary-foreground font-black">К</div>
-          <div className="leading-tight">
-            <div className="text-sm font-bold tracking-tight">Кремнева</div>
-            <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">бизнес-школа · Липецк</div>
-          </div>
+        <img src={logoAsset.url} alt="Тактика основателя" className="h-9 w-auto" />
+        <div className="hidden text-sm font-bold tracking-tight md:block">
+          Бизнес-школа Елены Кремневой
         </div>
-        <nav className="hidden gap-8 md:flex">
-          {links.map((l) => (
-            <a key={l} href="#" className="text-sm font-medium text-foreground/80 hover:text-primary">{l}</a>
-          ))}
-        </nav>
         <CtaButton variant="ghost">Записаться</CtaButton>
       </Container>
     </header>
@@ -153,40 +145,34 @@ function Header() {
 function Hero() {
   return (
     <section className="relative overflow-hidden">
-      <Container className="grid gap-12 py-20 md:grid-cols-[1.4fr_1fr] md:py-32">
-        <div>
-          <Eyebrow>Практическая бизнес-школа · Липецк</Eyebrow>
+      <Container className="py-20 md:py-28">
+        <div className="mx-auto max-w-4xl text-center">
+          <Eyebrow>Практическая бизнес-школа</Eyebrow>
           <h1 className="mt-8 text-5xl font-black leading-[0.95] tracking-tight text-primary md:text-7xl">
             Пересоберите свою<br />бизнес-модель
           </h1>
-          <p className="mt-8 max-w-xl text-lg text-muted-foreground md:text-xl">
-            Как липецкому предпринимателю найти скрытые источники дохода и вырасти
-            без круглосуточной пахоты. Соединяем мировые практики с реальностью региона
-            и личностью собственника.
+          <p className="mt-6 text-xl font-semibold text-foreground/80 md:text-2xl">
+            …чтобы она работала на тебя, а не ты на неё.
           </p>
-          <div className="mt-10 flex flex-wrap gap-4">
+          <p className="mt-10 mx-auto max-w-2xl text-lg text-muted-foreground md:text-xl">
+            Как липецкому предпринимателю найти скрытые источники дохода и вырасти
+            без круглосуточной пахоты?
+          </p>
+          <p className="mt-4 mx-auto max-w-2xl text-base text-muted-foreground md:text-lg">
+            Соединяем мировые бизнес-практики с реальностью региона и личностью собственника.
+          </p>
+          <div className="mt-10 flex flex-wrap justify-center gap-4">
             <CtaButton>Записаться на диагностику</CtaButton>
             <CtaButton variant="ghost">Смотреть программы</CtaButton>
           </div>
-          <p className="mt-6 text-xs uppercase tracking-[0.16em] text-muted-foreground">
-            На аудит берём 4 компании в неделю · осталось 1 место
-          </p>
-        </div>
-        <aside className="rounded-3xl border border-border bg-card p-8">
-          <Eyebrow>От ремесленника к собственнику системы</Eyebrow>
-          <p className="mt-6 text-base leading-relaxed text-foreground/80">
-            Преврати свой бизнес из выживания в систему. Пересоберём модель так, чтобы
-            она работала на тебя, а не ты на неё.
-          </p>
-          <div className="mt-8 space-y-3 border-t border-border pt-6 text-sm">
-            {["Найти скрытые источники дохода","Избавиться от кассовых разрывов","Вырасти без выгорания"].map((t) => (
-              <div key={t} className="flex items-start gap-3">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <span className="text-foreground/85">{t}</span>
-              </div>
-            ))}
+          <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-primary/30 bg-secondary px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
+            </span>
+            На аудит берём 4 компании в неделю · осталось <span className="text-base font-black">1</span> место
           </div>
-        </aside>
+        </div>
       </Container>
     </section>
   );
