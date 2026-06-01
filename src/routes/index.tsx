@@ -443,11 +443,11 @@ function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] text-white">
       <div
-        className="pointer-events-none absolute inset-0 bg-no-repeat bg-right-top opacity-40 mix-blend-screen"
+        className="pointer-events-none absolute inset-0 bg-no-repeat bg-center opacity-40 mix-blend-screen"
         style={{
           backgroundImage: `url(${heroGearsAsset.url})`,
-          backgroundSize: "auto 90%",
-          filter: "blur(6px) saturate(0)",
+          backgroundSize: "cover",
+          filter: "blur(8px) saturate(0)",
         }}
       />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#04140f]/85 via-[#0a2e22]/70 to-[#0d4d3a]/80" />
