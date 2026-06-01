@@ -382,7 +382,7 @@ function Index() {
       <Bridge />
       <Outcomes />
       <Fit />
-      <FinalCta />
+      <Faq />
       <Footer />
     </div>
   );
@@ -991,8 +991,7 @@ function Fit() {
   return (
     <section className="py-24">
       <Container>
-        <Eyebrow>Кому подойдёт</Eyebrow>
-        <h2 className="mt-6 max-w-5xl text-4xl font-black leading-[1.05] tracking-tight md:text-6xl bg-gradient-to-r from-[#0a2e22] via-[#1a7a5c] to-[#0d4d3a] bg-clip-text text-transparent">
+        <h2 className="max-w-5xl text-4xl font-black leading-[1.05] tracking-tight md:text-6xl bg-gradient-to-r from-[#0a2e22] via-[#1a7a5c] to-[#0d4d3a] bg-clip-text text-transparent">
           Если вы нашли себя хотя бы в трёх пунктах ниже — наше обучение вам поможет
         </h2>
         <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -1020,27 +1019,93 @@ function Fit() {
   );
 }
 
-function FinalCta() {
+const faqItems = [
+  {
+    q: "За сколько окупится участие?",
+    a: "Большинство участников окупает обучение за первые 2–3 месяца — за счёт первой же системной перестройки найма, продаж или ценообразования.",
+    tone: "green-lg",
+  },
+  {
+    q: "Это теория или практика?",
+    a: "90% времени — внедрение в ваш бизнес. Никаких лекций «на потом» и домашек «в стол».",
+    tone: "gray",
+  },
+  {
+    q: "Кто ведёт программу?",
+    a: "Елена Кремнева и команда практикующих экспертов с опытом в производстве, рознице и услугах.",
+    tone: "gray-green",
+  },
+  {
+    q: "Подойдёт ли моему бизнесу?",
+    a: "Да, если у вас оборот от 5 млн ₽/мес и вы готовы внедрять, а не просто слушать. На диагностике честно скажем, если нет.",
+    tone: "green",
+  },
+  {
+    q: "Сколько длится обучение?",
+    a: "4 месяца плотной работы + 2 месяца сопровождения.",
+    tone: "gray",
+  },
+  {
+    q: "Берёте ли вы всех?",
+    a: "Нет. Сначала бесплатная диагностика. Если не сможем дать результат — честно откажем.",
+    tone: "green-md",
+  },
+  {
+    q: "Что если не сработает?",
+    a: "Возвращаем оплату по условиям договора, если вы выполняли все рекомендации и не получили роста.",
+    tone: "gray-dark",
+  },
+];
+
+function Faq() {
+  const toneMap: Record<string, string> = {
+    "green-lg":
+      "md:col-span-2 md:row-span-2 bg-gradient-to-br from-[#1a7a5c] via-[#0f5a42] to-[#08372a] border-emerald-400/20",
+    "green":
+      "md:col-span-2 bg-gradient-to-br from-[#0f5a42] to-[#082a20] border-emerald-400/15",
+    "green-md":
+      "md:col-span-2 bg-gradient-to-tr from-[#0d4d3a] via-[#11614a] to-[#1a7a5c]/70 border-emerald-400/20",
+    "gray":
+      "bg-gradient-to-br from-zinc-800 to-zinc-900 border-white/5",
+    "gray-dark":
+      "md:col-span-2 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black border-white/5",
+    "gray-green":
+      "bg-gradient-to-br from-zinc-800 via-zinc-900 to-emerald-950/60 border-emerald-400/10",
+  };
   return (
-    <section className="pb-24">
-      <Container>
-        <div className="overflow-hidden rounded-3xl bg-secondary p-10 md:p-16">
-          <div className="grid gap-10 md:grid-cols-[1.5fr_1fr] md:items-end">
-            <div>
-              <Eyebrow>Бесплатная стратегия</Eyebrow>
-              <h2 className="mt-6 text-4xl font-black leading-tight tracking-tight text-primary md:text-6xl">
-                Узнайте, подойдёт ли вам обучение —<br />и заберите бизнес-стратегию.
-              </h2>
-              <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-                Преподаватели школы берут на аудит всего 4 компании в неделю.
-                Осталось 1 свободное место. Записаться можно прямо сейчас — без обязательств.
+    <section className="relative overflow-hidden bg-[#0a0f0d] py-24 text-white">
+      <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-emerald-500/10 blur-[120px]" />
+      <div className="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-emerald-400/10 blur-[120px]" />
+      <Container className="relative">
+        <div className="max-w-3xl">
+          <span className="inline-block rounded-full border border-emerald-400/30 bg-emerald-400/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300">
+            Вопросы и ответы
+          </span>
+          <h2 className="mt-6 text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
+            Что важно знать <span className="bg-gradient-to-r from-emerald-300 to-emerald-500 bg-clip-text text-transparent">перед участием</span>
+          </h2>
+          <p className="mt-5 max-w-2xl text-base text-white/60 md:text-lg">
+            Формат обучения, результат, риски и условия участия. Без воды — прямые ответы на самые частые вопросы.
+          </p>
+        </div>
+        <div className="mt-14 grid auto-rows-[minmax(180px,auto)] gap-5 md:grid-cols-4">
+          {faqItems.map((item, i) => (
+            <article
+              key={item.q}
+              className={`group relative overflow-hidden rounded-3xl border p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/10 ${toneMap[item.tone]}`}
+            >
+              <div className="absolute right-5 top-5 text-xs font-bold uppercase tracking-widest text-white/30">
+                {String(i + 1).padStart(2, "0")}
+              </div>
+              <h3 className="pr-10 text-xl font-bold leading-snug md:text-2xl">
+                {item.q}
+              </h3>
+              <p className="mt-4 text-sm leading-relaxed text-white/70 md:text-base">
+                {item.a}
               </p>
-            </div>
-            <div className="flex flex-col gap-4">
-              <CtaButton>Записаться на аудит</CtaButton>
-              <CtaButton variant="ghost">Позвонить нам</CtaButton>
-            </div>
-          </div>
+              <div className="pointer-events-none absolute -bottom-12 -right-12 h-40 w-40 rounded-full bg-white/5 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
+            </article>
+          ))}
         </div>
       </Container>
     </section>
@@ -1048,11 +1113,83 @@ function FinalCta() {
 }
 
 function Footer() {
+  const nav = ["Главная", "Программы", "Тренинги", "Вопросы", "Эксперты", "О нас", "Контакты"];
   return (
-    <footer className="border-t border-border py-10">
-      <Container className="flex flex-col items-start justify-between gap-4 text-sm text-muted-foreground md:flex-row md:items-center">
-        <p>© Бизнес-школа Елены Кремневой · Липецк</p>
-        <p>Прототип. Контент будет уточняться.</p>
+    <footer className="border-t border-border bg-secondary/40">
+      <Container className="py-16">
+        <div className="grid gap-12 md:grid-cols-3">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">
+              Тактика основателя
+            </p>
+            <h3 className="mt-3 text-2xl font-black leading-tight tracking-tight">
+              Школа практического роста бизнеса
+            </h3>
+            <p className="mt-4 max-w-sm text-sm text-muted-foreground">
+              Никакой воды. Только система, прибыль и трансформация.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <CtaButton>Оставить заявку</CtaButton>
+              <button className="rounded-full border border-border bg-background px-6 py-3 text-sm font-bold uppercase tracking-wider transition-colors hover:bg-secondary">
+                Образование
+              </button>
+            </div>
+          </div>
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80">
+              Навигация
+            </p>
+            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+              {nav.map((item) => (
+                <li key={item}>
+                  <a href="#" className="transition-colors hover:text-primary">
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80">
+              Контакты
+            </p>
+            <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+              <li><a href="mailto:kredo48@mail.ru" className="hover:text-primary">kredo48@mail.ru</a></li>
+              <li><a href="tel:+74742711808" className="hover:text-primary">+7 4742 711 808</a></li>
+              <li>г. Липецк, ул. Коцаря С.Л., 10А, пом. 7</li>
+            </ul>
+            <p className="mt-6 text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80">
+              Социальные сети
+            </p>
+            <div className="mt-4 flex gap-3">
+              {["TG", "MAX", "VK"].map((s) => (
+                <a key={s} href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background text-xs font-bold text-primary transition-colors hover:bg-secondary">
+                  {s}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="mt-14 grid gap-6 border-t border-border pt-8 md:grid-cols-2 md:items-end">
+          <div>
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80">
+              Подпишитесь на новости
+            </p>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Получайте обновления по программам и тренингам школы.
+            </p>
+            <a href="#" className="mt-3 inline-block text-sm font-bold text-primary hover:underline">
+              Подписаться →
+            </a>
+          </div>
+          <div className="text-sm text-muted-foreground md:text-right">
+            <p>© 2026 Тактика основателя. Все права защищены.</p>
+            <p className="mt-2 space-x-4">
+              <a href="#" className="hover:text-primary">Политика конфиденциальности</a>
+              <a href="#" className="hover:text-primary">Публичная оферта</a>
+            </p>
+          </div>
+        </div>
       </Container>
     </footer>
   );
