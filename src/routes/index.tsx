@@ -864,7 +864,7 @@ function Bridge() {
           />
         </div>
         <div>
-          <h2 className="text-4xl font-black leading-tight tracking-tight md:text-5xl">
+          <h2 className="bg-gradient-to-r from-[#0a2e22] via-[#1a7a5c] to-[#0d4d3a] bg-clip-text text-transparent text-4xl font-black leading-tight tracking-tight md:text-5xl">
             Знакомо ощущение, когда вы вливаете деньги в рекламу, а продажи стоят на месте?
           </h2>
           <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
@@ -902,7 +902,7 @@ function Bridge() {
               <div className="rounded-2xl border border-primary-foreground/20 bg-primary-foreground/5 p-6 backdrop-blur">
                 <div className="flex items-center justify-between text-[11px] font-black uppercase tracking-[0.18em] text-primary-foreground/70">
                   <span>Места на этой неделе</span>
-                  <span className="rounded-full bg-accent px-2.5 py-1 text-[10px] text-accent-foreground">Осталось 1</span>
+                  <span className="rounded-full bg-red-500 px-2.5 py-1 text-[10px] font-bold text-white">Осталось 1</span>
                 </div>
                 <div className="mt-5 grid grid-cols-4 gap-2">
                   {[0, 1, 2, 3].map((i) => {
@@ -929,7 +929,9 @@ function Bridge() {
                   Берём не всех — только 4 компании в неделю
                 </div>
               </div>
-              <CtaButton variant="ghost">Получить диагностику</CtaButton>
+              <button className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary-foreground/50 bg-primary-foreground/15 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground backdrop-blur transition-colors hover:bg-primary-foreground/25">
+                Получить диагностику <ArrowRight className="h-4 w-4" />
+              </button>
             </div>
           </div>
         </div>
