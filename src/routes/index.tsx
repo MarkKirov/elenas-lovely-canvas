@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Plus } from "lucide-react";
 import { useState } from "react";
 import {
   Dialog,
@@ -1019,58 +1019,24 @@ function Fit() {
   );
 }
 
-const faqItems = [
-  {
-    q: "За сколько окупится участие?",
-    a: "Большинство участников окупает обучение за первые 2–3 месяца — за счёт первой же системной перестройки найма, продаж или ценообразования.",
-    tone: "green-lg",
-  },
-  {
-    q: "Это теория или практика?",
-    a: "90% времени — внедрение в ваш бизнес. Никаких лекций «на потом» и домашек «в стол».",
-    tone: "gray",
-  },
-  {
-    q: "Кто ведёт программу?",
-    a: "Елена Кремнева и команда практикующих экспертов с опытом в производстве, рознице и услугах.",
-    tone: "gray-green",
-  },
-  {
-    q: "Подойдёт ли моему бизнесу?",
-    a: "Да, если у вас оборот от 5 млн ₽/мес и вы готовы внедрять, а не просто слушать. На диагностике честно скажем, если нет.",
-    tone: "green",
-  },
-  {
-    q: "Сколько длится обучение?",
-    a: "4 месяца плотной работы + 2 месяца сопровождения.",
-    tone: "gray",
-  },
-  {
-    q: "Берёте ли вы всех?",
-    a: "Нет. Сначала бесплатная диагностика. Если не сможем дать результат — честно откажем.",
-    tone: "green-md",
-  },
-  {
-    q: "Что если не сработает?",
-    a: "Возвращаем оплату по условиям договора, если вы выполняли все рекомендации и не получили роста.",
-    tone: "gray-dark",
-  },
+const faqItems: { q: string; a: string; tone: "green" | "gray"; span: string }[] = [
+  // Row 1 — 3 + 3
+  { q: "За сколько окупится участие?", a: "Большинство участников окупает обучение за первые 2–3 месяца — за счёт первой же системной перестройки найма, продаж или ценообразования.", tone: "green", span: "md:col-span-3" },
+  { q: "Подойдёт ли моему бизнесу?", a: "Да, если у вас оборот от 5 млн ₽/мес и вы готовы внедрять, а не просто слушать. На диагностике честно скажем, если нет.", tone: "gray", span: "md:col-span-3" },
+  // Row 2 — 2 + 2 + 2
+  { q: "Это теория или практика?", a: "90% времени — внедрение в ваш бизнес. Никаких лекций «на потом» и домашек «в стол».", tone: "gray", span: "md:col-span-2" },
+  { q: "Кто ведёт программу?", a: "Елена Кремнева и команда практикующих экспертов с опытом в производстве, рознице и услугах.", tone: "green", span: "md:col-span-2" },
+  { q: "Сколько длится обучение?", a: "4 месяца плотной работы + 2 месяца сопровождения.", tone: "gray", span: "md:col-span-2" },
+  // Row 3 — 3 + 3
+  { q: "Берёте ли вы всех?", a: "Нет. Сначала бесплатная диагностика. Если не сможем дать результат — честно откажем.", tone: "green", span: "md:col-span-3" },
+  { q: "Что если не сработает?", a: "Возвращаем оплату по условиям договора, если вы выполняли все рекомендации и не получили роста.", tone: "gray", span: "md:col-span-3" },
 ];
 
 function Faq() {
+  const [open, setOpen] = useState<number | null>(null);
   const toneMap: Record<string, string> = {
-    "green-lg":
-      "md:col-span-2 md:row-span-2 bg-gradient-to-br from-[#1a7a5c] via-[#0f5a42] to-[#08372a] border-emerald-400/20",
-    "green":
-      "md:col-span-2 bg-gradient-to-br from-[#0f5a42] to-[#082a20] border-emerald-400/15",
-    "green-md":
-      "md:col-span-2 bg-gradient-to-tr from-[#0d4d3a] via-[#11614a] to-[#1a7a5c]/70 border-emerald-400/20",
-    "gray":
-      "bg-gradient-to-br from-zinc-800 to-zinc-900 border-white/5",
-    "gray-dark":
-      "md:col-span-2 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black border-white/5",
-    "gray-green":
-      "bg-gradient-to-br from-zinc-800 via-zinc-900 to-emerald-950/60 border-emerald-400/10",
+    green: "bg-gradient-to-br from-[#1a7a5c] via-[#0f5a42] to-[#08372a] border-emerald-400/20 hover:border-emerald-300/50",
+    gray: "bg-gradient-to-br from-zinc-800 via-zinc-900 to-zinc-950 border-white/5 hover:border-emerald-300/30",
   };
   return (
     <section className="relative overflow-hidden bg-[#0a0f0d] py-24 text-white">
@@ -1085,29 +1051,50 @@ function Faq() {
             Что важно знать <span className="bg-gradient-to-r from-emerald-300 to-emerald-500 bg-clip-text text-transparent">перед участием</span>
           </h2>
           <p className="mt-5 max-w-2xl text-base text-white/60 md:text-lg">
-            Формат обучения, результат, риски и условия участия. Без воды — прямые ответы на самые частые вопросы.
+            Нажмите на вопрос — раскроется прямой ответ. Без воды.
           </p>
         </div>
-        <div className="mt-14 grid auto-rows-[minmax(180px,auto)] gap-5 md:grid-cols-4">
+        <div className="mt-14 grid auto-rows-fr gap-5 md:grid-cols-6">
           {faqItems.map((item, i) => (
-            <article
+            <button
               key={item.q}
-              className={`group relative overflow-hidden rounded-3xl border p-7 md:p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/10 ${toneMap[item.tone]}`}
+              type="button"
+              onClick={() => setOpen(i)}
+              className={`group relative flex min-h-[180px] flex-col justify-between overflow-hidden rounded-3xl border p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/20 md:p-8 ${item.span} ${toneMap[item.tone]}`}
             >
-              <div className="absolute right-5 top-5 text-xs font-bold uppercase tracking-widest text-white/30">
+              <div className="absolute right-5 top-5 text-[11px] font-bold uppercase tracking-widest text-white/30">
                 {String(i + 1).padStart(2, "0")}
               </div>
               <h3 className="pr-10 text-xl font-bold leading-snug md:text-2xl">
                 {item.q}
               </h3>
-              <p className="mt-4 text-sm leading-relaxed text-white/70 md:text-base">
-                {item.a}
-              </p>
+              <div className="mt-6 flex items-center justify-between gap-4">
+                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/50 transition-colors group-hover:text-emerald-200">
+                  Показать ответ
+                </span>
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur transition-all group-hover:rotate-90 group-hover:border-emerald-300/60 group-hover:bg-emerald-400/15">
+                  <Plus className="h-4 w-4" />
+                </span>
+              </div>
               <div className="pointer-events-none absolute -bottom-12 -right-12 h-40 w-40 rounded-full bg-white/5 opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100" />
-            </article>
+            </button>
           ))}
         </div>
       </Container>
+      <Dialog open={open !== null} onOpenChange={(v) => !v && setOpen(null)}>
+        <DialogContent className="max-w-xl">
+          {open !== null && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-black leading-tight">{faqItems[open].q}</DialogTitle>
+              </DialogHeader>
+              <DialogDescription className="text-base leading-relaxed text-muted-foreground">
+                {faqItems[open].a}
+              </DialogDescription>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
