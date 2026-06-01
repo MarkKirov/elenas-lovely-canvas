@@ -1048,11 +1048,10 @@ function Faq() {
             Вопросы и ответы
           </span>
           <h2 className="mt-6 text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
-            Что важно знать <span className="bg-gradient-to-r from-emerald-300 to-emerald-500 bg-clip-text text-transparent">перед участием</span>
+            <span className="bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
+              Что важно знать перед участием
+            </span>
           </h2>
-          <p className="mt-5 max-w-2xl text-base text-white/60 md:text-lg">
-            Нажмите на вопрос — раскроется прямой ответ. Без воды.
-          </p>
         </div>
         <div className="mt-14 grid auto-rows-fr gap-5 md:grid-cols-6">
           {faqItems.map((item, i) => (
