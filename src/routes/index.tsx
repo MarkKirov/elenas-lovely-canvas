@@ -447,7 +447,15 @@ function Header() {
           <div>Соединяем мировые бизнес-практики</div>
           <div>с реальностью Липецка и личностью собственника</div>
         </div>
-        <div className="hidden md:block" aria-hidden="true" />
+        <div className="hidden md:flex md:justify-end">
+          <a
+            href="#programs"
+            onClick={scrollToPrograms}
+            className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-secondary px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+          >
+            Смотреть программы <ArrowRight className="h-3.5 w-3.5" />
+          </a>
+        </div>
       </Container>
     </header>
   );
@@ -483,11 +491,12 @@ function Hero() {
             без круглосуточной пахоты?
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
-            <button className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#04140f] transition-colors hover:bg-white/90">
+            <button
+              type="button"
+              onClick={openLeadDialog}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-[#04140f] transition-colors hover:bg-white/90"
+            >
               Записаться на диагностику <ArrowRight className="h-4 w-4" />
-            </button>
-            <button className="inline-flex items-center gap-2 rounded-full border border-white/40 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white/10">
-              Смотреть программы <ArrowRight className="h-4 w-4" />
             </button>
           </div>
         </div>
