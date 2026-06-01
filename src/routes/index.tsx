@@ -268,40 +268,37 @@ function Problem() {
 
 function Comparison() {
   return (
-    <section className="bg-secondary/40 py-24">
-      <Container>
-        <Eyebrow>Сравнение</Eyebrow>
-        <h2 className="mt-6 max-w-3xl text-4xl font-black tracking-tight md:text-5xl">
-          MBA и онлайн-курсы vs школа Кремневой
-        </h2>
-
-        <div className="mt-12 overflow-hidden rounded-3xl border border-border bg-card">
-          <div className="hidden grid-cols-[1.1fr_1.4fr_1.4fr] gap-px bg-border text-xs font-bold uppercase tracking-[0.14em] md:grid">
-            <div className="bg-card px-6 py-4 text-foreground/60">Критерий</div>
-            <div className="bg-card px-6 py-4 text-foreground/60">Стандарт MBA / онлайн-курсы</div>
-            <div className="bg-card px-6 py-4 text-primary">Школа Кремневой</div>
-          </div>
-          <div className="divide-y divide-border">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] py-24 text-white">
+      <div className="pointer-events-none absolute -right-32 top-10 h-96 w-96 rounded-full bg-emerald-400/10 blur-3xl" />
+      <div className="pointer-events-none absolute -left-32 bottom-10 h-96 w-96 rounded-full bg-emerald-300/10 blur-3xl" />
+      <Container className="relative">
+        <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-sm">
+          <div className="divide-y divide-white/10">
             {comparison.map((row) => (
-              <div key={row.problem} className="grid gap-6 p-6 md:grid-cols-[1.1fr_1.4fr_1.4fr] md:gap-px md:bg-border md:p-0">
-                <div className="md:bg-card md:p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground md:hidden">Критерий</p>
-                  <p className="mt-1 text-lg font-bold text-foreground md:mt-0">{row.problem}</p>
+              <div
+                key={row.problem}
+                className="grid gap-5 p-6 md:grid-cols-[0.9fr_1.4fr_1.4fr] md:gap-8 md:p-8"
+              >
+                <div>
+                  <p className="text-lg font-bold leading-snug text-white md:text-xl">
+                    {row.problem}
+                  </p>
                 </div>
-                <div className="md:bg-card md:p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground md:hidden">MBA / онлайн</p>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground md:mt-0">{row.mba}</p>
+                <div>
+                  <p className="text-sm leading-relaxed text-white/65">{row.mba}</p>
                 </div>
-                <div className="rounded-2xl bg-secondary p-5 md:rounded-none md:bg-card md:p-6">
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-primary md:hidden">Школа Кремневой</p>
-                  <p className="mt-1 text-sm leading-relaxed text-foreground md:mt-0">{row.us}</p>
+                <div className="rounded-2xl bg-white/[0.04] p-5 md:bg-transparent md:p-0">
+                  <p className="text-base font-bold leading-snug text-emerald-200 md:text-lg">
+                    {row.usTitle}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-white/80">{row.us}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <p className="mt-10 max-w-3xl text-base text-muted-foreground">
+        <p className="mt-10 max-w-3xl text-base text-white/70">
           Если узнали свои проблемы — запишитесь на составление бесплатной бизнес-стратегии.
           Это ни к чему не обязывает, и мы ничего не будем продавать.
         </p>
