@@ -76,7 +76,7 @@ type ProgramDetail = {
   meta: string[];
   host?: { name: string; role: string; img: string; bullets: string[] };
   outcomes: string[];
-  modules: { label: string; title: string; sub?: string }[];
+  modules: { label: string; title: string; sub?: string; weeks?: string; dates?: string; blocks?: string }[];
 };
 
 const programs: ProgramDetail[] = [
@@ -97,11 +97,11 @@ const programs: ProgramDetail[] = [
       "Получаете пошаговый план внедрения на следующий этап развития.",
     ],
     modules: [
-      { label: "Модуль 01", title: "Клиент и ценность", sub: "На ком и чём зарабатываем?" },
-      { label: "Модуль 02", title: "Деньги в бизнесе", sub: "Как зарабатываем?" },
-      { label: "Модуль 03", title: "Команда и делегирование", sub: "Кто зарабатывает?" },
-      { label: "Модуль 04", title: "Ресурсы, партнёры, автоматизация", sub: "Основа роста и управляемости" },
-      { label: "Модуль 05", title: "Сборка бизнес-модели", sub: "Интеграция всех 9 блоков Canvas" },
+      { label: "Модуль 01", title: "Клиент и ценность", sub: "На ком и чём зарабатываем?", weeks: "Недели 1–3", dates: "11–13 сентября 2026", blocks: "ВП · СК · ВТ" },
+      { label: "Модуль 02", title: "Деньги в бизнесе", sub: "Как зарабатываем?", weeks: "Недели 4–6", dates: "02–04 октября 2026", blocks: "КЛ · ВТ · ПД" },
+      { label: "Модуль 03", title: "Команда и делегирование", sub: "Кто зарабатывает?", weeks: "Недели 7–9", dates: "23–25 октября 2026", blocks: "КР · КД · КП" },
+      { label: "Модуль 04", title: "Ресурсы, партнёры, автоматизация", sub: "Основа роста и управляемости", weeks: "Недели 10–12", dates: "13–15 ноября 2026", blocks: "СИ · ПД" },
+      { label: "Модуль 05", title: "Сборка бизнес-модели", sub: "Интеграция всех 9 блоков Canvas", weeks: "Недели 13–15", dates: "04–06 декабря 2026", blocks: "КП · КД · ВП · ВТ · СК · КР · КЛ · СИ · ПД" },
     ],
   },
   {
@@ -686,12 +686,25 @@ function ProgramDialog({ program, onClose }: { program: ProgramDetail | null; on
 
               <div>
                 <h4 className="text-lg font-black md:text-xl">Программа</h4>
-                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-2">
                   {program.modules.map((m) => (
-                    <div key={m.label} className="rounded-xl bg-muted/60 p-4">
+                    <div key={m.label} className="rounded-xl border border-emerald-200/60 bg-muted/60 p-4">
                       <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary">{m.label}</p>
                       <p className="mt-2 font-bold leading-snug">{m.title}</p>
                       {m.sub && <p className="mt-1 text-sm text-muted-foreground">{m.sub}</p>}
+                      {(m.weeks || m.dates) && (
+                        <div className="mt-3 border-t border-emerald-200/60 pt-3">
+                          {m.weeks && (
+                            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary">{m.weeks}</p>
+                          )}
+                          {m.dates && <p className="mt-0.5 text-sm text-foreground/80">{m.dates}</p>}
+                        </div>
+                      )}
+                      {m.blocks && (
+                        <div className="mt-3 inline-flex rounded-full border border-emerald-300/70 bg-emerald-50/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-emerald-900">
+                          Блоки: {m.blocks}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
