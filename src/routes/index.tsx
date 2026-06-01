@@ -864,7 +864,7 @@ function Bridge() {
           />
         </div>
         <div>
-          <h2 className="text-4xl font-black leading-tight tracking-tight md:text-5xl">
+          <h2 className="bg-gradient-to-r from-[#0a2e22] via-[#1a7a5c] to-[#0d4d3a] bg-clip-text text-transparent text-4xl font-black leading-tight tracking-tight md:text-5xl">
             Знакомо ощущение, когда вы вливаете деньги в рекламу, а продажи стоят на месте?
           </h2>
           <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
