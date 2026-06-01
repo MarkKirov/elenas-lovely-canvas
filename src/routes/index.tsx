@@ -1,5 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
 import logoAsset from "@/assets/to-logo-full-light.svg.asset.json";
 import carPartsAsset from "@/assets/car-frame.jpg.asset.json";
 import elenaAsset from "@/assets/elena-kremneva.jpg.asset.json";
@@ -59,13 +68,182 @@ const comparison = [
   },
 ];
 
-const programs = [
-  { tag: "Программа школы", title: "Сборка бизнес-модели", desc: "Полный трек для собственников: клиент, деньги, команда, процессы и защита итоговой модели внедрения." },
-  { tag: "Практический тренинг", title: "От хаоса к потоку", desc: "Управление проектами без авралов: сроки, бюджет и качество в одном контуре." },
-  { tag: "Интенсив", title: "От сигналов к действиям", desc: "Как замечать рыночные сигналы раньше и быстро превращать их в решения." },
-  { tag: "Интенсив", title: "Путешествие в ботинках клиента", desc: "Customer Journey и точки роста конверсии по реальному пути клиента." },
-  { tag: "Интенсив", title: "Синхронизация личности и бизнеса", desc: "Бизнес-психология собственника: устойчивость, фокус и качество решений." },
-  { tag: "Интенсив", title: "Как быть быстрее конкурента без найма людей", desc: "Прикладные ИИ-сценарии автоматизации для ускорения ключевых процессов." },
+type ProgramDetail = {
+  tag: string;
+  title: string;
+  desc: string;
+  highlights: string[];
+  meta: string[];
+  host?: { name: string; role: string; img: string; bullets: string[] };
+  outcomes: string[];
+  modules: { label: string; title: string; sub?: string }[];
+};
+
+const programs: ProgramDetail[] = [
+  {
+    tag: "Программа школы",
+    title: "Сборка бизнес-модели",
+    desc: "Формат для собственников, которые хотят собрать управляемую модель роста, снять перегруз с ручного управления и перейти к системным решениям в деньгах, команде и процессах.",
+    highlights: [
+      "Собираете целостную модель бизнеса под ваш этап роста.",
+      "Проходите 5 модулей с внедрением решений между сессиями.",
+      "Участие подтверждается после диагностики: берём не всех.",
+    ],
+    meta: ["Старт: 11 сентября 2026", "15 недель", "5 модулей · офлайн"],
+    outcomes: [
+      "Формулируете целевую модель роста и приоритеты собственника.",
+      "Убираете хаос в управлении деньгами, командой и проектами.",
+      "Синхронизируете команду вокруг единой операционной логики.",
+      "Получаете пошаговый план внедрения на следующий этап развития.",
+    ],
+    modules: [
+      { label: "Модуль 01", title: "Клиент и ценность", sub: "На ком и чём зарабатываем?" },
+      { label: "Модуль 02", title: "Деньги в бизнесе", sub: "Как зарабатываем?" },
+      { label: "Модуль 03", title: "Команда и делегирование", sub: "Кто зарабатывает?" },
+      { label: "Модуль 04", title: "Ресурсы, партнёры, автоматизация", sub: "Основа роста и управляемости" },
+      { label: "Модуль 05", title: "Сборка бизнес-модели", sub: "Интеграция всех 9 блоков Canvas" },
+    ],
+  },
+  {
+    tag: "Отдельный тренинг",
+    title: "От хаоса к потоку",
+    desc: "Практический тренинг по управлению проектами для собственников и руководителей: как удерживать срок, бюджет и качество, когда одновременно идёт много инициатив и не хватает ресурсов.",
+    highlights: [
+      "2 дня практики",
+      "Фокус: срок · бюджет · качество",
+      "Инструменты для внедрения сразу после тренинга",
+    ],
+    meta: ["10–11 апреля 2026", "Липецк", "2 дня · практический формат"],
+    host: {
+      name: "Олег Давидович",
+      role: "Ведущий тренинга",
+      img: olegAsset.url,
+      bullets: [
+        "Преподаватель программ MBA и Executive MBA ИБДА РАНХиГС.",
+        "Консультант по стратегиям и системам управления проектами.",
+        "Автор программ по системному мышлению и управленческим решениям.",
+        "Специализация: управление мультипроектной средой, приоритизация и устойчивое внедрение изменений.",
+      ],
+    },
+    outcomes: [
+      "Поймёте, почему проекты зависают и не доходят до завершения даже при высокой загрузке команды.",
+      "Научитесь расставлять приоритеты в мультипроектной среде и останавливать неэффективные инициативы.",
+      "Освоите подход к одновременному управлению сроками, бюджетом и качеством без постоянного аврала.",
+      "Сформируете план изменений, которые можно внедрить сразу после тренинга.",
+    ],
+    modules: [
+      { label: "День 1", title: "Почему проекты застревают" },
+      { label: "День 2", title: "Как выстроить поток проектов" },
+    ],
+  },
+  {
+    tag: "Интенсив школы",
+    title: "От сигналов к действиям",
+    desc: "Практический тренинг по работе с трендами для собственников и руководителей: как замечать изменения раньше рынка и превращать сигналы в конкретные управленческие решения.",
+    highlights: ["Тренды под ваш масштаб бизнеса", "Переход от сигналов к решениям", "Готовый план внедрения"],
+    meta: ["Офлайн-интенсив", "Липецк", "Практический формат"],
+    host: {
+      name: "Лариса Киселева",
+      role: "Ведущий тренинга",
+      img: larisaAsset.url,
+      bullets: [
+        "Лариса Киселева — эксперт по управленческим изменениям и стратегическому развитию.",
+        "Управленческий стаж 25+ лет, предпринимательский опыт 15+ лет.",
+        "Ментор и спикер «Сколково», практик по адаптации бизнеса к рыночным изменениям.",
+      ],
+    },
+    outcomes: [
+      "Научитесь замечать рыночные и технологические сигналы до того, как они станут очевидными для конкурентов.",
+      "Получите рабочую схему фильтрации трендов под ваш масштаб бизнеса и региональный контекст.",
+      "Соберёте карту приоритетных трендов с понятными шагами внедрения в процессы и продукт.",
+      "Снизите риск запоздалых решений и реактивного управления в условиях неопределённости.",
+    ],
+    modules: [
+      { label: "Блок 1", title: "Где искать ранние сигналы" },
+      { label: "Блок 2", title: "Переход от наблюдений к действиям" },
+    ],
+  },
+  {
+    tag: "Интенсив школы",
+    title: "Путешествие в ботинках клиента",
+    desc: "Практический тренинг по анализу и проектированию клиентского пути: от первого контакта до повторной покупки и роста лояльности.",
+    highlights: ["Customer Journey Map", "Service Blueprint", "План внедрения изменений"],
+    meta: ["Офлайн-интенсив", "Липецк", "80% практики"],
+    host: {
+      name: "Лариса Киселева",
+      role: "Ведущий тренинга",
+      img: larisaAsset.url,
+      bullets: [
+        "Лариса Киселева — практик по клиентскому опыту и управленческим трансформациям.",
+        "Ментор и спикер «Сколково», управленческий стаж 25+ лет.",
+        "Работает с предпринимателями над системным улучшением клиентского пути и сервиса.",
+      ],
+    },
+    outcomes: [
+      "Поймёте, где в клиентском пути теряются деньги и лояльность.",
+      "Соберёте Customer Journey Map и Service Blueprint для своего бизнеса.",
+      "Найдёте разрывы между обещанием бренда и реальным опытом клиента.",
+      "Подготовите конкретные решения для роста конверсии и повторных продаж.",
+    ],
+    modules: [
+      { label: "Блок 1", title: "Клиентский путь без иллюзий" },
+      { label: "Блок 2", title: "Проектирование улучшений" },
+    ],
+  },
+  {
+    tag: "Интенсив школы",
+    title: "Синхронизация личности и бизнеса",
+    desc: "Практический тренинг по бизнес-психологии собственника: как повысить управленческую устойчивость и синхронизировать личную стратегию с целями компании.",
+    highlights: ["Психология решений в бизнесе", "Устойчивость без выгорания", "Личный трек изменений"],
+    meta: ["Офлайн-интенсив", "Липецк", "Практика для собственников"],
+    host: {
+      name: "Александра Гречушенко",
+      role: "Ведущий тренинга",
+      img: aleksandraAsset.url,
+      bullets: [
+        "Александра Гречушенко — бизнес-психолог, ментор, коуч, бизнес-тренер.",
+        "Работает с предпринимателями на стыке психологии управления и бизнес-результатов.",
+        "Фокус: устойчивые решения, управленческая зрелость и долгосрочная эффективность собственника.",
+      ],
+    },
+    outcomes: [
+      "Выявите личные управленческие паттерны, которые тормозят рост бизнеса.",
+      "Снизите перегруз и тревожность собственника в операционной рутине.",
+      "Соберёте устойчивую модель принятия решений без выгорания команды и руководителя.",
+      "Получите инструменты синхронизации личных целей и стратегии компании.",
+    ],
+    modules: [
+      { label: "Блок 1", title: "Диагностика текущего состояния" },
+      { label: "Блок 2", title: "Сборка устойчивой модели управления" },
+    ],
+  },
+  {
+    tag: "Интенсив школы",
+    title: "Как быть быстрее конкурента без найма людей",
+    desc: "Практический тренинг по внедрению ИИ и нейросетей в бизнес-процессы: как ускорить операционку, снизить издержки и повысить скорость принятия решений.",
+    highlights: ["Автоматизация без расширения штата", "Прикладные кейсы для МСП", "План внедрения и контроль эффекта"],
+    meta: ["Офлайн-интенсив", "Липецк", "ИИ для предпринимателей"],
+    host: {
+      name: "Алексей Фарафонов",
+      role: "Ведущий тренинга",
+      img: alekseyAsset.url,
+      bullets: [
+        "Алексей Фарафонов — основатель ООО «ОНСОФТ», эксперт по внедрению ИИ.",
+        "Более 15 лет в разработке программного обеспечения.",
+        "220+ реализованных проектов по автоматизации и цифровым решениям для бизнеса.",
+      ],
+    },
+    outcomes: [
+      "Определите, какие бизнес-процессы стоит автоматизировать в первую очередь.",
+      "Поймёте, как внедрять ИИ без увеличения штата и потери управляемости.",
+      "Соберёте набор прикладных сценариев для продаж, сервиса и операционки.",
+      "Оцените риски и экономический эффект внедрения до старта работ.",
+    ],
+    modules: [
+      { label: "Блок 1", title: "Где ИИ даёт быстрый эффект" },
+      { label: "Блок 2", title: "Внедрение без хаоса" },
+    ],
+  },
 ];
 
 const outcomesMain = [
@@ -370,6 +548,8 @@ function Teachers() {
 }
 
 function Programs() {
+  const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const active = openIdx !== null ? programs[openIdx] : null;
   return (
     <section className="py-24">
       <Container>
@@ -394,12 +574,15 @@ function Programs() {
           <p className="text-xs font-bold uppercase tracking-[0.14em] text-muted-foreground">Каталог</p>
           <h3 className="mt-3 text-3xl font-black tracking-tight md:text-4xl">Выберите направление</h3>
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {programs.map((p) => (
+            {programs.map((p, i) => (
               <article key={p.title} className="flex flex-col rounded-2xl bg-muted/60 p-6 transition-colors hover:bg-muted">
                 <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-primary">{p.tag}</p>
                 <h4 className="mt-3 text-lg font-bold leading-snug text-foreground">{p.title}</h4>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
-                <button className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-primary hover:bg-secondary">
+                <button
+                  onClick={() => setOpenIdx(i)}
+                  className="mt-6 inline-flex w-fit items-center gap-2 rounded-full border border-primary/40 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-primary hover:bg-secondary"
+                >
                   Подробнее <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               </article>
@@ -407,7 +590,160 @@ function Programs() {
           </div>
         </div>
       </Container>
+      <ProgramDialog program={active} onClose={() => setOpenIdx(null)} />
     </section>
+  );
+}
+
+function ProgramDialog({ program, onClose }: { program: ProgramDetail | null; onClose: () => void }) {
+  const [phone, setPhone] = useState("");
+  const [name, setName] = useState("");
+  const [sent, setSent] = useState(false);
+
+  const handleClose = (open: boolean) => {
+    if (!open) {
+      onClose();
+      setTimeout(() => {
+        setSent(false);
+        setPhone("");
+        setName("");
+      }, 200);
+    }
+  };
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!phone.trim()) return;
+    setSent(true);
+  };
+
+  return (
+    <Dialog open={!!program} onOpenChange={handleClose}>
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-0 gap-0">
+        {program && (
+          <>
+            <div className="rounded-t-lg bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-8 text-white md:p-10">
+              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-200">{program.tag}</p>
+              <DialogHeader className="mt-3 space-y-3">
+                <DialogTitle className="text-3xl font-black tracking-tight md:text-4xl text-white text-left">
+                  {program.title}
+                </DialogTitle>
+                <DialogDescription className="text-sm leading-relaxed text-white/85 md:text-base text-left">
+                  {program.desc}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {program.meta.map((m) => (
+                  <span key={m} className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-xs font-semibold">
+                    {m}
+                  </span>
+                ))}
+              </div>
+              <ul className="mt-6 space-y-2">
+                {program.highlights.map((h) => (
+                  <li key={h} className="rounded-xl bg-white/10 px-4 py-2.5 text-sm leading-snug">
+                    {h}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="space-y-8 p-8 md:p-10">
+              {program.host && (
+                <div className="rounded-2xl border border-border bg-muted/40 p-5 md:p-6">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">{program.host.role}</p>
+                  <div className="mt-4 flex flex-col gap-5 md:flex-row md:items-start">
+                    <img
+                      src={program.host.img}
+                      alt={program.host.name}
+                      className="h-32 w-32 flex-shrink-0 rounded-xl object-cover md:h-36 md:w-36"
+                    />
+                    <div className="flex-1">
+                      <h4 className="text-xl font-black md:text-2xl">{program.host.name}</h4>
+                      <ul className="mt-3 space-y-2">
+                        {program.host.bullets.map((b) => (
+                          <li key={b} className="flex gap-2 text-sm leading-relaxed text-foreground/80">
+                            <span className="mt-2 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div>
+                <h4 className="text-lg font-black md:text-xl">Что получат участники</h4>
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                  {program.outcomes.map((o) => (
+                    <div key={o} className="rounded-xl border border-emerald-200/60 bg-emerald-50/50 p-4 text-sm leading-relaxed">
+                      {o}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h4 className="text-lg font-black md:text-xl">Программа</h4>
+                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                  {program.modules.map((m) => (
+                    <div key={m.label} className="rounded-xl bg-muted/60 p-4">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary">{m.label}</p>
+                      <p className="mt-2 font-bold leading-snug">{m.title}</p>
+                      {m.sub && <p className="mt-1 text-sm text-muted-foreground">{m.sub}</p>}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-2xl bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-6 text-white md:p-8">
+                {sent ? (
+                  <div className="py-4 text-center">
+                    <p className="text-xl font-black">Спасибо! Заявка отправлена.</p>
+                    <p className="mt-2 text-sm text-white/80">Свяжемся с вами в ближайшее время.</p>
+                  </div>
+                ) : (
+                  <>
+                    <h4 className="text-xl font-black md:text-2xl">Узнайте, подойдёт ли вам эта программа</h4>
+                    <p className="mt-2 text-sm text-white/80">
+                      Оставьте телефон — перезвоним, зададим короткие вопросы и расскажем, ваша ли это программа.
+                    </p>
+                    <form onSubmit={submit} className="mt-5 grid gap-3 md:grid-cols-[1fr_1fr_auto]">
+                      <Input
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="Ваше имя"
+                        className="bg-white text-foreground placeholder:text-muted-foreground"
+                        maxLength={100}
+                      />
+                      <Input
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        required
+                        type="tel"
+                        placeholder="+7 ___ ___ __ __"
+                        className="bg-white text-foreground placeholder:text-muted-foreground"
+                        maxLength={20}
+                      />
+                      <button
+                        type="submit"
+                        className="inline-flex items-center justify-center gap-2 rounded-md bg-white px-5 py-2 text-sm font-bold uppercase tracking-wider text-[#04140f] hover:bg-white/90"
+                      >
+                        Узнать <ArrowRight className="h-4 w-4" />
+                      </button>
+                    </form>
+                    <p className="mt-3 text-[11px] text-white/60">
+                      Оставляя заявку, вы соглашаетесь на обработку персональных данных.
+                    </p>
+                  </>
+                )}
+              </div>
+            </div>
+          </>
+        )}
+      </DialogContent>
+    </Dialog>
   );
 }
 
