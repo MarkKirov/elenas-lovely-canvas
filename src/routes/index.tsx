@@ -433,7 +433,7 @@ function Hero() {
           <span className="inline-block rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white">
             Практическая бизнес-школа
           </span>
-          <h1 className="mt-8 text-5xl font-black leading-[0.95] tracking-tight md:text-7xl bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
+          <h1 className="mt-8 text-5xl font-black leading-[0.95] tracking-tight md:text-7xl bg-gradient-to-b from-white to-white/75 bg-clip-text text-transparent">
             Пересобери свою<br />бизнес-модель
           </h1>
           <p className="mt-6 text-xl font-semibold text-white/90 md:text-2xl">
