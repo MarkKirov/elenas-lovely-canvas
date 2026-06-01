@@ -172,25 +172,60 @@ function Hero() {
 function Quiz() {
   return (
     <section className="border-y border-border bg-secondary/50">
-      <Container className="py-20">
+      <Container className="py-20 md:py-24">
         <div className="max-w-4xl">
-          <h2 className="text-4xl font-black tracking-tight text-foreground md:text-5xl">
-            Какой вы собственник и где ваши невидимые источники дохода?
+          <h2 className="text-4xl font-black leading-[1.1] tracking-tight text-foreground md:text-5xl lg:text-6xl">
+            Какой вы собственник <span className="text-primary">и где ваши</span> невидимые источники дохода?
           </h2>
-          <p className="mt-8 text-lg text-muted-foreground md:text-xl">
+          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
             Нажмите на кнопку ниже, чтобы понять, какой бизнес подходит под вашу личность,
-            почему буксуют продажи, как перестать саботировать собственный масштаб и навсегда
-            избавиться от предпринимательского одиночества.
+            почему буксуют продажи и как перестать саботировать собственный масштаб.
           </p>
-          <button className="mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground">
-            Пройти диагностику <ArrowRight className="h-4 w-4" />
+          <button className="mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+            Пройти диагностику <ArrowRight className="h-5 w-5" />
           </button>
-          <p className="mt-12 text-lg text-foreground md:text-xl">
-            Сразу после теста вы получаете бронь на бесплатный подбор пошаговой бизнес-стратегии
-            от преподавателей и практиков нашей школы, разработанной строго под вашу личность,
-            возможности и конъюнктуру региона. Эта стратегия выведет вас на новый уровень и
-            решит ключевые боли, сжирающие ресурсы компании прямо сейчас:
-          </p>
+
+          <div className="relative mt-16">
+            <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-primary/20 opacity-30 blur-3xl" />
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-primary p-8 text-primary-foreground shadow-2xl md:p-12">
+              <div className="pointer-events-none absolute inset-0 opacity-5">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <pattern id="quiz-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="white" strokeWidth="1" />
+                    </pattern>
+                  </defs>
+                  <rect width="100%" height="100%" fill="url(#quiz-grid)" />
+                </svg>
+              </div>
+              <div className="relative z-10">
+                <div className="mb-6 inline-block rounded-full bg-primary-foreground/90 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-primary">
+                  Гарантированный бонус
+                </div>
+                <h3 className="mb-6 text-2xl font-bold leading-tight md:text-3xl">
+                  Сразу после теста вы получаете бронь на бесплатный подбор стратегии
+                </h3>
+                <p className="max-w-3xl text-lg font-light leading-relaxed text-primary-foreground/85 md:text-xl">
+                  Пошаговая бизнес-стратегия от преподавателей и практиков нашей школы,
+                  разработанная строго под вашу личность, возможности и конъюнктуру региона.
+                  Она выведет вас на новый уровень и решит ключевые боли, сжирающие ресурсы
+                  компании прямо сейчас.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-10 flex flex-col items-start">
+              <button className="group flex items-center gap-4 rounded-full border-2 border-primary bg-background px-10 py-5 text-base font-bold text-primary shadow-lg transition-all duration-300 hover:bg-primary hover:text-primary-foreground">
+                <span>Начать диагностику</span>
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary transition-colors group-hover:bg-primary-foreground">
+                  <ArrowRight className="h-4 w-4 text-primary-foreground transition-colors group-hover:text-primary" />
+                </span>
+              </button>
+              <p className="mt-4 text-sm font-medium text-muted-foreground">
+                Тест займёт не более 5 минут
+              </p>
+            </div>
+          </div>
         </div>
       </Container>
     </section>
