@@ -657,7 +657,7 @@ function Programs() {
           <h3 className="mt-3 text-3xl font-black tracking-tight md:text-4xl">Выберите направление</h3>
           <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {programs.map((p, i) => (
-              <article key={p.title} className="flex flex-col rounded-2xl bg-muted/60 p-6 transition-colors hover:bg-muted">
+              <article key={p.title} className="flex flex-col rounded-2xl border border-border bg-muted/60 p-6 transition-colors hover:bg-muted">
                 <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-primary">{p.tag}</p>
                 <h4 className="mt-3 text-lg font-bold leading-snug text-foreground">{p.title}</h4>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
