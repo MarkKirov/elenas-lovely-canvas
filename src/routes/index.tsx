@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -385,6 +385,19 @@ const fitPoints = [
   { title: "Чувствуете внутренний саботаж", desc: "Испытываете жёсткий конфликт бизнеса и личности, из-за чего прокрастинируете, выгораете, а команда заражается вашим саботажем." },
 ];
 
+function openLeadDialog() {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent("open-lead-dialog"));
+  }
+}
+
+function scrollToPrograms(e: React.MouseEvent) {
+  e.preventDefault();
+  if (typeof document !== "undefined") {
+    document.getElementById("programs")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -400,6 +413,7 @@ function Index() {
       <Fit />
       <Faq />
       <Footer />
+      <LeadDialog />
     </div>
   );
 }
