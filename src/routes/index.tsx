@@ -17,7 +17,6 @@ import larisaAsset from "@/assets/larisa-kiseleva.png.asset.json";
 import aleksandraAsset from "@/assets/aleksandra-grechushenko.png.asset.json";
 import alekseyAsset from "@/assets/aleksey-farafonov.png.asset.json";
 import icebergAsset from "@/assets/iceberg.png.asset.json";
-import heroBlocks from "@/assets/hero-blocks.jpg";
 import programPeaks from "@/assets/program-peaks.png.asset.json";
 import programCompass from "@/assets/program-compass.png.asset.json";
 import programWheel from "@/assets/program-wheel.png.asset.json";
@@ -442,13 +441,6 @@ function Header() {
 function Hero() {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] text-white">
-      <img
-        src={heroBlocks}
-        alt=""
-        aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-0 hidden h-full w-[58%] object-cover opacity-70 blur-[10px] saturate-[1.1] md:block"
-      />
-      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[58%] bg-gradient-to-l from-transparent via-[#04140f]/55 to-[#04140f] md:block" />
       <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/15 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-12 -left-8 h-44 w-44 rounded-full bg-emerald-300/25 blur-3xl" />
       <Container className="relative z-10 py-20 md:py-28">
