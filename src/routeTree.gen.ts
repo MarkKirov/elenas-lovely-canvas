@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiDiagnostikaAnalyzeRouteImport } from './routes/api/diagnostika.analyze'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiDiagnostikaAnalyzeRoute = ApiDiagnostikaAnalyzeRouteImport.update({
+  id: '/api/diagnostika/analyze',
+  path: '/api/diagnostika/analyze',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api/diagnostika/analyze': typeof ApiDiagnostikaAnalyzeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api/diagnostika/analyze': typeof ApiDiagnostikaAnalyzeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api/diagnostika/analyze': typeof ApiDiagnostikaAnalyzeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/api/diagnostika/analyze'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/api/diagnostika/analyze'
+  id: '__root__' | '/' | '/api/diagnostika/analyze'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiDiagnostikaAnalyzeRoute: typeof ApiDiagnostikaAnalyzeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,12 +58,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/diagnostika/analyze': {
+      id: '/api/diagnostika/analyze'
+      path: '/api/diagnostika/analyze'
+      fullPath: '/api/diagnostika/analyze'
+      preLoaderRoute: typeof ApiDiagnostikaAnalyzeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiDiagnostikaAnalyzeRoute: ApiDiagnostikaAnalyzeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
