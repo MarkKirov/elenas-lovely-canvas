@@ -640,7 +640,11 @@ function Comparison() {
           Это ни к чему не обязывает.
         </p>
         <div className="mt-6">
-          <button className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-primary shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+          <button
+            type="button"
+            onClick={openLeadDialog}
+            className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-primary shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+          >
             Получить стратегию <ArrowRight className="h-4 w-4" />
           </button>
         </div>
@@ -1012,7 +1016,11 @@ function Bridge() {
                   Берём не всех — только 4 компании в неделю
                 </div>
               </div>
-              <button className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary-foreground/50 bg-primary-foreground/15 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground backdrop-blur transition-colors hover:bg-primary-foreground/25">
+              <button
+                type="button"
+                onClick={openLeadDialog}
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-primary-foreground/50 bg-primary-foreground/15 px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground backdrop-blur transition-colors hover:bg-primary-foreground/25"
+              >
                 Получить диагностику <ArrowRight className="h-4 w-4" />
               </button>
             </div>
