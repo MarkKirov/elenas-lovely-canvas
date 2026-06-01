@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
-import logoAsset from "@/assets/taktika-logo.png.asset.json";
+import logoAsset from "@/assets/to-logo-full-light.svg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -131,15 +131,13 @@ function CtaButton({ children, variant = "solid" }: { children: React.ReactNode;
 function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
-      <Container className="flex h-20 items-center justify-between">
-        <img src={logoAsset.url} alt="Тактика основателя" className="h-9 w-auto" />
-        <div className="hidden flex-col items-center text-center leading-tight md:flex">
-          <div className="text-sm font-bold tracking-tight">Бизнес-школа Елены Кремневой</div>
-          <div className="mt-1 text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
-            Соединяем мировые бизнес-практики с реальностью Липецка и личностью собственника
-          </div>
+      <Container className="grid h-20 grid-cols-[auto_1fr] items-center gap-6 md:grid-cols-[180px_1fr_180px]">
+        <img src={logoAsset.url} alt="Тактика основателя" className="h-10 w-auto" />
+        <div className="hidden text-center text-[10px] font-semibold uppercase leading-relaxed tracking-[0.14em] text-muted-foreground md:block">
+          <div>Соединяем мировые бизнес-практики</div>
+          <div>с реальностью Липецка и личностью собственника</div>
         </div>
-        <CtaButton variant="ghost">Записаться</CtaButton>
+        <div className="hidden md:block" aria-hidden="true" />
       </Container>
     </header>
   );
@@ -158,19 +156,12 @@ function Hero() {
             …чтобы она работала на тебя, а не ты на неё.
           </p>
           <p className="mt-10 max-w-2xl text-lg text-muted-foreground md:text-xl">
-            Как липецкому предпринимателю найти скрытые источники дохода и вырасти
+            Как Липецкому предпринимателю найти скрытые источники дохода и вырасти
             без круглосуточной пахоты?
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <CtaButton>Записаться на диагностику</CtaButton>
             <CtaButton variant="ghost">Смотреть программы</CtaButton>
-          </div>
-          <div className="mt-8 inline-flex items-center gap-3 rounded-full border border-primary/30 bg-secondary px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-60"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-primary"></span>
-            </span>
-            На аудит берём 4 компании в неделю · осталось <span className="text-base font-black">1</span> место
           </div>
         </div>
       </Container>
