@@ -172,27 +172,25 @@ function Hero() {
 function Quiz() {
   return (
     <section className="border-y border-border bg-secondary/50">
-      <Container className="grid items-center gap-10 py-20 md:grid-cols-[1.3fr_1fr]">
-        <div>
-          <Eyebrow>Экран · диагностика</Eyebrow>
-          <h2 className="mt-6 text-4xl font-black tracking-tight text-foreground md:text-5xl">
+      <Container className="py-20">
+        <div className="max-w-4xl">
+          <h2 className="text-4xl font-black tracking-tight text-foreground md:text-5xl">
             Какой вы собственник и где ваши невидимые источники дохода?
           </h2>
-          <p className="mt-6 max-w-xl text-base text-muted-foreground md:text-lg">
-            Поймёте, какой бизнес подходит под вашу личность, почему буксуют продажи,
-            как перестать саботировать собственный масштаб и навсегда избавиться от
-            предпринимательского одиночества.
+          <p className="mt-8 text-lg text-muted-foreground md:text-xl">
+            Нажмите на кнопку ниже, чтобы понять, какой бизнес подходит под вашу личность,
+            почему буксуют продажи, как перестать саботировать собственный масштаб и навсегда
+            избавиться от предпринимательского одиночества.
           </p>
-        </div>
-        <div className="rounded-3xl bg-primary p-10 text-primary-foreground">
-          <p className="text-sm uppercase tracking-[0.16em] opacity-80">После теста</p>
-          <p className="mt-4 text-2xl font-bold leading-snug">
-            Бронь на бесплатный подбор пошаговой бизнес-стратегии от преподавателей школы —
-            под вашу личность, возможности и конъюнктуру региона.
-          </p>
-          <button className="mt-8 inline-flex items-center gap-2 rounded-full bg-background px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary">
+          <button className="mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground">
             Пройти диагностику <ArrowRight className="h-4 w-4" />
           </button>
+          <p className="mt-12 text-lg text-foreground md:text-xl">
+            Сразу после теста вы получаете бронь на бесплатный подбор пошаговой бизнес-стратегии
+            от преподавателей и практиков нашей школы, разработанной строго под вашу личность,
+            возможности и конъюнктуру региона. Эта стратегия выведет вас на новый уровень и
+            решит ключевые боли, сжирающие ресурсы компании прямо сейчас:
+          </p>
         </div>
       </Container>
     </section>
