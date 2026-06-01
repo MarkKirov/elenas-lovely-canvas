@@ -76,7 +76,7 @@ type ProgramDetail = {
   meta: string[];
   host?: { name: string; role: string; img: string; bullets: string[] };
   outcomes: string[];
-  modules: { label: string; title: string; sub?: string; weeks?: string; dates?: string; blocks?: string }[];
+  modules: { label: string; title: string; sub?: string; weeks?: string; dates?: string; blocks?: string; points?: string[] }[];
 };
 
 const programs: ProgramDetail[] = [
@@ -132,8 +132,26 @@ const programs: ProgramDetail[] = [
       "Сформируете план изменений, которые можно внедрить сразу после тренинга.",
     ],
     modules: [
-      { label: "День 1", title: "Почему проекты застревают" },
-      { label: "День 2", title: "Как выстроить поток проектов" },
+      {
+        label: "День 1",
+        title: "Почему проекты застревают",
+        points: [
+          "Реальная картина проектного хаоса: где в компании теряются время и деньги.",
+          "Перегрузка и многозадачность: почему попытка делать всё сразу замедляет каждый проект.",
+          "Приоритеты: как принимать управленческие решения в условиях конкуренции за ресурсы.",
+          "Сроки, бюджет и качество: как убирать конфликт метрик в реальной работе.",
+        ],
+      },
+      {
+        label: "День 2",
+        title: "Как выстроить поток проектов",
+        points: [
+          "Управление ресурсами без постоянных авралов и сбережение ключевых специалистов.",
+          "Контроль без микроменеджмента: прозрачность статуса и раннее выявление рисков.",
+          "Внедрение изменений: от «попробовали и забыли» к устойчивой практике.",
+          "Личный фокус руководителя в мультипроектной среде.",
+        ],
+      },
     ],
   },
   {
@@ -704,6 +722,15 @@ function ProgramDialog({ program, onClose }: { program: ProgramDetail | null; on
                         <div className="mt-3 inline-flex rounded-full border border-emerald-300/70 bg-emerald-50/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-emerald-900">
                           Блоки: {m.blocks}
                         </div>
+                      )}
+                      {m.points && (
+                        <ul className="mt-3 space-y-2">
+                          {m.points.map((p) => (
+                            <li key={p} className="rounded-lg border border-border bg-background px-3 py-2 text-sm leading-snug text-foreground/85">
+                              {p}
+                            </li>
+                          ))}
+                        </ul>
                       )}
                     </div>
                   ))}
