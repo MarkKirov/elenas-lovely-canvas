@@ -433,7 +433,7 @@ function Hero() {
           <span className="inline-block rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white">
             Практическая бизнес-школа
           </span>
-          <h1 className="mt-8 text-5xl font-black leading-[0.95] tracking-tight md:text-7xl bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
+          <h1 className="mt-8 text-5xl font-black leading-[0.95] tracking-tight md:text-7xl bg-gradient-to-b from-white to-white/75 bg-clip-text text-transparent">
             Пересобери свою<br />бизнес-модель
           </h1>
           <p className="mt-6 text-xl font-semibold text-white/90 md:text-2xl">
@@ -1019,17 +1019,53 @@ function Fit() {
   );
 }
 
-const faqItems: { q: string; a: string; tone: "green" | "gray"; span: string }[] = [
-  // Row 1 — 3 + 3
-  { q: "За сколько окупится участие?", a: "Большинство участников окупает обучение за первые 2–3 месяца — за счёт первой же системной перестройки найма, продаж или ценообразования.", tone: "green", span: "md:col-span-3" },
-  { q: "Подойдёт ли моему бизнесу?", a: "Да, если у вас оборот от 5 млн ₽/мес и вы готовы внедрять, а не просто слушать. На диагностике честно скажем, если нет.", tone: "gray", span: "md:col-span-3" },
-  // Row 2 — 2 + 2 + 2
-  { q: "Это теория или практика?", a: "90% времени — внедрение в ваш бизнес. Никаких лекций «на потом» и домашек «в стол».", tone: "gray", span: "md:col-span-2" },
-  { q: "Кто ведёт программу?", a: "Елена Кремнева и команда практикующих экспертов с опытом в производстве, рознице и услугах.", tone: "green", span: "md:col-span-2" },
-  { q: "Сколько длится обучение?", a: "4 месяца плотной работы + 2 месяца сопровождения.", tone: "gray", span: "md:col-span-2" },
-  // Row 3 — 3 + 3
-  { q: "Берёте ли вы всех?", a: "Нет. Сначала бесплатная диагностика. Если не сможем дать результат — честно откажем.", tone: "green", span: "md:col-span-3" },
-  { q: "Что если не сработает?", a: "Возвращаем оплату по условиям договора, если вы выполняли все рекомендации и не получили роста.", tone: "gray", span: "md:col-span-3" },
+type FaqCategory = {
+  title: string;
+  preview: string;
+  tone: "green" | "gray";
+  qa: { q: string; a: string }[];
+};
+
+const faqCategories: FaqCategory[] = [
+  {
+    title: "Формат и методика",
+    preview: "Практика или теория · Подойдёт ли моему бизнесу…",
+    tone: "green",
+    qa: [
+      { q: "Это теория или практика?", a: "90% времени — внедрение в ваш бизнес. Никаких лекций «на потом» и домашек «в стол»." },
+      { q: "Подойдёт ли моему бизнесу?", a: "Да, если у вас оборот от 5 млн ₽/мес и вы готовы внедрять, а не просто слушать. На диагностике честно скажем, если нет." },
+      { q: "Сколько длится обучение?", a: "4 месяца плотной работы + 2 месяца сопровождения." },
+      { q: "Какой формат занятий?", a: "Очно в Липецке + онлайн-разборы. Записи остаются у вас навсегда." },
+    ],
+  },
+  {
+    title: "Результат и ценность",
+    preview: "Конкретный результат · Чем отличаетесь…",
+    tone: "gray",
+    qa: [
+      { q: "За сколько окупится участие?", a: "Большинство участников окупает обучение за первые 2–3 месяца — за счёт первой же системной перестройки найма, продаж или ценообразования." },
+      { q: "Какой конкретный результат я получу?", a: "Пересобранную бизнес-модель, систему найма и контроля, рост маржи и свободное время собственника." },
+      { q: "Чем отличаетесь от других школ?", a: "Мы работаем точечно с собственниками из регионов и внедряем в ваш бизнес, а не учим «вообще»." },
+      { q: "Что если не сработает?", a: "Возвращаем оплату по условиям договора, если вы выполняли все рекомендации и не получили роста." },
+    ],
+  },
+  {
+    title: "Доверие и эксперты",
+    preview: "Кто ведёт программу",
+    tone: "green",
+    qa: [
+      { q: "Кто ведёт программу?", a: "Елена Кремнева и команда практикующих экспертов с опытом в производстве, рознице и услугах." },
+    ],
+  },
+  {
+    title: "Условия участия",
+    preview: "Берёте всех · Кому не подойдёт…",
+    tone: "gray",
+    qa: [
+      { q: "Берёте ли вы всех?", a: "Нет. Сначала бесплатная диагностика. Если не сможем дать результат — честно откажем." },
+      { q: "Кому не подойдёт обучение?", a: "Тем, кто ищет волшебную таблетку и не готов внедрять. Тем, у кого нет команды и оборота." },
+    ],
+  },
 ];
 
 function Faq() {
@@ -1053,23 +1089,33 @@ function Faq() {
             </span>
           </h2>
         </div>
-        <div className="mt-14 grid auto-rows-fr gap-5 md:grid-cols-6">
-          {faqItems.map((item, i) => (
+        <div className="mt-14 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {faqCategories.map((cat, i) => (
             <button
-              key={item.q}
+              key={cat.title}
               type="button"
               onClick={() => setOpen(i)}
-              className={`group relative flex min-h-[180px] flex-col justify-between overflow-hidden rounded-3xl border p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/20 md:p-8 ${item.span} ${toneMap[item.tone]}`}
+              className={`group relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-3xl border p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/20 md:p-8 ${toneMap[cat.tone]}`}
             >
-              <div className="absolute right-5 top-5 text-[11px] font-bold uppercase tracking-widest text-white/30">
-                {String(i + 1).padStart(2, "0")}
+              <div className="flex items-start justify-between gap-3">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-emerald-300/40 bg-emerald-400/15 text-sm font-black text-emerald-200">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-white/70">
+                  {cat.qa.length} {cat.qa.length === 1 ? "вопрос" : cat.qa.length < 5 ? "вопроса" : "вопросов"}
+                </span>
               </div>
-              <h3 className="pr-10 text-xl font-bold leading-snug md:text-2xl">
-                {item.q}
-              </h3>
-              <div className="mt-6 flex items-center justify-between gap-4">
-                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/50 transition-colors group-hover:text-emerald-200">
-                  Показать ответ
+              <div className="mt-8 flex-1">
+                <h3 className="text-xl font-bold leading-snug md:text-2xl">
+                  {cat.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/60">
+                  {cat.preview}
+                </p>
+              </div>
+              <div className="mt-6 flex items-center justify-between gap-4 border-t border-white/10 pt-5">
+                <span className="text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-200/90 transition-colors group-hover:text-emerald-200">
+                  К вопросам
                 </span>
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/5 backdrop-blur transition-all group-hover:rotate-90 group-hover:border-emerald-300/60 group-hover:bg-emerald-400/15">
                   <Plus className="h-4 w-4" />
@@ -1081,14 +1127,23 @@ function Faq() {
         </div>
       </Container>
       <Dialog open={open !== null} onOpenChange={(v) => !v && setOpen(null)}>
-        <DialogContent className="max-w-xl">
+        <DialogContent className="max-w-2xl">
           {open !== null && (
             <>
               <DialogHeader>
-                <DialogTitle className="text-2xl font-black leading-tight">{faqItems[open].q}</DialogTitle>
+                <DialogTitle className="text-2xl font-black leading-tight bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
+                  {faqCategories[open].title}
+                </DialogTitle>
               </DialogHeader>
-              <DialogDescription className="text-base leading-relaxed text-muted-foreground">
-                {faqItems[open].a}
+              <DialogDescription asChild>
+                <div className="mt-2 space-y-5">
+                  {faqCategories[open].qa.map((item) => (
+                    <div key={item.q} className="border-b border-border/60 pb-4 last:border-0 last:pb-0">
+                      <h4 className="text-base font-bold text-foreground">{item.q}</h4>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.a}</p>
+                    </div>
+                  ))}
+                </div>
               </DialogDescription>
             </>
           )}
