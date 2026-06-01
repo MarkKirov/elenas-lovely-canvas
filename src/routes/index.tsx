@@ -76,7 +76,7 @@ type ProgramDetail = {
   meta: string[];
   host?: { name: string; role: string; img: string; bullets: string[] };
   outcomes: string[];
-  modules: { label: string; title: string; sub?: string }[];
+  modules: { label: string; title: string; sub?: string; weeks?: string; dates?: string; blocks?: string }[];
 };
 
 const programs: ProgramDetail[] = [
@@ -97,11 +97,11 @@ const programs: ProgramDetail[] = [
       "Получаете пошаговый план внедрения на следующий этап развития.",
     ],
     modules: [
-      { label: "Модуль 01", title: "Клиент и ценность", sub: "На ком и чём зарабатываем?" },
-      { label: "Модуль 02", title: "Деньги в бизнесе", sub: "Как зарабатываем?" },
-      { label: "Модуль 03", title: "Команда и делегирование", sub: "Кто зарабатывает?" },
-      { label: "Модуль 04", title: "Ресурсы, партнёры, автоматизация", sub: "Основа роста и управляемости" },
-      { label: "Модуль 05", title: "Сборка бизнес-модели", sub: "Интеграция всех 9 блоков Canvas" },
+      { label: "Модуль 01", title: "Клиент и ценность", sub: "На ком и чём зарабатываем?", weeks: "Недели 1–3", dates: "11–13 сентября 2026", blocks: "ВП · СК · ВТ" },
+      { label: "Модуль 02", title: "Деньги в бизнесе", sub: "Как зарабатываем?", weeks: "Недели 4–6", dates: "02–04 октября 2026", blocks: "КЛ · ВТ · ПД" },
+      { label: "Модуль 03", title: "Команда и делегирование", sub: "Кто зарабатывает?", weeks: "Недели 7–9", dates: "23–25 октября 2026", blocks: "КР · КД · КП" },
+      { label: "Модуль 04", title: "Ресурсы, партнёры, автоматизация", sub: "Основа роста и управляемости", weeks: "Недели 10–12", dates: "13–15 ноября 2026", blocks: "СИ · ПД" },
+      { label: "Модуль 05", title: "Сборка бизнес-модели", sub: "Интеграция всех 9 блоков Canvas", weeks: "Недели 13–15", dates: "04–06 декабря 2026", blocks: "КП · КД · ВП · ВТ · СК · КР · КЛ · СИ · ПД" },
     ],
   },
   {
