@@ -273,6 +273,11 @@ function Comparison() {
       <div className="pointer-events-none absolute -left-32 bottom-10 h-96 w-96 rounded-full bg-emerald-300/10 blur-3xl" />
       <Container className="relative">
         <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] backdrop-blur-sm">
+          <div className="hidden grid-cols-[0.9fr_1.4fr_1.4fr] gap-8 border-b border-white/10 px-8 py-5 text-xs font-bold uppercase tracking-[0.16em] md:grid">
+            <div className="text-white/50">Критерий</div>
+            <div className="text-white/50">Обычные онлайн-курсы</div>
+            <div className="text-emerald-200">Тактика основателя</div>
+          </div>
           <div className="divide-y divide-white/10">
             {comparison.map((row) => (
               <div
@@ -302,7 +307,11 @@ function Comparison() {
           Если узнали свои проблемы — запишитесь на составление бесплатной бизнес-стратегии.
           Это ни к чему не обязывает, и мы ничего не будем продавать.
         </p>
-        <div className="mt-6"><CtaButton>Получить стратегию</CtaButton></div>
+        <div className="mt-6">
+          <button className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-primary shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+            Получить стратегию <ArrowRight className="h-4 w-4" />
+          </button>
+        </div>
       </Container>
     </section>
   );
