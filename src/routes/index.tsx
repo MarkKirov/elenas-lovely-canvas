@@ -133,8 +133,11 @@ function Header() {
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
       <Container className="flex h-20 items-center justify-between">
         <img src={logoAsset.url} alt="Тактика основателя" className="h-9 w-auto" />
-        <div className="hidden text-sm font-bold tracking-tight md:block">
-          Бизнес-школа Елены Кремневой
+        <div className="hidden flex-col items-center text-center leading-tight md:flex">
+          <div className="text-sm font-bold tracking-tight">Бизнес-школа Елены Кремневой</div>
+          <div className="mt-1 text-[10px] uppercase tracking-[0.14em] text-muted-foreground">
+            Соединяем мировые бизнес-практики с реальностью Липецка и личностью собственника
+          </div>
         </div>
         <CtaButton variant="ghost">Записаться</CtaButton>
       </Container>
@@ -146,7 +149,7 @@ function Hero() {
   return (
     <section className="relative overflow-hidden">
       <Container className="py-20 md:py-28">
-        <div className="mx-auto max-w-4xl text-center">
+        <div className="max-w-3xl">
           <Eyebrow>Практическая бизнес-школа</Eyebrow>
           <h1 className="mt-8 text-5xl font-black leading-[0.95] tracking-tight text-primary md:text-7xl">
             Пересоберите свою<br />бизнес-модель
@@ -154,14 +157,11 @@ function Hero() {
           <p className="mt-6 text-xl font-semibold text-foreground/80 md:text-2xl">
             …чтобы она работала на тебя, а не ты на неё.
           </p>
-          <p className="mt-10 mx-auto max-w-2xl text-lg text-muted-foreground md:text-xl">
+          <p className="mt-10 max-w-2xl text-lg text-muted-foreground md:text-xl">
             Как липецкому предпринимателю найти скрытые источники дохода и вырасти
             без круглосуточной пахоты?
           </p>
-          <p className="mt-4 mx-auto max-w-2xl text-base text-muted-foreground md:text-lg">
-            Соединяем мировые бизнес-практики с реальностью региона и личностью собственника.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <div className="mt-10 flex flex-wrap gap-4">
             <CtaButton>Записаться на диагностику</CtaButton>
             <CtaButton variant="ghost">Смотреть программы</CtaButton>
           </div>
