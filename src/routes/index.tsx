@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Plus } from "lucide-react";
 import { useState } from "react";
 import {
@@ -494,9 +494,12 @@ function Quiz() {
             Нажмите на кнопку ниже, чтобы понять, какой бизнес подходит под вашу личность,
             почему буксуют продажи и как перестать саботировать собственный масштаб.
           </p>
-          <button className="mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl">
+          <Link
+            to="/diagnostika"
+            className="mt-10 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+          >
             Пройти диагностику <ArrowRight className="h-5 w-5" />
-          </button>
+          </Link>
 
           <div className="relative mt-16">
             <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-primary/20 opacity-30 blur-3xl" />
@@ -525,12 +528,15 @@ function Quiz() {
             </div>
 
             <div className="mt-10 flex flex-col items-start">
-              <button className="group flex items-center gap-4 rounded-full border-2 border-primary bg-background px-10 py-5 text-base font-bold text-primary shadow-lg transition-all duration-300 hover:bg-primary hover:text-primary-foreground">
+              <Link
+                to="/diagnostika"
+                className="group flex items-center gap-4 rounded-full border-2 border-primary bg-background px-10 py-5 text-base font-bold text-primary shadow-lg transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
+              >
                 <span>Начать диагностику</span>
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary transition-colors group-hover:bg-primary-foreground">
                   <ArrowRight className="h-4 w-4 text-primary-foreground transition-colors group-hover:text-primary" />
                 </span>
-              </button>
+              </Link>
               <p className="mt-4 text-sm font-medium text-muted-foreground">
                 Тест займёт не более 5 минут
               </p>
