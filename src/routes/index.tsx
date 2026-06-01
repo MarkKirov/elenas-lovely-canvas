@@ -17,6 +17,7 @@ import larisaAsset from "@/assets/larisa-kiseleva.png.asset.json";
 import aleksandraAsset from "@/assets/aleksandra-grechushenko.png.asset.json";
 import alekseyAsset from "@/assets/aleksey-farafonov.png.asset.json";
 import icebergAsset from "@/assets/iceberg.png.asset.json";
+import heroBlocks from "@/assets/hero-blocks.jpg";
 import programPeaks from "@/assets/program-peaks.png.asset.json";
 import programCompass from "@/assets/program-compass.png.asset.json";
 import programWheel from "@/assets/program-wheel.png.asset.json";
