@@ -686,12 +686,25 @@ function ProgramDialog({ program, onClose }: { program: ProgramDetail | null; on
 
               <div>
                 <h4 className="text-lg font-black md:text-xl">Программа</h4>
-                <div className="mt-4 grid gap-3 md:grid-cols-2">
+                <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-2">
                   {program.modules.map((m) => (
-                    <div key={m.label} className="rounded-xl bg-muted/60 p-4">
+                    <div key={m.label} className="rounded-xl border border-emerald-200/60 bg-muted/60 p-4">
                       <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary">{m.label}</p>
                       <p className="mt-2 font-bold leading-snug">{m.title}</p>
                       {m.sub && <p className="mt-1 text-sm text-muted-foreground">{m.sub}</p>}
+                      {(m.weeks || m.dates) && (
+                        <div className="mt-3 border-t border-emerald-200/60 pt-3">
+                          {m.weeks && (
+                            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-primary">{m.weeks}</p>
+                          )}
+                          {m.dates && <p className="mt-0.5 text-sm text-foreground/80">{m.dates}</p>}
+                        </div>
+                      )}
+                      {m.blocks && (
+                        <div className="mt-3 inline-flex rounded-full border border-emerald-300/70 bg-emerald-50/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-emerald-900">
+                          Блоки: {m.blocks}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
