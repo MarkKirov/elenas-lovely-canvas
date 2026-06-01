@@ -365,13 +365,10 @@ function Programs() {
   return (
     <section className="py-24">
       <Container>
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 via-emerald-600 to-teal-700 p-8 md:p-12 text-white shadow-xl">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-8 md:p-12 text-white shadow-xl">
           <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/15 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-12 -left-8 h-44 w-44 rounded-full bg-emerald-300/25 blur-3xl" />
-          <span className="inline-block rounded-full border border-white/30 bg-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white">
-            Каталог школы
-          </span>
-          <h2 className="mt-6 text-4xl font-black tracking-tight md:text-6xl">Программы</h2>
+          <h2 className="text-4xl font-black tracking-tight md:text-6xl">Программы</h2>
           <p className="mt-6 max-w-3xl text-lg font-semibold leading-snug md:text-xl">
             Курс построен на стыке академических знаний и личной инженерии собственника.
           </p>
