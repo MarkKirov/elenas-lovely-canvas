@@ -81,10 +81,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "Практическая бизнес-школа в Липецке: пересборка бизнес-модели собственника. Соединяем мировые практики с конъюнктурой региона и личностью предпринимателя." },
       { name: "author", content: "Елена Кремнева" },
       { property: "og:title", content: "Бизнес-школа Елены Кремневой — Липецк" },
-      { property: "og:description", content: "Пересборка бизнес-модели для липецких предпринимателей." },
+      { property: "og:description", content: "Практическая бизнес-школа в Липецке: пересборка бизнес-модели собственника. Соединяем мировые практики с конъюнктурой региона и личностью предпринимателя." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Бизнес-школа Елены Кремневой — Липецк" },
+      { name: "twitter:description", content: "Практическая бизнес-школа в Липецке: пересборка бизнес-модели собственника. Соединяем мировые практики с конъюнктурой региона и личностью предпринимателя." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ad5fb6e8-c1d7-475f-85fa-8caa6345dcd2/id-preview-46d47c22--9377376d-7968-45bd-b63f-d964eba0f4af.lovable.app-1780314028263.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/ad5fb6e8-c1d7-475f-85fa-8caa6345dcd2/id-preview-46d47c22--9377376d-7968-45bd-b63f-d964eba0f4af.lovable.app-1780314028263.png" },
     ],
     links: [
       {
