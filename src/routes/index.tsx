@@ -940,7 +940,7 @@ function Bridge() {
 
 function Outcomes() {
   return (
-    <section className="bg-primary py-24 text-primary-foreground">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] py-24 text-white">
       <Container>
         <Eyebrow>Результат</Eyebrow>
         <h2 className="mt-6 max-w-4xl text-4xl font-black tracking-tight md:text-6xl">
