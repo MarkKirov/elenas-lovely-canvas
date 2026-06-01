@@ -329,13 +329,12 @@ function Teachers() {
   return (
     <section className="py-24">
       <Container>
-        <Eyebrow>Кто поведёт</Eyebrow>
-        <h2 className="mt-6 max-w-3xl text-4xl font-black tracking-tight md:text-5xl">
-          Опытные водители с бизнесом, оборот которых переваливает за миллиарды
+        <h2 className="max-w-3xl text-4xl font-black tracking-tight md:text-5xl">
+          Преподаватели
         </h2>
         <p className="mt-6 max-w-3xl text-lg text-muted-foreground">
-          Жёсткие бизнес-практики, каждый — признанный спец в своей среде.
-          Знают изнутри всю региональную конъюнктуру и не работают по мёртвым учебникам.
+          Жёсткие бизнес-практики. Каждый — признанный спец в своей среде,
+          знает изнутри всю региональную конъюнктуру и не работает по мёртвым учебникам.
         </p>
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {items.map((p, i) => (
