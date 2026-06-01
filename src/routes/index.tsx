@@ -4,6 +4,7 @@ import logoAsset from "@/assets/to-logo-full-light.svg.asset.json";
 import carPartsAsset from "@/assets/car-frame.jpg.asset.json";
 import elenaAsset from "@/assets/elena-kremneva.jpg.asset.json";
 import olegAsset from "@/assets/oleg-davidovich.png.asset.json";
+import larisaAsset from "@/assets/larisa-kiseleva.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -325,7 +326,7 @@ function Teachers() {
   const items = [
     { name: "Елена Кремнева", role: "Основатель бизнес-школы", note: "Бизнес-практик, методолог пересборки моделей.", img: elenaAsset.url },
     { name: "Олег Давидович", role: "Ведущий тренинга", note: "Преподаватель программ MBA и Executive MBA ИБДА РАНХиГС. Системы управления проектами.", img: olegAsset.url },
-    { name: "Партнёр-практик", role: "Финансы и кассовые разрывы", note: "Подсветка реальных цифр компании.", img: null },
+    { name: "Лариса Киселева", role: "Ведущий тренинга", note: "Эксперт по управленческим изменениям и стратегическому развитию. Стаж 25+ лет. Ментор и спикер «Сколково».", img: larisaAsset.url },
     { name: "Партнёр-практик", role: "Операционка и процессы", note: "От хаоса к управляемой системе.", img: null },
   ];
   return (
