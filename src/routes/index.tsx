@@ -23,6 +23,7 @@ import programWheel from "@/assets/program-wheel.png.asset.json";
 import programTent from "@/assets/program-tent.png.asset.json";
 import programCards from "@/assets/program-cards.png.asset.json";
 import programArrows from "@/assets/program-arrows.png.asset.json";
+import heroGearsAsset from "@/assets/hero-gears.png.asset.json";
 
 const programImages = [
   programPeaks.url,
