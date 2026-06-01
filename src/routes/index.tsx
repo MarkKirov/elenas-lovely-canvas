@@ -884,7 +884,7 @@ function Bridge() {
           <div className="absolute -bottom-32 -left-20 h-80 w-80 rounded-full bg-primary-foreground/10 blur-3xl" />
           <div className="relative grid gap-10 md:grid-cols-[1.4fr_1fr] md:items-center">
             <div>
-              <Eyebrow className="text-primary-foreground/70">Бесплатная диагностика</Eyebrow>
+              <div className="text-xs font-black uppercase tracking-[0.18em] text-primary-foreground/70">Бесплатная диагностика</div>
               <h3 className="mt-5 text-3xl font-black leading-tight tracking-tight md:text-4xl">
                 Узнайте, нет ли у вас скрытого кассового разрыва — пока он не разрушил бизнес.
               </h3>
