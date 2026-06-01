@@ -382,7 +382,7 @@ function Index() {
       <Bridge />
       <Outcomes />
       <Fit />
-      <FinalCta />
+      <Faq />
       <Footer />
     </div>
   );
