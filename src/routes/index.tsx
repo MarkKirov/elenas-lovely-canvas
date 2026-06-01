@@ -17,6 +17,21 @@ import larisaAsset from "@/assets/larisa-kiseleva.png.asset.json";
 import aleksandraAsset from "@/assets/aleksandra-grechushenko.png.asset.json";
 import alekseyAsset from "@/assets/aleksey-farafonov.png.asset.json";
 import icebergAsset from "@/assets/iceberg.png.asset.json";
+import programPeaks from "@/assets/program-peaks.png.asset.json";
+import programCompass from "@/assets/program-compass.png.asset.json";
+import programWheel from "@/assets/program-wheel.png.asset.json";
+import programTent from "@/assets/program-tent.png.asset.json";
+import programCards from "@/assets/program-cards.png.asset.json";
+import programArrows from "@/assets/program-arrows.png.asset.json";
+
+const programImages = [
+  programPeaks.url,
+  programCompass.url,
+  programWheel.url,
+  programTent.url,
+  programCards.url,
+  programArrows.url,
+];
 
 export const Route = createFileRoute("/")({
   head: () => ({
