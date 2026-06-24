@@ -1701,11 +1701,23 @@ function LeadForm({ tone = "light" }: { tone?: "light" | "dark" }) {
   const [messenger, setMessenger] = useState("");
   const [contact, setContact] = useState<"call" | "write">("call");
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("lead", { name, phone, messenger, contact });
-    setSent(true);
+    setError(null);
+    setSubmitting(true);
+    try {
+      const { sendLead } = await import("@/lib/send-lead.functions");
+      await sendLead({ data: { name, phone, messenger, contact } });
+      setSent(true);
+    } catch (err) {
+      setError("Не удалось отправить. Попробуйте ещё раз или напишите напрямую.");
+      console.error(err);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const isDark = tone === "dark";
