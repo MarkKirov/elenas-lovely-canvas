@@ -573,25 +573,49 @@ function Method() {
           })}
         </ol>
 
-        <div className="mt-16 flex justify-center">
-          <div className="relative flex flex-col gap-4 rounded-3xl border border-[#059669]/30 bg-gradient-to-br from-[#064e3b]/10 via-background to-[#0f766e]/10 px-8 py-8 shadow-[0_20px_60px_-30px_rgba(5,150,105,0.5)] md:flex-row md:items-center md:gap-8 md:px-12">
-            <span className="text-xs font-semibold uppercase tracking-[0.22em] bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent md:whitespace-nowrap">
-              Результат
-            </span>
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-              <div className="flex items-center gap-3 text-base font-semibold text-muted-foreground line-through decoration-red-500/70 decoration-2">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-500/15 text-red-500">
-                  <X className="h-4 w-4" strokeWidth={3} />
+        <div className="mt-20">
+          <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#052e22] via-[#059669] to-[#0f766e] px-8 py-14 shadow-[0_40px_100px_-30px_rgba(5,150,105,0.6)] md:px-16 md:py-20">
+            {/* decorative blurred orbs */}
+            <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[#34d399]/30 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-32 -right-16 h-80 w-80 rounded-full bg-[#064e3b]/60 blur-3xl" />
+            {/* subtle grid */}
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.08]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+                backgroundSize: "44px 44px",
+              }}
+            />
+
+            <div className="relative grid gap-12 md:grid-cols-[auto_1fr] md:items-center md:gap-16">
+              <div className="flex flex-col gap-3">
+                <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.28em] text-white backdrop-blur-sm ring-1 ring-white/20">
+                  Результат
                 </span>
-                не знания
+                <span className="text-sm font-medium text-white/70 md:text-base">
+                  После пяти шагов школы
+                </span>
               </div>
-              <div className="flex items-center gap-3 text-lg font-bold md:text-xl">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#059669]/15 text-[#059669]">
-                  <Check className="h-4 w-4" strokeWidth={3} />
-                </span>
-                <span className="bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
-                  деньги в кассе
-                </span>
+
+              <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-5">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-red-500/20 text-red-300 ring-1 ring-red-400/40 backdrop-blur-sm md:h-14 md:w-14">
+                    <X className="h-6 w-6 md:h-7 md:w-7" strokeWidth={3} />
+                  </span>
+                  <span className="text-2xl font-semibold text-white/60 line-through decoration-red-400/70 decoration-[3px] md:text-3xl">
+                    не очередные знания
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-5">
+                  <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-[#059669] shadow-lg shadow-emerald-900/40 md:h-16 md:w-16">
+                    <Check className="h-7 w-7 md:h-8 md:w-8" strokeWidth={3.5} />
+                  </span>
+                  <span className="text-4xl font-black leading-[1.05] tracking-tight text-white md:text-6xl">
+                    деньги в кассе
+                  </span>
+                </div>
               </div>
             </div>
           </div>
