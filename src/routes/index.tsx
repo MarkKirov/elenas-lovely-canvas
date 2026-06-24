@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, Plus, Search, Compass, UserCog, ShieldCheck, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   Dialog,
@@ -403,6 +403,7 @@ function Index() {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <Hero />
+      <Method />
       <Quiz />
       <Problem />
       <Comparison />
@@ -505,6 +506,78 @@ function Hero() {
 }
 
 function Quiz() {
+  return QuizImpl();
+}
+
+const METHOD_STEPS = [
+  {
+    icon: Search,
+    title: "Диагностика",
+    text: "Находим реальную ситуацию и корневое ограничение роста в вашем бизнесе.",
+  },
+  {
+    icon: Compass,
+    title: "Выбор стратегии",
+    text: "Подбираем формат и стратегию действий, подходящую именно вашему контексту.",
+  },
+  {
+    icon: UserCog,
+    title: "Работа с вашим кейсом",
+    text: "Под жизненную ситуацию, цели, психотип, темперамент и финансовые задачи.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Внедрение под контролем",
+    text: "Сообщество преподавателей, основатель и модераторы держат вас в фокусе.",
+  },
+  {
+    icon: Users,
+    title: "Работа в сообществе",
+    text: "Регулярная обратная связь от практиков и собственников вашего уровня.",
+  },
+] as const;
+
+function Method() {
+  return (
+    <section className="border-b border-border bg-background">
+      <Container className="py-20 md:py-28">
+        <div className="max-w-3xl">
+          <Eyebrow>Метод школы</Eyebrow>
+          <h2 className="mt-6 text-3xl font-black leading-[1.1] tracking-tight md:text-5xl">
+            Это не ещё один курс, а школа для тех, кто хочет увидеть бизнес как систему.
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
+            Путь собственника в школе — пять последовательных шагов, которые превращают
+            интуитивное управление в управляемую систему.
+          </p>
+        </div>
+
+        <ol className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-5">
+          {METHOD_STEPS.map((step, i) => {
+            const Icon = step.icon;
+            return (
+              <li
+                key={step.title}
+                className="relative flex flex-col rounded-2xl border border-border bg-secondary/40 p-6 transition-colors hover:border-primary/40 hover:bg-secondary/70"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                    Шаг {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <Icon className="h-5 w-5 text-primary" />
+                </div>
+                <h3 className="mt-6 text-lg font-bold leading-tight">{step.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{step.text}</p>
+              </li>
+            );
+          })}
+        </ol>
+      </Container>
+    </section>
+  );
+}
+
+function QuizImpl() {
   return (
     <section className="border-y border-border bg-secondary/50">
       <Container className="py-20 md:py-24">
