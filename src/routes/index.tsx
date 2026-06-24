@@ -415,6 +415,7 @@ function Index() {
       <Faq />
       <Footer />
       <LeadDialog />
+      <InvitePopup />
     </div>
   );
 }
