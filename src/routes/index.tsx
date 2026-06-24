@@ -513,7 +513,7 @@ function InvitePopupInner() {
                 onClick={handleCta}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-colors hover:bg-white/20"
               >
-                Через форму
+                Свяжитесь со мной <ArrowRight className="h-4 w-4" />
               </button>
             </div>
             <button
