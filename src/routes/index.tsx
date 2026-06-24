@@ -1791,14 +1791,18 @@ function LeadForm({ tone = "light" }: { tone?: "light" | "dark" }) {
       </div>
       <button
         type="submit"
+        disabled={submitting}
         className={`mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] transition-colors ${
           isDark
             ? "bg-white text-[#064e3b] hover:bg-white/90"
             : "bg-primary text-primary-foreground hover:bg-primary/90"
-        }`}
+        } disabled:opacity-60`}
       >
-        Отправить заявку <ArrowRight className="h-4 w-4" />
+        {submitting ? "Отправляем…" : "Отправить заявку"} <ArrowRight className="h-4 w-4" />
       </button>
+      {error && (
+        <p className={`text-center text-xs ${isDark ? "text-red-300" : "text-red-600"}`}>{error}</p>
+      )}
       <div className="pt-2">
         <p className={`text-center text-xs font-semibold uppercase tracking-[0.14em] ${isDark ? "text-white/70" : "text-muted-foreground"}`}>
           Или напишите напрямую
