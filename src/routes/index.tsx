@@ -697,7 +697,7 @@ function Problem() {
       <Container className="grid items-center gap-12 md:grid-cols-[1.1fr_1fr]">
         <div>
           <h2 className="text-4xl font-black leading-tight tracking-tight md:text-5xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
-            Большинство бизнес-школ дают ценные знания,<br />
+            Обычно бизнес-обучение — это ценные знания,<br />
             но выдают их как запчасти от автомобиля.
           </h2>
           <p className="mt-8 max-w-xl text-lg text-muted-foreground">
