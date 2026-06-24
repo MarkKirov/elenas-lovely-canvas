@@ -446,7 +446,7 @@ function InvitePopupInner() {
     const t = setTimeout(() => {
       setOpen(true);
       sessionStorage.setItem("invitePopupShown", "1");
-    }, 60000);
+    }, 30000);
     return () => clearTimeout(t);
   }, []);
 
