@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Plus, Search, Compass, UserCog, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, Plus, Search, Compass, UserCog, ShieldCheck, Users, X, Check } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   Dialog,
@@ -572,6 +572,30 @@ function Method() {
             );
           })}
         </ol>
+
+        <div className="mt-16 flex justify-center">
+          <div className="relative flex flex-col gap-4 rounded-3xl border border-[#059669]/30 bg-gradient-to-br from-[#064e3b]/10 via-background to-[#0f766e]/10 px-8 py-8 shadow-[0_20px_60px_-30px_rgba(5,150,105,0.5)] md:flex-row md:items-center md:gap-8 md:px-12">
+            <span className="text-xs font-semibold uppercase tracking-[0.22em] bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent md:whitespace-nowrap">
+              Результат
+            </span>
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+              <div className="flex items-center gap-3 text-base font-semibold text-muted-foreground line-through decoration-red-500/70 decoration-2">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-red-500/15 text-red-500">
+                  <X className="h-4 w-4" strokeWidth={3} />
+                </span>
+                не знания
+              </div>
+              <div className="flex items-center gap-3 text-lg font-bold md:text-xl">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#059669]/15 text-[#059669]">
+                  <Check className="h-4 w-4" strokeWidth={3} />
+                </span>
+                <span className="bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
+                  деньги в кассе
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
       </Container>
     </section>
   );
