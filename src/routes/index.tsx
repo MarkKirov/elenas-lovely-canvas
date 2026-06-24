@@ -392,6 +392,51 @@ function openLeadDialog() {
 }
 
 function InvitePopup() {
+  return (
+    <InvitePopupInner />
+  );
+}
+
+function ScalesInfographic() {
+  return (
+    <div className="mt-6 rounded-2xl bg-black/30 px-4 py-5 ring-1 ring-white/10">
+      <p className="mb-3 text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-white/60">
+        Какую чашу выбираете вы?
+      </p>
+      <svg viewBox="0 0 320 130" className="mx-auto h-32 w-full max-w-sm" aria-hidden="true">
+        {/* beam */}
+        <line x1="40" y1="55" x2="280" y2="55" stroke="rgba(255,255,255,0.55)" strokeWidth="2" strokeLinecap="round" />
+        {/* center post */}
+        <line x1="160" y1="55" x2="160" y2="100" stroke="rgba(255,255,255,0.55)" strokeWidth="2" strokeLinecap="round" />
+        <line x1="140" y1="100" x2="180" y2="100" stroke="rgba(255,255,255,0.55)" strokeWidth="2" strokeLinecap="round" />
+        {/* chains */}
+        <line x1="60" y1="55" x2="60" y2="78" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+        <line x1="260" y1="55" x2="260" y2="78" stroke="rgba(255,255,255,0.35)" strokeWidth="1" />
+        {/* left pan (heavier — business works for you) */}
+        <ellipse cx="60" cy="82" rx="42" ry="6" fill="rgba(16,185,129,0.85)" />
+        <path d="M22 82 Q60 110 98 82 Z" fill="rgba(16,185,129,0.25)" stroke="rgba(16,185,129,0.9)" strokeWidth="1.5" />
+        {/* right pan (lighter — you work for business) */}
+        <ellipse cx="260" cy="78" rx="38" ry="5" fill="rgba(239,68,68,0.65)" />
+        <path d="M226 78 Q260 100 294 78 Z" fill="rgba(239,68,68,0.18)" stroke="rgba(239,68,68,0.75)" strokeWidth="1.5" />
+        {/* center "you" circle */}
+        <circle cx="160" cy="40" r="18" fill="#064e3b" stroke="#10b981" strokeWidth="2" />
+        <text x="160" y="45" textAnchor="middle" fontSize="13" fontWeight="700" fill="#fff" fontFamily="system-ui, sans-serif">ВЫ</text>
+      </svg>
+      <div className="mt-3 grid grid-cols-2 gap-3 text-[12px] leading-snug md:text-[13px]">
+        <div className="rounded-xl bg-emerald-500/15 px-3 py-2 ring-1 ring-emerald-400/30">
+          <p className="font-bold uppercase tracking-wide text-emerald-300">Бизнес работает на вас</p>
+          <p className="text-white/75">Система, свобода, рост без выгорания</p>
+        </div>
+        <div className="rounded-xl bg-red-500/10 px-3 py-2 ring-1 ring-red-400/25">
+          <p className="font-bold uppercase tracking-wide text-red-300">Вы работаете на бизнес</p>
+          <p className="text-white/75">Хаос, ручное управление, усталость</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function InvitePopupInner() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -408,9 +453,9 @@ function InvitePopup() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="overflow-hidden border-0 p-0 sm:max-w-xl">
-        <div className="relative bg-gradient-to-br from-[#02100b] via-[#03241a] to-[#064e3b] px-8 py-12 text-white md:px-12 md:py-14">
-          <div className="pointer-events-none absolute -top-20 -left-20 h-56 w-56 rounded-full bg-[#059669]/25 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -right-16 h-64 w-64 rounded-full bg-[#022c1f]/80 blur-3xl" />
+        <div className="relative bg-gradient-to-br from-black via-[#020a07] to-[#02231a] px-8 py-12 text-white md:px-12 md:py-14">
+          <div className="pointer-events-none absolute -top-20 -left-20 h-56 w-56 rounded-full bg-[#059669]/15 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 -right-16 h-64 w-64 rounded-full bg-black/80 blur-3xl" />
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.08]"
             style={{
@@ -433,6 +478,7 @@ function InvitePopup() {
                 С диагностики вы уйдёте уже с готовым планом действий.
               </DialogDescription>
             </DialogHeader>
+            <ScalesInfographic />
             <div className="mt-6 flex items-center gap-3 whitespace-nowrap rounded-2xl bg-white/10 px-4 py-3 ring-1 ring-white/25 backdrop-blur-sm">
               <span className="relative flex h-2.5 w-2.5 shrink-0">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
@@ -453,6 +499,15 @@ function InvitePopup() {
               >
                 Записаться в Telegram <ArrowRight className="h-4 w-4" />
               </a>
+              <button
+                type="button"
+                disabled
+                title="Скоро"
+                className="inline-flex cursor-not-allowed items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white/70 backdrop-blur-sm"
+              >
+                Записаться через МАКС
+                <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] tracking-wider">скоро</span>
+              </button>
               <button
                 type="button"
                 onClick={handleCta}
