@@ -479,8 +479,7 @@ function InvitePopupInner() {
                 С диагностики вы уйдёте уже с готовым планом действий.
               </DialogDescription>
             </DialogHeader>
-            <ScalesInfographic />
-            <div className="mt-6 flex items-center gap-3 whitespace-nowrap rounded-2xl bg-white/10 px-4 py-3 ring-1 ring-white/25 backdrop-blur-sm">
+            <div className="mt-8 flex items-center gap-3 whitespace-nowrap rounded-2xl bg-white/10 px-4 py-3 ring-1 ring-white/25 backdrop-blur-sm">
               <span className="relative flex h-2.5 w-2.5 shrink-0">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500" />
@@ -1646,9 +1645,19 @@ function Footer() {
               Социальные сети
             </p>
             <div className="mt-4 flex gap-3">
-              {["TG", "MAX", "VK"].map((s) => (
-                <a key={s} href="#" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background text-xs font-bold text-primary transition-colors hover:bg-secondary">
-                  {s}
+              {[
+                { label: "TG", href: "https://t.me/urist_kremneva" },
+                { label: "MAX", href: "https://max.ru/join/FtOAsCSvvuRcswinuPOCJBSJpy-5V0iu9h4A1wCG-GM" },
+                { label: "VK", href: "https://vk.com/urist_kremneva" },
+              ].map((s) => (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border bg-background text-xs font-bold text-primary transition-colors hover:bg-secondary"
+                >
+                  {s.label}
                 </a>
               ))}
             </div>
@@ -1657,13 +1666,18 @@ function Footer() {
         <div className="mt-14 grid gap-6 border-t border-border pt-8 md:grid-cols-2 md:items-end">
           <div>
             <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-foreground/80">
-              Подпишитесь на новости
+              Подпишитесь во ВКонтакте
             </p>
             <p className="mt-3 text-sm text-muted-foreground">
-              Получайте обновления по программам и тренингам школы.
+              Новости школы, разборы кейсов и анонсы программ — в группе Елены Кремневой.
             </p>
-            <a href="#" className="mt-3 inline-block text-sm font-bold text-primary hover:underline">
-              Подписаться →
+            <a
+              href="https://vk.com/urist_kremneva"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-block text-sm font-bold text-primary hover:underline"
+            >
+              Подписаться во ВКонтакте →
             </a>
           </div>
           <div className="text-sm text-muted-foreground md:text-right">
@@ -1784,6 +1798,28 @@ function LeadDialog() {
             >
               Отправить заявку <ArrowRight className="h-4 w-4" />
             </button>
+            <div className="pt-2">
+              <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                Или напишите напрямую
+              </p>
+              <div className="mt-3 flex justify-center gap-3">
+                {[
+                  { label: "Telegram", href: "https://t.me/urist_kremneva" },
+                  { label: "MAX", href: "https://max.ru/join/FtOAsCSvvuRcswinuPOCJBSJpy-5V0iu9h4A1wCG-GM" },
+                  { label: "ВКонтакте", href: "https://vk.com/urist_kremneva" },
+                ].map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full border border-border bg-background px-4 py-2 text-xs font-bold text-primary transition-colors hover:bg-secondary"
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+            </div>
           </form>
         )}
       </DialogContent>
