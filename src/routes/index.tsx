@@ -391,6 +391,72 @@ function openLeadDialog() {
   }
 }
 
+function InvitePopup() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (sessionStorage.getItem("invite-popup-shown") === "1") return;
+    const t = setTimeout(() => {
+      setOpen(true);
+      sessionStorage.setItem("invite-popup-shown", "1");
+    }, 30000);
+    return () => clearTimeout(t);
+  }, []);
+
+  const handleCta = () => {
+    setOpen(false);
+    openLeadDialog();
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogContent className="overflow-hidden border-0 p-0 sm:max-w-xl">
+        <div className="relative bg-gradient-to-br from-[#052e22] via-[#059669] to-[#0f766e] px-8 py-12 text-white md:px-12 md:py-14">
+          <div className="pointer-events-none absolute -top-20 -left-20 h-56 w-56 rounded-full bg-[#34d399]/30 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 -right-16 h-64 w-64 rounded-full bg-[#064e3b]/60 blur-3xl" />
+          <div
+            className="pointer-events-none absolute inset-0 opacity-[0.08]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+          />
+          <div className="relative">
+            <DialogHeader className="space-y-4 text-left">
+              <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white ring-1 ring-white/20 backdrop-blur-sm">
+                Приглашение
+              </span>
+              <DialogTitle className="text-3xl font-black leading-[1.05] tracking-tight text-white md:text-4xl">
+                Бесплатная диагностика вашего бизнеса
+              </DialogTitle>
+              <DialogDescription className="text-base leading-relaxed text-white/85 md:text-lg">
+                На встрече подберём пошаговую бизнес-стратегию именно под ваш контекст:
+                жизненную ситуацию, цели, темперамент и психотип собственника.
+              </DialogDescription>
+            </DialogHeader>
+            <button
+              type="button"
+              onClick={handleCta}
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-[#064e3b] shadow-lg shadow-emerald-900/40 transition-transform hover:-translate-y-0.5"
+            >
+              Записаться на диагностику <ArrowRight className="h-4 w-4" />
+            </button>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="mt-4 ml-2 text-sm text-white/70 underline-offset-4 hover:text-white hover:underline"
+            >
+              Позже
+            </button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 function scrollToPrograms(e: React.MouseEvent) {
   e.preventDefault();
   if (typeof document !== "undefined") {
@@ -415,6 +481,7 @@ function Index() {
       <Faq />
       <Footer />
       <LeadDialog />
+      <InvitePopup />
     </div>
   );
 }
