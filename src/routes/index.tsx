@@ -442,7 +442,11 @@ function InvitePopupInner() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const t = setTimeout(() => setOpen(true), 30000);
+    if (sessionStorage.getItem("invitePopupShown") === "1") return;
+    const t = setTimeout(() => {
+      setOpen(true);
+      sessionStorage.setItem("invitePopupShown", "1");
+    }, 60000);
     return () => clearTimeout(t);
   }, []);
 
