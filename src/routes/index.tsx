@@ -408,9 +408,9 @@ function InvitePopup() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="overflow-hidden border-0 p-0 sm:max-w-xl">
-        <div className="relative bg-gradient-to-br from-[#02100b] via-[#03241a] to-[#064e3b] px-8 py-12 text-white md:px-12 md:py-14">
-          <div className="pointer-events-none absolute -top-20 -left-20 h-56 w-56 rounded-full bg-[#059669]/25 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -right-16 h-64 w-64 rounded-full bg-[#022c1f]/80 blur-3xl" />
+        <div className="relative bg-gradient-to-br from-black via-[#020a07] to-[#02231a] px-8 py-12 text-white md:px-12 md:py-14">
+          <div className="pointer-events-none absolute -top-20 -left-20 h-56 w-56 rounded-full bg-[#059669]/15 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 -right-16 h-64 w-64 rounded-full bg-black/80 blur-3xl" />
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.08]"
             style={{
@@ -433,6 +433,7 @@ function InvitePopup() {
                 С диагностики вы уйдёте уже с готовым планом действий.
               </DialogDescription>
             </DialogHeader>
+            <ScalesInfographic />
             <div className="mt-6 flex items-center gap-3 whitespace-nowrap rounded-2xl bg-white/10 px-4 py-3 ring-1 ring-white/25 backdrop-blur-sm">
               <span className="relative flex h-2.5 w-2.5 shrink-0">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
@@ -453,6 +454,15 @@ function InvitePopup() {
               >
                 Записаться в Telegram <ArrowRight className="h-4 w-4" />
               </a>
+              <button
+                type="button"
+                disabled
+                title="Скоро"
+                className="inline-flex cursor-not-allowed items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white/70 backdrop-blur-sm"
+              >
+                Записаться через МАКС
+                <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] tracking-wider">скоро</span>
+              </button>
               <button
                 type="button"
                 onClick={handleCta}
