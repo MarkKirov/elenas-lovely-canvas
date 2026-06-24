@@ -1019,6 +1019,41 @@ function Programs() {
             ))}
           </div>
         </div>
+
+        <div className="mt-8 relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-8 md:p-12 text-white shadow-xl">
+          <div className="pointer-events-none absolute -right-12 -top-12 h-44 w-44 rounded-full bg-emerald-300/25 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-16 -left-10 h-52 w-52 rounded-full bg-white/10 blur-3xl" />
+          <div className="relative">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-emerald-200">Результат</p>
+            <h3 className="mt-3 text-3xl font-black tracking-tight md:text-5xl">
+              Внедренческий контур, а не конспект
+            </h3>
+            <p className="mt-5 max-w-3xl text-base leading-relaxed text-white/90 md:text-lg">
+              Вы приходите не послушать — вы приносите проблему. И уходите не с тетрадкой
+              лекций, а с решением, проверенным в группе, закреплённым планом действий
+              и сопровождением модератора до исполнения.
+            </p>
+
+            <ul className="mt-8 grid gap-3 md:grid-cols-2">
+              {[
+                "Решение вашей реальной проблемы, разобранной в группе",
+                "Закреплённый пошаговый план действий",
+                "Сопровождение модератора до внедрения",
+                "Диплом о высшем образовании",
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 rounded-2xl border border-white/15 bg-white/5 p-4 backdrop-blur-sm"
+                >
+                  <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-400 text-[#04140f]">
+                    <Check className="h-4 w-4" strokeWidth={3} />
+                  </span>
+                  <span className="text-sm font-semibold leading-snug md:text-base">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </Container>
       <ProgramDialog program={active} onClose={() => setOpenIdx(null)} />
     </section>
