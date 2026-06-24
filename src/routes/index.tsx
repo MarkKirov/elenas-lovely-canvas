@@ -919,7 +919,7 @@ function Founder() {
   const quotes = [
     "20 лет рядом с региональными предпринимателями — юридические консультации, налоговые риски, реальные провалы и реальные взлёты бизнеса.",
     "15 лет академического преподавания. Умею объяснять сложное простым языком — так, чтобы у собственника в голове щёлкнуло.",
-    "Опыт MBA показал: дают предметы, но не дают сборку под реально малый бизнес в регионе. Я эту сборку собрала.",
+    "Опыт MBA показал: дают предметы, но не дают сборку под реально малый бизнес в регионе. Я адаптировала мировые бизнес-практики под региональный бизнес.",
     "Перевожу знания в план действий, а план действий — в результат. И точно знаю, как до этого результата довести.",
   ];
   return (
@@ -948,6 +948,15 @@ function Founder() {
                 </li>
               ))}
             </ul>
+            <a
+              href="https://vk.com/urist_kremneva"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] px-7 py-4 text-sm font-semibold uppercase tracking-[0.12em] text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+            >
+              Напишите мне ВКонтакте — давайте познакомимся
+              <ArrowRight className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </Container>
