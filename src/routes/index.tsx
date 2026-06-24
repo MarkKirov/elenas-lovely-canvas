@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, Plus, Search, Compass, UserCog, ShieldCheck, Users } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   Dialog,
@@ -403,6 +403,7 @@ function Index() {
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       <Hero />
+      <Method />
       <Quiz />
       <Problem />
       <Comparison />
