@@ -408,9 +408,9 @@ function InvitePopup() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent className="overflow-hidden border-0 p-0 sm:max-w-xl">
-        <div className="relative bg-gradient-to-br from-[#052e22] via-[#059669] to-[#0f766e] px-8 py-12 text-white md:px-12 md:py-14">
-          <div className="pointer-events-none absolute -top-20 -left-20 h-56 w-56 rounded-full bg-[#34d399]/30 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 -right-16 h-64 w-64 rounded-full bg-[#064e3b]/60 blur-3xl" />
+        <div className="relative bg-gradient-to-br from-[#02100b] via-[#03241a] to-[#064e3b] px-8 py-12 text-white md:px-12 md:py-14">
+          <div className="pointer-events-none absolute -top-20 -left-20 h-56 w-56 rounded-full bg-[#059669]/25 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 -right-16 h-64 w-64 rounded-full bg-[#022c1f]/80 blur-3xl" />
           <div
             className="pointer-events-none absolute inset-0 opacity-[0.08]"
             style={{
@@ -433,27 +433,38 @@ function InvitePopup() {
                 С диагностики вы уйдёте уже с готовым планом действий.
               </DialogDescription>
             </DialogHeader>
-            <div className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-white/10 px-4 py-3 ring-1 ring-white/25 backdrop-blur-sm">
-              <span className="relative flex h-2.5 w-2.5">
+            <div className="mt-6 flex items-center gap-3 whitespace-nowrap rounded-2xl bg-white/10 px-4 py-3 ring-1 ring-white/25 backdrop-blur-sm">
+              <span className="relative flex h-2.5 w-2.5 shrink-0">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
                 <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500" />
               </span>
               <span className="text-sm font-semibold text-white md:text-base">
-                Места ограничены — на этой неделе осталось{" "}
-                <span className="text-lg font-black text-white md:text-xl">1 место</span>
+                На этой неделе осталось{" "}
+                <span className="font-black">1 место</span>
               </span>
+            </div>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <a
+                href="https://t.me/urist_kremneva?text=Здравствуйте!%20Хочу%20записаться%20на%20бесплатную%20диагностику%20бизнеса"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-[#064e3b] shadow-lg shadow-emerald-900/40 transition-transform hover:-translate-y-0.5"
+              >
+                Записаться в Telegram <ArrowRight className="h-4 w-4" />
+              </a>
+              <button
+                type="button"
+                onClick={handleCta}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+              >
+                Через форму
+              </button>
             </div>
             <button
               type="button"
-              onClick={handleCta}
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-[#064e3b] shadow-lg shadow-emerald-900/40 transition-transform hover:-translate-y-0.5"
-            >
-              Записаться на диагностику <ArrowRight className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
               onClick={() => setOpen(false)}
-              className="mt-4 ml-2 text-sm text-white/70 underline-offset-4 hover:text-white hover:underline"
+              className="mt-4 text-sm text-white/70 underline-offset-4 hover:text-white hover:underline"
             >
               Позже
             </button>
