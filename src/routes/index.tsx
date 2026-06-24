@@ -1694,29 +1694,167 @@ function Footer() {
   );
 }
 
-function LeadDialog() {
-  const [open, setOpen] = useState(false);
+function LeadForm({ tone = "light" }: { tone?: "light" | "dark" }) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [messenger, setMessenger] = useState("");
   const [contact, setContact] = useState<"call" | "write">("call");
   const [sent, setSent] = useState(false);
 
-  useEffect(() => {
-    const handler = () => {
-      setSent(false);
-      setOpen(true);
-    };
-    window.addEventListener("open-lead-dialog", handler);
-    return () => window.removeEventListener("open-lead-dialog", handler);
-  }, []);
-
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: backend hookup — пока просто фиксируем состояние «отправлено»
     console.log("lead", { name, phone, messenger, contact });
     setSent(true);
   };
+
+  const isDark = tone === "dark";
+  const labelCls = isDark
+    ? "mb-1 block text-xs font-semibold uppercase tracking-wider text-white/70"
+    : "mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground";
+  const inputCls = isDark
+    ? "border-white/20 bg-white/10 text-white placeholder:text-white/50 focus-visible:ring-emerald-400"
+    : "";
+  const segBase = "rounded-md border px-3 py-2 text-sm font-semibold transition-colors";
+  const segActive = isDark ? "border-emerald-300 bg-emerald-400 text-emerald-950" : "border-primary bg-primary text-primary-foreground";
+  const segIdle = isDark ? "border-white/20 bg-white/5 text-white hover:bg-white/10" : "border-border bg-background hover:bg-secondary";
+
+  if (sent) {
+    return (
+      <div className="py-6 text-center">
+        <p className={`text-lg font-semibold ${isDark ? "text-emerald-300" : "text-primary"}`}>Заявка принята ✓</p>
+        <p className={`mt-2 text-sm ${isDark ? "text-white/70" : "text-muted-foreground"}`}>
+          Свяжемся с вами в ближайшее время.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={submit} className="space-y-4">
+      <div>
+        <label className={labelCls}>Ваше имя</label>
+        <Input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Имя" className={inputCls} />
+      </div>
+      <div>
+        <label className={labelCls}>Телефон</label>
+        <Input
+          type="tel"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          required
+          placeholder="+7 (___) ___-__-__"
+          className={inputCls}
+        />
+      </div>
+      <div>
+        <label className={labelCls}>Мессенджер (Telegram, WhatsApp, MAX, VK — любой)</label>
+        <Input
+          value={messenger}
+          onChange={(e) => setMessenger(e.target.value)}
+          placeholder="@username или ссылка"
+          className={inputCls}
+        />
+      </div>
+      <div>
+        <p className={`mb-2 text-xs font-semibold uppercase tracking-wider ${isDark ? "text-white/70" : "text-muted-foreground"}`}>
+          Как с вами связаться
+        </p>
+        <div className="grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            onClick={() => setContact("call")}
+            className={`${segBase} ${contact === "call" ? segActive : segIdle}`}
+          >
+            Позвонить
+          </button>
+          <button
+            type="button"
+            onClick={() => setContact("write")}
+            className={`${segBase} ${contact === "write" ? segActive : segIdle}`}
+          >
+            Написать
+          </button>
+        </div>
+      </div>
+      <button
+        type="submit"
+        className={`mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] transition-colors ${
+          isDark
+            ? "bg-white text-[#064e3b] hover:bg-white/90"
+            : "bg-primary text-primary-foreground hover:bg-primary/90"
+        }`}
+      >
+        Отправить заявку <ArrowRight className="h-4 w-4" />
+      </button>
+      <div className="pt-2">
+        <p className={`text-center text-xs font-semibold uppercase tracking-[0.14em] ${isDark ? "text-white/70" : "text-muted-foreground"}`}>
+          Или напишите напрямую
+        </p>
+        <div className="mt-3 flex justify-center gap-3">
+          {[
+            { label: "Telegram", href: "https://t.me/urist_kremneva" },
+            { label: "MAX", href: "https://max.ru/join/FtOAsCSvvuRcswinuPOCJBSJpy-5V0iu9h4A1wCG-GM" },
+            { label: "ВКонтакте", href: "https://vk.com/urist_kremneva" },
+          ].map((s) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center justify-center rounded-full px-4 py-2 text-xs font-bold transition-colors ${
+                isDark
+                  ? "border border-white/25 bg-white/10 text-white hover:bg-white/20"
+                  : "border border-border bg-background text-primary hover:bg-secondary"
+              }`}
+            >
+              {s.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </form>
+  );
+}
+
+function ContactSection() {
+  return (
+    <section id="contact" className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] py-24 text-white scroll-mt-24">
+      <div className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-emerald-500/15 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-32 -right-16 h-80 w-80 rounded-full bg-emerald-400/10 blur-3xl" />
+      <Container className="relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+        <div>
+          <span className="inline-block rounded-full border border-emerald-300/30 bg-emerald-400/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-emerald-200">
+            Оставить заявку
+          </span>
+          <h2 className="mt-6 text-4xl font-black leading-[1.05] tracking-tight md:text-5xl">
+            Запишитесь на бесплатную диагностику
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">
+            Заполните форму — свяжемся в удобном для вас формате. Или напишите напрямую
+            в Telegram, MAX или ВКонтакте.
+          </p>
+          <ul className="mt-6 space-y-2 text-sm text-white/80 md:text-base">
+            <li>— Разберём вашу бизнес-модель</li>
+            <li>— Найдём точки роста на ближайшие 90 дней</li>
+            <li>— Без обязательств</li>
+          </ul>
+        </div>
+        <div className="rounded-3xl border border-white/15 bg-white/5 p-6 backdrop-blur md:p-8">
+          <LeadForm tone="dark" />
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+function LeadDialog() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setOpen(true);
+    window.addEventListener("open-lead-dialog", handler);
+    return () => window.removeEventListener("open-lead-dialog", handler);
+  }, []);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -1727,102 +1865,7 @@ function LeadDialog() {
             Свяжемся с вами в удобном формате — позвоним или напишем в мессенджер.
           </DialogDescription>
         </DialogHeader>
-        {sent ? (
-          <div className="py-6 text-center">
-            <p className="text-lg font-semibold text-primary">Заявка принята ✓</p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Свяжемся с вами в ближайшее время.
-            </p>
-          </div>
-        ) : (
-          <form onSubmit={submit} className="space-y-4">
-            <div>
-              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Ваше имя
-              </label>
-              <Input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Имя" />
-            </div>
-            <div>
-              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Телефон
-              </label>
-              <Input
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                required
-                placeholder="+7 (___) ___-__-__"
-              />
-            </div>
-            <div>
-              <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Мессенджер (Telegram, WhatsApp, MAX, VK — любой)
-              </label>
-              <Input
-                value={messenger}
-                onChange={(e) => setMessenger(e.target.value)}
-                placeholder="@username или ссылка"
-              />
-            </div>
-            <div>
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Как с вами связаться
-              </p>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => setContact("call")}
-                  className={`rounded-md border px-3 py-2 text-sm font-semibold transition-colors ${
-                    contact === "call"
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border bg-background hover:bg-secondary"
-                  }`}
-                >
-                  Позвонить
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setContact("write")}
-                  className={`rounded-md border px-3 py-2 text-sm font-semibold transition-colors ${
-                    contact === "write"
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border bg-background hover:bg-secondary"
-                  }`}
-                >
-                  Написать
-                </button>
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] text-primary-foreground transition-colors hover:bg-primary/90"
-            >
-              Отправить заявку <ArrowRight className="h-4 w-4" />
-            </button>
-            <div className="pt-2">
-              <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-                Или напишите напрямую
-              </p>
-              <div className="mt-3 flex justify-center gap-3">
-                {[
-                  { label: "Telegram", href: "https://t.me/urist_kremneva" },
-                  { label: "MAX", href: "https://max.ru/join/FtOAsCSvvuRcswinuPOCJBSJpy-5V0iu9h4A1wCG-GM" },
-                  { label: "ВКонтакте", href: "https://vk.com/urist_kremneva" },
-                ].map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border border-border bg-background px-4 py-2 text-xs font-bold text-primary transition-colors hover:bg-secondary"
-                  >
-                    {s.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </form>
-        )}
+        <LeadForm />
       </DialogContent>
     </Dialog>
   );
