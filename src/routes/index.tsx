@@ -1798,6 +1798,28 @@ function LeadDialog() {
             >
               Отправить заявку <ArrowRight className="h-4 w-4" />
             </button>
+            <div className="pt-2">
+              <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+                Или напишите напрямую
+              </p>
+              <div className="mt-3 flex justify-center gap-3">
+                {[
+                  { label: "Telegram", href: "https://t.me/urist_kremneva" },
+                  { label: "MAX", href: "https://max.ru/join/FtOAsCSvvuRcswinuPOCJBSJpy-5V0iu9h4A1wCG-GM" },
+                  { label: "ВКонтакте", href: "https://vk.com/urist_kremneva" },
+                ].map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full border border-border bg-background px-4 py-2 text-xs font-bold text-primary transition-colors hover:bg-secondary"
+                  >
+                    {s.label}
+                  </a>
+                ))}
+              </div>
+            </div>
           </form>
         )}
       </DialogContent>
