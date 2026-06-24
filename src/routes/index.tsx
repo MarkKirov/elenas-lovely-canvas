@@ -553,6 +553,7 @@ function Index() {
       <Outcomes />
       <Fit />
       <Faq />
+      <ContactSection />
       <Footer />
       <LeadDialog />
       <InvitePopup />
