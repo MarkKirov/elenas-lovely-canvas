@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Plus, Search, Compass, UserCog, ShieldCheck, Users, X, Check } from "lucide-react";
+import { ArrowRight, Plus, Search, Compass, UserCog, ShieldCheck, Users, X, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   Dialog,
@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import logoAsset from "@/assets/to-logo-full-light.svg.asset.json";
 import carPartsAsset from "@/assets/car-frame.jpg.asset.json";
 import elenaAsset from "@/assets/elena-kremneva.jpg.asset.json";
+import elenaAsset2 from "@/assets/elena-kremneva-2.jpg.asset.json";
 import olegAsset from "@/assets/oleg-davidovich.png.asset.json";
 import larisaAsset from "@/assets/larisa-kiseleva.png.asset.json";
 import aleksandraAsset from "@/assets/aleksandra-grechushenko.png.asset.json";
@@ -546,6 +547,7 @@ function Index() {
       <Quiz />
       <Problem />
       <Comparison />
+      <Founder />
       <Teachers />
       <Programs />
       <Bridge />
