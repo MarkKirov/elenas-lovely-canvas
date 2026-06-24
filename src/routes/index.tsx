@@ -1036,19 +1036,30 @@ function Programs() {
 
             <ul className="mt-8 grid gap-3 md:grid-cols-2">
               {[
-                "Решение вашей реальной проблемы, разобранной в группе",
-                "Закреплённый пошаговый план действий",
-                "Сопровождение модератора до внедрения",
-                "Диплом о высшем образовании",
+                {
+                  title: "Решение вашей реальной проблемы, разобранной в группе",
+                  sub: "Через сборку бизнес-модели под ваш контекст",
+                },
+                {
+                  title: "Закреплённый пошаговый план действий",
+                  sub: "Каждый модуль заканчивается внедряемым артефактом",
+                },
+                { title: "Сопровождение модератора до внедрения" },
+                { title: "Диплом о высшем образовании" },
               ].map((item) => (
                 <li
-                  key={item}
+                  key={item.title}
                   className="flex items-start gap-3 rounded-2xl border border-white/15 bg-white/5 p-4 backdrop-blur-sm"
                 >
                   <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-emerald-400 text-[#04140f]">
                     <Check className="h-4 w-4" strokeWidth={3} />
                   </span>
-                  <span className="text-sm font-semibold leading-snug md:text-base">{item}</span>
+                  <div className="flex-1">
+                    <p className="text-sm font-semibold leading-snug md:text-base">{item.title}</p>
+                    {item.sub && (
+                      <p className="mt-1 text-xs leading-snug text-white/70 md:text-sm">{item.sub}</p>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>
