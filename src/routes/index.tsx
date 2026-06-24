@@ -425,13 +425,24 @@ function InvitePopup() {
                 Приглашение
               </span>
               <DialogTitle className="text-3xl font-black leading-[1.05] tracking-tight text-white md:text-4xl">
-                Бесплатная диагностика вашего бизнеса
+                Запишитесь на бесплатную диагностику вас и вашего бизнеса
               </DialogTitle>
               <DialogDescription className="text-base leading-relaxed text-white/85 md:text-lg">
                 На встрече подберём пошаговую бизнес-стратегию именно под ваш контекст:
                 жизненную ситуацию, цели, темперамент и психотип собственника.
+                С диагностики вы уйдёте уже с готовым планом действий.
               </DialogDescription>
             </DialogHeader>
+            <div className="mt-6 inline-flex items-center gap-3 rounded-2xl bg-white/10 px-4 py-3 ring-1 ring-white/25 backdrop-blur-sm">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500" />
+              </span>
+              <span className="text-sm font-semibold text-white md:text-base">
+                Места ограничены — на этой неделе осталось{" "}
+                <span className="text-lg font-black text-white md:text-xl">1 место</span>
+              </span>
+            </div>
             <button
               type="button"
               onClick={handleCta}
