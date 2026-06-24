@@ -543,8 +543,8 @@ function Method() {
       <Container className="py-20 md:py-28">
         <div className="max-w-3xl">
           <Eyebrow>Метод школы</Eyebrow>
-          <h2 className="mt-6 text-3xl font-black leading-[1.1] tracking-tight md:text-5xl">
-            Это не ещё один курс, а школа для тех, кто хочет увидеть бизнес как систему.
+          <h2 className="mt-6 text-3xl font-black leading-[1.1] tracking-tight md:text-5xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
+            Это не ещё один курс, а школа для тех, кто хочет увидеть бизнес как систему
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
             Путь собственника в школе — пять последовательных шагов, которые превращают
@@ -561,12 +561,12 @@ function Method() {
                 className="relative flex flex-col rounded-2xl border border-border bg-secondary/40 p-6 transition-colors hover:border-primary/40 hover:bg-secondary/70"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                  <span className="text-xs font-semibold uppercase tracking-[0.18em] bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
                     Шаг {String(i + 1).padStart(2, "0")}
                   </span>
-                  <Icon className="h-5 w-5 text-primary" />
+                  <Icon className="h-5 w-5 text-[#059669]" />
                 </div>
-                <h3 className="mt-6 text-lg font-bold leading-tight">{step.title}</h3>
+                <h3 className="mt-6 text-lg font-bold leading-tight bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">{step.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{step.text}</p>
               </li>
             );
