@@ -445,7 +445,7 @@ function Header() {
         <img src={logoAsset.url} alt="Тактика основателя" className="h-10 w-auto" />
         <div className="hidden text-center text-[10px] font-semibold uppercase leading-relaxed tracking-[0.14em] text-muted-foreground md:block">
           <div>Соединяем мировые бизнес-практики</div>
-          <div>с реальностью Липецка и личностью собственника</div>
+          <div>с реальностью региона и личностью собственника</div>
         </div>
         <div className="hidden md:flex md:justify-end">
           <a
