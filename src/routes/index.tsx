@@ -547,10 +547,10 @@ function Index() {
       <Quiz />
       <Problem />
       <Comparison />
-      <Founder />
       <Teachers />
       <Programs />
       <Bridge />
+      <Founder />
       <Outcomes />
       <Fit />
       <Faq />
