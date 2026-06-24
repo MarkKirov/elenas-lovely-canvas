@@ -1701,11 +1701,23 @@ function LeadForm({ tone = "light" }: { tone?: "light" | "dark" }) {
   const [messenger, setMessenger] = useState("");
   const [contact, setContact] = useState<"call" | "write">("call");
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("lead", { name, phone, messenger, contact });
-    setSent(true);
+    setError(null);
+    setSubmitting(true);
+    try {
+      const { sendLead } = await import("@/lib/send-lead.functions");
+      await sendLead({ data: { name, phone, messenger, contact } });
+      setSent(true);
+    } catch (err) {
+      setError("Не удалось отправить. Попробуйте ещё раз или напишите напрямую.");
+      console.error(err);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const isDark = tone === "dark";
@@ -1779,14 +1791,18 @@ function LeadForm({ tone = "light" }: { tone?: "light" | "dark" }) {
       </div>
       <button
         type="submit"
+        disabled={submitting}
         className={`mt-2 inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold uppercase tracking-[0.12em] transition-colors ${
           isDark
             ? "bg-white text-[#064e3b] hover:bg-white/90"
             : "bg-primary text-primary-foreground hover:bg-primary/90"
-        }`}
+        } disabled:opacity-60`}
       >
-        Отправить заявку <ArrowRight className="h-4 w-4" />
+        {submitting ? "Отправляем…" : "Отправить заявку"} <ArrowRight className="h-4 w-4" />
       </button>
+      {error && (
+        <p className={`text-center text-xs ${isDark ? "text-red-300" : "text-red-600"}`}>{error}</p>
+      )}
       <div className="pt-2">
         <p className={`text-center text-xs font-semibold uppercase tracking-[0.14em] ${isDark ? "text-white/70" : "text-muted-foreground"}`}>
           Или напишите напрямую
