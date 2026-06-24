@@ -499,15 +499,15 @@ function InvitePopupInner() {
               >
                 Записаться в Telegram <ArrowRight className="h-4 w-4" />
               </a>
-              <button
-                type="button"
-                disabled
-                title="Скоро"
-                className="inline-flex cursor-not-allowed items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white/70 backdrop-blur-sm"
+              <a
+                href="https://max.ru/join/FtOAsCSvvuRcswinuPOCJBSJpy-5V0iu9h4A1wCG-GM"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm transition-colors hover:bg-white/20"
               >
-                Записаться через МАКС
-                <span className="rounded-full bg-white/15 px-2 py-0.5 text-[10px] tracking-wider">скоро</span>
-              </button>
+                Записаться через МАКС <ArrowRight className="h-4 w-4" />
+              </a>
               <button
                 type="button"
                 onClick={handleCta}
