@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Plus, Search, Compass, UserCog, ShieldCheck, Users, X, Check } from "lucide-react";
+import { ArrowRight, Plus, Search, Compass, UserCog, ShieldCheck, Users, X, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   Dialog,
@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import logoAsset from "@/assets/to-logo-full-light.svg.asset.json";
 import carPartsAsset from "@/assets/car-frame.jpg.asset.json";
 import elenaAsset from "@/assets/elena-kremneva.jpg.asset.json";
+import elenaAsset2 from "@/assets/elena-kremneva-2.jpg.asset.json";
 import olegAsset from "@/assets/oleg-davidovich.png.asset.json";
 import larisaAsset from "@/assets/larisa-kiseleva.png.asset.json";
 import aleksandraAsset from "@/assets/aleksandra-grechushenko.png.asset.json";
@@ -546,6 +547,7 @@ function Index() {
       <Quiz />
       <Problem />
       <Comparison />
+      <Founder />
       <Teachers />
       <Programs />
       <Bridge />
@@ -907,6 +909,87 @@ function Comparison() {
           >
             Получить стратегию <ArrowRight className="h-4 w-4" />
           </button>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+function Founder() {
+  const photos = [elenaAsset2.url, elenaAsset.url];
+  const [idx, setIdx] = useState(0);
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % photos.length), 5000);
+    return () => clearInterval(t);
+  }, [photos.length]);
+  const prev = () => setIdx((i) => (i - 1 + photos.length) % photos.length);
+  const next = () => setIdx((i) => (i + 1) % photos.length);
+  const quotes = [
+    "20 лет рядом с региональными предпринимателями — юридические консультации, налоговые риски, реальные провалы и реальные взлёты бизнеса.",
+    "15 лет академического преподавания. Умею объяснять сложное простым языком — так, чтобы у собственника в голове щёлкнуло.",
+    "Опыт MBA показал: дают предметы, но не дают сборку под реально малый бизнес в регионе. Я эту сборку собрала.",
+    "Перевожу знания в план действий, а план действий — в результат. И точно знаю, как до этого результата довести.",
+  ];
+  return (
+    <section className="bg-neutral-50 py-24 text-neutral-900">
+      <Container>
+        <div className="grid gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16 lg:items-center">
+          <div className="relative">
+            <div className="relative overflow-hidden rounded-3xl bg-neutral-200 shadow-xl aspect-[4/5]">
+              {photos.map((src, i) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt="Елена Кремнева"
+                  className={`absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-700 ${i === idx ? "opacity-100" : "opacity-0"}`}
+                />
+              ))}
+              <button
+                type="button"
+                onClick={prev}
+                aria-label="Предыдущее фото"
+                className="absolute left-3 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full bg-white/80 text-neutral-900 shadow backdrop-blur transition hover:bg-white"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                aria-label="Следующее фото"
+                className="absolute right-3 top-1/2 -translate-y-1/2 grid h-10 w-10 place-items-center rounded-full bg-white/80 text-neutral-900 shadow backdrop-blur transition hover:bg-white"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+              <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
+                {photos.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setIdx(i)}
+                    aria-label={`Фото ${i + 1}`}
+                    className={`h-2 rounded-full transition-all ${i === idx ? "w-6 bg-white" : "w-2 bg-white/60"}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Хозяйка школы</p>
+            <h2 className="mt-3 text-4xl font-black tracking-tight md:text-5xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
+              Елена Кремнева
+            </h2>
+            <p className="mt-4 text-lg text-neutral-600">
+              Основатель бизнес-школы. Юрист, методолог, преподаватель. Собирает программу из того, что реально работает у региональных собственников.
+            </p>
+            <ul className="mt-8 space-y-5">
+              {quotes.map((q, i) => (
+                <li key={i} className="relative rounded-2xl border border-neutral-200 bg-white p-5 shadow-sm">
+                  <span className="absolute -left-2 top-5 h-8 w-1 rounded-full bg-gradient-to-b from-[#059669] to-[#0f766e]" />
+                  <p className="text-base leading-relaxed text-neutral-800">«{q}»</p>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </Container>
     </section>
