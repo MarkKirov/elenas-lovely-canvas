@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as DiagnostikaRouteImport } from './routes/diagnostika'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ApiDiagnostikaAnalyzeRouteImport } from './routes/api/diagnostika.analyze'
 
 const DiagnostikaRoute = DiagnostikaRouteImport.update({
   id: '/diagnostika',
@@ -23,40 +22,31 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiDiagnostikaAnalyzeRoute = ApiDiagnostikaAnalyzeRouteImport.update({
-  id: '/api/diagnostika/analyze',
-  path: '/api/diagnostika/analyze',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/diagnostika': typeof DiagnostikaRoute
-  '/api/diagnostika/analyze': typeof ApiDiagnostikaAnalyzeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/diagnostika': typeof DiagnostikaRoute
-  '/api/diagnostika/analyze': typeof ApiDiagnostikaAnalyzeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/diagnostika': typeof DiagnostikaRoute
-  '/api/diagnostika/analyze': typeof ApiDiagnostikaAnalyzeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/diagnostika' | '/api/diagnostika/analyze'
+  fullPaths: '/' | '/diagnostika'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/diagnostika' | '/api/diagnostika/analyze'
-  id: '__root__' | '/' | '/diagnostika' | '/api/diagnostika/analyze'
+  to: '/' | '/diagnostika'
+  id: '__root__' | '/' | '/diagnostika'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DiagnostikaRoute: typeof DiagnostikaRoute
-  ApiDiagnostikaAnalyzeRoute: typeof ApiDiagnostikaAnalyzeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,20 +65,12 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/diagnostika/analyze': {
-      id: '/api/diagnostika/analyze'
-      path: '/api/diagnostika/analyze'
-      fullPath: '/api/diagnostika/analyze'
-      preLoaderRoute: typeof ApiDiagnostikaAnalyzeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DiagnostikaRoute: DiagnostikaRoute,
-  ApiDiagnostikaAnalyzeRoute: ApiDiagnostikaAnalyzeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
