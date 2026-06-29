@@ -48,6 +48,7 @@ export const sendLead = createServerFn({ method: "POST" })
       messenger?: string;
       contact?: string;
       source?: string;
+      answers?: string;
     }) => data,
   )
   .handler(async ({ data }) => {
@@ -59,6 +60,7 @@ export const sendLead = createServerFn({ method: "POST" })
       <p><b>Мессенджер:</b> ${escapeHtml(data.messenger || "—")}</p>
       <p><b>Как связаться:</b> ${escapeHtml(data.contact || "—")}</p>
       ${data.source ? `<p><b>Источник:</b> ${escapeHtml(data.source)}</p>` : ""}
+      ${data.answers ? `<hr /><h3>Ответы квиза</h3><pre style="font-family:inherit;white-space:pre-wrap;background:#f6f6f6;padding:12px;border-radius:8px">${escapeHtml(data.answers)}</pre>` : ""}
       <hr />
       <p style="color:#888;font-size:12px">Отправлено автоматически с сайта.</p>
     `;
