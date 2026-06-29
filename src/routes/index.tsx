@@ -980,10 +980,10 @@ function Teachers() {
     <section className="bg-white py-24 text-neutral-900">
       <Container>
         <h2 className="max-w-3xl text-4xl font-black tracking-tight md:text-5xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
-          Преподаватели
+          Преподаватели и эксперты
         </h2>
         <p className="mt-6 max-w-3xl text-lg text-neutral-600">
-          Жёсткие бизнес-практики. Каждый — признанный спец в своей среде,
+          Жёсткие бизнес-практики и предприниматели. Каждый — признанный спец в своей среде,
           знает изнутри всю региональную конъюнктуру и не работает по мёртвым учебникам.
         </p>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
