@@ -634,7 +634,7 @@ function Hero() {
             …чтобы она работала на тебя, а не ты на неё.
           </p>
           <p className="mt-10 max-w-2xl text-lg text-white/80 md:text-xl">
-            Практическая школа пересборки бизнес-моделей для регионального предпринимателя: от интуитивного управления к системному пониманию денег, клиентов, команды и личной роли собственника.
+            Практический цех пересборки бизнес-моделей для регионального предпринимателя: от интуитивного управления к системному пониманию денег, клиентов, команды и личной роли собственника.
           </p>
           <div className="mt-10 flex flex-wrap gap-4">
             <button
@@ -690,7 +690,7 @@ function Method() {
         <div className="max-w-3xl">
           <Eyebrow>Метод школы</Eyebrow>
           <h2 className="mt-6 text-3xl font-black leading-[1.1] tracking-tight md:text-5xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
-            Это не ещё один курс, а школа для тех, кто хочет увидеть бизнес как систему
+            Это не ещё один курс, а практикум для тех, кто хочет увидеть бизнес как систему
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
             Путь собственника в школе — пять последовательных шагов, которые превращают
@@ -740,7 +740,7 @@ function Method() {
                   Результат
                 </span>
                 <span className="text-sm font-medium text-white/70 md:text-base">
-                  После пяти шагов школы
+                  После пяти шагов практикума
                 </span>
               </div>
 
