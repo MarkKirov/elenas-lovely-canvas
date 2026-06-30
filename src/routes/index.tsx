@@ -589,27 +589,35 @@ function CtaButton({ children, variant = "solid" }: { children: React.ReactNode;
 function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
-      <Container className="grid h-20 grid-cols-[auto_1fr] items-center gap-6 md:grid-cols-[180px_1fr_180px]">
-        <img src={logoAsset.url} alt="Тактика основателя" className="h-10 w-auto" />
+      <Container className="grid h-16 grid-cols-1 items-center gap-6 md:h-20 md:grid-cols-[180px_1fr_220px]">
+        <img src={logoAsset.url} alt="Тактика основателя" className="hidden h-10 w-auto md:block" />
         <div className="hidden text-center text-[10px] font-semibold uppercase leading-relaxed tracking-[0.14em] text-muted-foreground md:block">
           <div>Соединяем мировые бизнес-практики</div>
           <div>с реальностью региона и личностью собственника</div>
         </div>
-        <div className="hidden md:flex md:items-center md:justify-end md:gap-2">
+        <div className="flex items-center justify-between gap-1 md:justify-end md:gap-2">
           <a
             href="#programs"
             onClick={scrollToPrograms}
-            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-secondary"
+            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-primary transition-colors hover:bg-secondary md:text-[11px] md:tracking-[0.12em]"
           >
             Программы
           </a>
           <span className="h-3 w-px bg-border" aria-hidden />
           <a
             href="#calendar"
-            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-secondary"
+            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-primary transition-colors hover:bg-secondary md:text-[11px] md:tracking-[0.12em]"
           >
             Календарь
           </a>
+          <span className="h-3 w-px bg-border" aria-hidden />
+          <button
+            type="button"
+            onClick={openLeadDialog}
+            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 md:text-[11px] md:tracking-[0.12em]"
+          >
+            Диагностика
+          </button>
         </div>
       </Container>
     </header>
