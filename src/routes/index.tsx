@@ -611,14 +611,6 @@ function CtaButton({ children, variant = "solid" }: { children: React.ReactNode;
 function Header() {
   return (
     <header className="z-50">
-      <div className="border-b border-border/40 bg-background md:hidden">
-        <Container className="flex flex-col items-center gap-1 py-3 text-center">
-          <img src={logoAsset.url} alt="Тактика основателя" className="h-7 w-auto" />
-          <p className="text-[9px] font-semibold uppercase leading-snug tracking-[0.14em] text-muted-foreground">
-            Соединяем мировые бизнес-практики с реальностью региона и личностью собственника
-          </p>
-        </Container>
-      </div>
       <div className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
       <Container className="grid h-16 grid-cols-1 items-center gap-6 md:h-20 md:grid-cols-[180px_1fr_220px]">
         <img src={logoAsset.url} alt="Тактика основателя" className="hidden h-10 w-auto md:block" />
@@ -651,6 +643,14 @@ function Header() {
           </button>
         </div>
       </Container>
+      </div>
+      <div className="border-b border-border/40 bg-background md:hidden">
+        <Container className="flex flex-col items-center gap-1 py-3 text-center">
+          <img src={logoAsset.url} alt="Тактика основателя" className="h-7 w-auto" />
+          <p className="text-[9px] font-semibold uppercase leading-snug tracking-[0.14em] text-muted-foreground">
+            Соединяем мировые бизнес-практики с реальностью региона и личностью собственника
+          </p>
+        </Container>
       </div>
     </header>
   );
