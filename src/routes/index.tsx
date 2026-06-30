@@ -552,6 +552,7 @@ function Index() {
       <Comparison />
       <Teachers />
       <Programs />
+      <Calendar />
       <Bridge />
       <Founder />
       <Outcomes />
