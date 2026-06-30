@@ -1140,6 +1140,394 @@ function Programs() {
   );
 }
 
+type CalendarEvent = {
+  id: string;
+  year: number;
+  month: number; // 0-indexed
+  day: number;
+  dayLabel: string;
+  time: string;
+  tag: string;
+  title: string;
+  tagline: string;
+  host: { name: string; role: string; img: string };
+  price: string;
+  format: string;
+  knownPoints: string[];
+  steps: { title: string; desc: string }[];
+  outcomes: string[];
+  fit: string[];
+  formatBullets: string[];
+  importance: string;
+};
+
+const events: CalendarEvent[] = [
+  {
+    id: "sync-2026-08-08",
+    year: 2026,
+    month: 7,
+    day: 8,
+    dayLabel: "Суббота",
+    time: "10:00 – 17:00",
+    tag: "Интенсив · 1 день",
+    title: "Синхронизация личности и бизнеса",
+    tagline:
+      "Практический интенсив за 1 день превратит внутреннюю неопределённость в чёткую стратегию роста на 5 лет вперёд.",
+    host: {
+      name: "Александра Гречушенко",
+      role: "Бизнес-психолог · ментор · ICF-коуч · соучредитель «Ментор-центра»",
+      img: aleksandraAsset.url,
+    },
+    price: "25 000 ₽",
+    format: "Очно · малая группа · кофе-брейки и пакет участника включены",
+    knownPoints: [
+      "Бизнес растёт, а вы чувствуете пустоту.",
+      "Доход стабильный, но энергии на себя, близких и хобби уже не остаётся.",
+      "В голове 100 идей, и ни одна не кажется той самой.",
+      "Вы достигли прошлых целей, а новые не мотивируют.",
+    ],
+    steps: [
+      { title: "Кто вы как собственник?", desc: "Честный срез вашей текущей роли — без самообмана." },
+      { title: "Как масштабироваться с кайфом?", desc: "Опора на ваши природные сильные стороны, а не на «надо»." },
+      { title: "Куда двигаться дальше?", desc: "Ясный вектор для себя и компании на 3–5 лет." },
+    ],
+    outcomes: [
+      "Персональный стратегический вектор развития.",
+      "Карта ваших сильных сторон как собственника.",
+      "Точки роста для бизнеса и личности в связке.",
+      "Чёткие ориентиры для решений на 5–10 лет вперёд.",
+      "Готовая стратегия «Я + моя компания» на ближайшие годы.",
+    ],
+    fit: [
+      "Вы — главный актив своего бизнеса (без вас компания тормозит).",
+      "Доход есть, но вы просыпаетесь без огня в глазах.",
+      "Компания «съедает» всё время, а удовольствия — ноль.",
+      "Переросли старые цели и не знаете, за что хвататься дальше.",
+      "Хотите строить следующий этап на прочном фундаменте личных ценностей.",
+    ],
+    formatBullets: [
+      "Активные упражнения.",
+      "Индивидуальная рефлексия.",
+      "Групповые обсуждения.",
+      "Уходите с конкретными решениями, а не с конспектом.",
+    ],
+    importance:
+      "В кризис выигрывает не тот, кто пашет 24/7, а тот, кто принимает точные решения быстрее других. Главное конкурентное преимущество — ваша голова.",
+  },
+];
+
+const RU_MONTHS = [
+  "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+  "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь",
+];
+const RU_WEEKDAYS = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
+
+function Calendar() {
+  const firstEvent = events[0];
+  const [view, setView] = useState({ year: firstEvent.year, month: firstEvent.month });
+  const [activeId, setActiveId] = useState<string | null>(null);
+  const active = events.find((e) => e.id === activeId) ?? null;
+
+  const firstDay = new Date(view.year, view.month, 1);
+  const daysInMonth = new Date(view.year, view.month + 1, 0).getDate();
+  // Mon=0..Sun=6
+  const startOffset = (firstDay.getDay() + 6) % 7;
+  const cells: Array<number | null> = [];
+  for (let i = 0; i < startOffset; i++) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+  while (cells.length % 7 !== 0) cells.push(null);
+
+  const eventOnDay = (d: number | null) =>
+    d === null ? null : events.find((e) => e.year === view.year && e.month === view.month && e.day === d) ?? null;
+
+  const upcoming = [...events].sort((a, b) => {
+    const da = new Date(a.year, a.month, a.day).getTime();
+    const db = new Date(b.year, b.month, b.day).getTime();
+    return da - db;
+  });
+
+  const goMonth = (delta: number) => {
+    setView((v) => {
+      const next = new Date(v.year, v.month + delta, 1);
+      return { year: next.getFullYear(), month: next.getMonth() };
+    });
+  };
+
+  return (
+    <section id="calendar" className="scroll-mt-24 py-24">
+      <Container>
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-8 md:p-12 text-white shadow-xl">
+          <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-emerald-300/20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-12 -left-8 h-44 w-44 rounded-full bg-white/10 blur-3xl" />
+          <p className="relative text-xs font-bold uppercase tracking-[0.18em] text-emerald-200">Календарь мероприятий</p>
+          <h2 className="relative mt-3 text-4xl font-black tracking-tight md:text-6xl">
+            Что и когда у нас в цехе
+          </h2>
+          <p className="relative mt-5 max-w-3xl text-base leading-relaxed text-white/85 md:text-lg">
+            Интенсивы, мастерские и встречи с экспертами. Нажмите на дату с меткой — откроется
+            подробная программа и форма записи.
+          </p>
+        </div>
+
+        <div className="mt-8 grid gap-6 lg:grid-cols-[1.05fr_1fr]">
+          {/* Month grid */}
+          <div className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Месяц</p>
+                <h3 className="mt-1 text-2xl font-black tracking-tight md:text-3xl">
+                  {RU_MONTHS[view.month]} <span className="text-muted-foreground">{view.year}</span>
+                </h3>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => goMonth(-1)}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-foreground transition-colors hover:bg-secondary"
+                  aria-label="Предыдущий месяц"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => goMonth(1)}
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-foreground transition-colors hover:bg-secondary"
+                  aria-label="Следующий месяц"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-7 gap-1.5 text-center text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground">
+              {RU_WEEKDAYS.map((w) => (
+                <div key={w} className="py-2">{w}</div>
+              ))}
+            </div>
+            <div className="mt-1 grid grid-cols-7 gap-1.5">
+              {cells.map((d, i) => {
+                const ev = eventOnDay(d);
+                if (d === null) return <div key={i} className="aspect-square" />;
+                if (ev) {
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setActiveId(ev.id)}
+                      className="group relative aspect-square overflow-hidden rounded-2xl bg-gradient-to-br from-[#064e3b] via-[#059669] to-[#0f766e] p-2 text-white shadow-md transition-all hover:-translate-y-1 hover:shadow-[0_18px_36px_-12px_rgba(6,78,59,0.55)]"
+                    >
+                      <div className="absolute inset-0 bg-white/0 transition-colors group-hover:bg-white/10" />
+                      <span className="relative block text-left text-xl font-black md:text-2xl">{d}</span>
+                      <span className="relative mt-auto block text-left text-[9px] font-bold uppercase tracking-[0.14em] text-emerald-100">
+                        Событие
+                      </span>
+                      <span className="pointer-events-none absolute right-1.5 top-1.5 h-1.5 w-1.5 animate-pulse rounded-full bg-white" />
+                    </button>
+                  );
+                }
+                return (
+                  <div
+                    key={i}
+                    className="aspect-square rounded-2xl border border-border/70 bg-background p-2 text-left text-sm font-semibold text-foreground/70"
+                  >
+                    {d}
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="mt-6 flex items-center gap-3 text-xs text-muted-foreground">
+              <span className="inline-flex h-4 w-4 rounded-md bg-gradient-to-br from-[#064e3b] via-[#059669] to-[#0f766e]" />
+              день с мероприятием — кликните, чтобы открыть программу
+            </div>
+          </div>
+
+          {/* Upcoming events list */}
+          <div className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Ближайшие</p>
+            <h3 className="mt-1 text-2xl font-black tracking-tight md:text-3xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
+              Запланируйте день
+            </h3>
+            <ul className="mt-6 space-y-4">
+              {upcoming.map((ev) => (
+                <li key={ev.id}>
+                  <button
+                    type="button"
+                    onClick={() => setActiveId(ev.id)}
+                    className="group flex w-full items-stretch gap-5 rounded-2xl border border-border bg-background p-5 text-left transition-all hover:-translate-y-0.5 hover:border-emerald-700/40 hover:shadow-[0_18px_36px_-18px_rgba(6,78,59,0.4)]"
+                  >
+                    <div className="flex flex-col items-center justify-center rounded-xl bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] px-5 py-4 text-white">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-200">
+                        {RU_MONTHS[ev.month].slice(0, 3)}
+                      </span>
+                      <span className="text-3xl font-black leading-none">{ev.day}</span>
+                      <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
+                        {ev.dayLabel}
+                      </span>
+                    </div>
+                    <div className="flex-1">
+                      <span className="inline-flex rounded-full bg-emerald-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-800">
+                        {ev.tag}
+                      </span>
+                      <p className="mt-2 text-lg font-black leading-tight tracking-tight md:text-xl">
+                        {ev.title}
+                      </p>
+                      <p className="mt-1.5 text-sm leading-snug text-muted-foreground">
+                        {ev.time} · {ev.host.name}
+                      </p>
+                      <span className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-700 transition-transform group-hover:translate-x-0.5">
+                        Программа и запись <ArrowRight className="h-3.5 w-3.5" />
+                      </span>
+                    </div>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Container>
+      <EventDialog event={active} onClose={() => setActiveId(null)} />
+    </section>
+  );
+}
+
+function EventDialog({ event, onClose }: { event: CalendarEvent | null; onClose: () => void }) {
+  return (
+    <Dialog open={!!event} onOpenChange={(o) => !o && onClose()}>
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto p-0 gap-0">
+        {event && (
+          <>
+            <div className="rounded-t-lg bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-8 text-white md:p-10">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em]">
+                  {event.tag}
+                </span>
+                <span className="rounded-full bg-emerald-400/20 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-100">
+                  {event.day} {RU_MONTHS[event.month].toLowerCase()} {event.year} · {event.dayLabel}
+                </span>
+                <span className="rounded-full bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em]">
+                  {event.time}
+                </span>
+              </div>
+              <DialogHeader className="mt-4 space-y-3">
+                <DialogTitle className="text-3xl font-black tracking-tight md:text-4xl text-left bg-gradient-to-r from-white via-emerald-200 to-emerald-400 bg-clip-text text-transparent">
+                  {event.title}
+                </DialogTitle>
+                <DialogDescription className="text-sm leading-relaxed text-white/85 md:text-base text-left">
+                  {event.tagline}
+                </DialogDescription>
+              </DialogHeader>
+            </div>
+
+            <div className="space-y-8 p-8 md:p-10">
+              <div className="rounded-2xl border border-border bg-muted/40 p-5 md:p-6">
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">Ведёт</p>
+                <div className="mt-4 flex flex-col gap-5 md:flex-row md:items-start">
+                  <img
+                    src={event.host.img}
+                    alt={event.host.name}
+                    className="h-32 w-32 flex-shrink-0 rounded-xl object-cover md:h-36 md:w-36"
+                  />
+                  <div className="flex-1">
+                    <h4 className="text-xl font-black md:text-2xl">{event.host.name}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-foreground/80">{event.host.role}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">Знакомо?</p>
+                <ul className="mt-3 grid gap-2 md:grid-cols-2">
+                  {event.knownPoints.map((p) => (
+                    <li key={p} className="rounded-xl bg-muted/40 px-4 py-3 text-sm leading-snug">
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">3 шага за день</p>
+                <ol className="mt-3 space-y-3">
+                  {event.steps.map((s, i) => (
+                    <li key={s.title} className="flex gap-4 rounded-2xl border border-border bg-background p-4">
+                      <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#064e3b] via-[#059669] to-[#0f766e] text-sm font-black text-white">
+                        {i + 1}
+                      </span>
+                      <div>
+                        <p className="text-sm font-black md:text-base">{s.title}</p>
+                        <p className="mt-1 text-sm leading-relaxed text-foreground/75">{s.desc}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">Что увезёте с собой</p>
+                <ul className="mt-3 space-y-2">
+                  {event.outcomes.map((o) => (
+                    <li key={o} className="flex gap-3 text-sm leading-relaxed">
+                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-600" />
+                      <span>{o}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="rounded-2xl border border-border bg-muted/30 p-5">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">Кому подойдёт</p>
+                  <ul className="mt-3 space-y-2 text-sm leading-snug">
+                    {event.fit.map((f) => (
+                      <li key={f} className="flex gap-2">
+                        <span className="mt-2 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                        <span>{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-2xl border border-border bg-muted/30 p-5">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-primary">Формат</p>
+                  <ul className="mt-3 space-y-2 text-sm leading-snug">
+                    {event.formatBullets.map((b) => (
+                      <li key={b} className="flex gap-2">
+                        <span className="mt-2 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              <div className="rounded-2xl bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-6 text-white md:p-8">
+                <div className="flex flex-wrap items-baseline justify-between gap-4">
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-emerald-200">Стоимость</p>
+                    <p className="mt-1 text-3xl font-black tracking-tight">{event.price}</p>
+                    <p className="mt-1 text-xs text-white/70">{event.format}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={openLeadDialog}
+                    className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-[#04140f] transition-transform hover:-translate-y-0.5"
+                  >
+                    Оставить заявку <ArrowRight className="h-4 w-4" />
+                  </button>
+                </div>
+                <p className="mt-4 text-xs leading-relaxed text-white/70">
+                  Количество мест строго ограничено — группа маленькая, чтобы каждый получил
+                  максимум внимания и глубинной проработки.
+                </p>
+              </div>
+            </div>
+          </>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
+}
+
 function ProgramDialog({ program, onClose }: { program: ProgramDetail | null; onClose: () => void }) {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
