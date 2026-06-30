@@ -594,13 +594,20 @@ function Header() {
           <div>Соединяем мировые бизнес-практики</div>
           <div>с реальностью региона и личностью собственника</div>
         </div>
-        <div className="hidden md:flex md:justify-end">
+        <div className="hidden md:flex md:items-center md:justify-end md:gap-2">
           <a
             href="#programs"
             onClick={scrollToPrograms}
-            className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-secondary px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-secondary"
           >
-            Смотреть программы <ArrowRight className="h-3.5 w-3.5" />
+            Программы
+          </a>
+          <span className="h-3 w-px bg-border" aria-hidden />
+          <a
+            href="#calendar"
+            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-secondary"
+          >
+            Календарь
           </a>
         </div>
       </Container>
