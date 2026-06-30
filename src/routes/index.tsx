@@ -2009,6 +2009,7 @@ function Faq() {
 function Footer() {
   const nav: Array<{ label: string; href: string; external?: boolean }> = [
     { label: "Программы", href: "#programs" },
+    { label: "Календарь", href: "#calendar" },
     { label: "Тренинги", href: "#programs" },
     { label: "Вопросы", href: "#faq" },
     { label: "Эксперты", href: "#teachers" },
