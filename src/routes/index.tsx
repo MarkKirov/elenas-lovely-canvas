@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Plus, Search, Compass, UserCog, ShieldCheck, Users, X, Check, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Plus, Search, Compass, UserCog, ShieldCheck, Users, X, Check, ChevronLeft, ChevronRight, ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   Dialog,
@@ -562,12 +562,34 @@ function Index() {
       <Footer />
       <LeadDialog />
       <InvitePopup />
+      <ScrollToTop />
     </div>
   );
 }
 
 function Container({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return <div className={`mx-auto w-full max-w-[1240px] px-6 md:px-10 ${className}`}>{children}</div>;
+}
+
+function ScrollToTop() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 600);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  if (!visible) return null;
+  return (
+    <button
+      type="button"
+      aria-label="Наверх"
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className="fixed bottom-5 right-5 z-40 inline-flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg ring-1 ring-black/10 transition-transform hover:-translate-y-0.5 md:bottom-8 md:right-8"
+    >
+      <ArrowUp className="h-4 w-4" />
+    </button>
+  );
 }
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -589,27 +611,35 @@ function CtaButton({ children, variant = "solid" }: { children: React.ReactNode;
 function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/85 backdrop-blur">
-      <Container className="grid h-20 grid-cols-[auto_1fr] items-center gap-6 md:grid-cols-[180px_1fr_180px]">
-        <img src={logoAsset.url} alt="Тактика основателя" className="h-10 w-auto" />
+      <Container className="grid h-16 grid-cols-1 items-center gap-6 md:h-20 md:grid-cols-[180px_1fr_220px]">
+        <img src={logoAsset.url} alt="Тактика основателя" className="hidden h-10 w-auto md:block" />
         <div className="hidden text-center text-[10px] font-semibold uppercase leading-relaxed tracking-[0.14em] text-muted-foreground md:block">
           <div>Соединяем мировые бизнес-практики</div>
           <div>с реальностью региона и личностью собственника</div>
         </div>
-        <div className="hidden md:flex md:items-center md:justify-end md:gap-2">
+        <div className="flex items-center justify-between gap-1 md:justify-end md:gap-2">
           <a
             href="#programs"
             onClick={scrollToPrograms}
-            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-secondary"
+            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-primary transition-colors hover:bg-secondary md:text-[11px] md:tracking-[0.12em]"
           >
             Программы
           </a>
           <span className="h-3 w-px bg-border" aria-hidden />
           <a
             href="#calendar"
-            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-primary transition-colors hover:bg-secondary"
+            className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-primary transition-colors hover:bg-secondary md:text-[11px] md:tracking-[0.12em]"
           >
             Календарь
           </a>
+          <span className="h-3 w-px bg-border" aria-hidden />
+          <button
+            type="button"
+            onClick={openLeadDialog}
+            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.1em] text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 md:text-[11px] md:tracking-[0.12em]"
+          >
+            Диагностика
+          </button>
         </div>
       </Container>
     </header>
@@ -630,7 +660,7 @@ function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[#04140f]/85 via-[#0a2e22]/70 to-[#0d4d3a]/80" />
       <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/15 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-12 -left-8 h-44 w-44 rounded-full bg-emerald-300/25 blur-3xl" />
-      <Container className="relative z-10 py-20 md:py-28">
+      <Container className="relative z-10 py-12 md:py-28">
         <div className="max-w-3xl">
           <span className="inline-block rounded-full border border-white/30 bg-white/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white">
             Практический цех пересборки
@@ -694,7 +724,7 @@ const METHOD_STEPS = [
 function Method() {
   return (
     <section className="border-b border-border bg-background">
-      <Container className="py-20 md:py-28">
+      <Container className="py-12 md:py-28">
         <div className="max-w-3xl">
           <Eyebrow>Метод цеха</Eyebrow>
           <h2 className="mt-6 text-3xl font-black leading-[1.1] tracking-tight md:text-5xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
@@ -782,7 +812,7 @@ function Method() {
 function QuizImpl() {
   return (
     <section className="border-y border-border bg-secondary/50">
-      <Container className="py-20 md:py-24">
+      <Container className="py-12 md:py-24">
         <div className="max-w-4xl">
           <h2 className="text-3xl font-black leading-[1.1] tracking-tight md:text-4xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
             Какой вы собственник и где ваши невидимые источники дохода?
@@ -847,7 +877,7 @@ function QuizImpl() {
 
 function Problem() {
   return (
-    <section className="py-24">
+    <section className="py-12 md:py-24">
       <Container className="grid items-center gap-12 md:grid-cols-[1.1fr_1fr]">
         <div>
           <h2 className="text-4xl font-black leading-tight tracking-tight md:text-5xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
@@ -872,7 +902,7 @@ function Problem() {
 
 function Comparison() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] py-24 text-white">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] py-12 md:py-24 text-white">
       <div className="pointer-events-none absolute -right-32 top-10 h-96 w-96 rounded-full bg-emerald-400/10 blur-3xl" />
       <div className="pointer-events-none absolute -left-32 bottom-10 h-96 w-96 rounded-full bg-emerald-300/10 blur-3xl" />
       <Container className="relative">
@@ -935,7 +965,7 @@ function Founder() {
     "Вижу реальный успех только при системном подходе к бизнесу. Перевожу знания в план действий, а план действий — в результат.",
   ];
   return (
-    <section className="bg-neutral-50 py-24 text-neutral-900">
+    <section className="bg-neutral-50 py-12 md:py-24 text-neutral-900">
       <Container>
         <div className="grid gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16 lg:items-center">
           <div className="overflow-hidden rounded-3xl bg-neutral-200 shadow-xl aspect-[4/5]">
@@ -985,7 +1015,7 @@ function Teachers() {
     { name: "Алексей Фарафонов", role: "Ведущий тренинга", note: "Основатель ООО «ОНСОФТ», эксперт по внедрению ИИ. 15+ лет в разработке ПО, 220+ проектов по автоматизации.", img: alekseyAsset.url },
   ];
   return (
-    <section className="bg-white py-24 text-neutral-900">
+    <section className="bg-white py-12 md:py-24 text-neutral-900">
       <Container>
         <h2 className="max-w-3xl text-4xl font-black tracking-tight md:text-5xl bg-gradient-to-r from-[#064e3b] via-[#059669] to-[#0f766e] bg-clip-text text-transparent">
           Преподаватели, эксперты и предприниматели
@@ -1017,7 +1047,7 @@ function Programs() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const active = openIdx !== null ? programs[openIdx] : null;
   return (
-    <section id="programs" className="scroll-mt-24 py-24">
+    <section id="programs" className="scroll-mt-24 py-12 md:py-24">
       <Container>
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-8 md:p-12 text-white shadow-xl">
           <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/15 blur-3xl" />
@@ -1254,7 +1284,7 @@ function Calendar() {
   };
 
   return (
-    <section id="calendar" className="scroll-mt-24 py-24">
+    <section id="calendar" className="scroll-mt-24 py-12 md:py-24">
       <Container>
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] p-8 md:p-12 text-white shadow-xl">
           <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-emerald-300/20 blur-3xl" />
@@ -1704,7 +1734,7 @@ function ProgramDialog({ program, onClose }: { program: ProgramDetail | null; on
 
 function Bridge() {
   return (
-    <section className="py-24">
+    <section className="py-12 md:py-24">
       <Container className="grid gap-12 md:grid-cols-2 md:items-center">
         <div className="flex aspect-[4/5] items-center justify-center rounded-3xl bg-white p-6">
           <img
@@ -1796,7 +1826,7 @@ function Bridge() {
 
 function Outcomes() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] py-24 text-white">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] py-12 md:py-24 text-white">
       <Container>
         <Eyebrow>Результат</Eyebrow>
         <h2 className="mt-6 max-w-4xl text-4xl font-black tracking-tight md:text-6xl">
@@ -1841,7 +1871,7 @@ function Fit() {
     "from-fuchsia-500/20 to-fuchsia-500/0 text-fuchsia-600",
   ];
   return (
-    <section className="py-24">
+    <section className="py-12 md:py-24">
       <Container>
         <h2 className="max-w-5xl text-4xl font-black leading-[1.05] tracking-tight md:text-6xl bg-gradient-to-r from-[#0a2e22] via-[#1a7a5c] to-[#0d4d3a] bg-clip-text text-transparent">
           Если вы нашли себя хотя бы в трёх пунктах ниже — наше обучение вам поможет
@@ -1928,7 +1958,7 @@ function Faq() {
     gray: "bg-gradient-to-br from-zinc-800 via-zinc-900 to-zinc-950 border-white/5 hover:border-emerald-300/30",
   };
   return (
-    <section className="relative overflow-hidden bg-[#0a0f0d] py-24 text-white">
+    <section className="relative overflow-hidden bg-[#0a0f0d] py-12 md:py-24 text-white">
       <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-emerald-500/10 blur-[120px]" />
       <div className="pointer-events-none absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-emerald-400/10 blur-[120px]" />
       <Container className="relative">
@@ -2252,7 +2282,7 @@ function LeadForm({ tone = "light" }: { tone?: "light" | "dark" }) {
 
 function ContactSection() {
   return (
-    <section id="contact" className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] py-24 text-white scroll-mt-24">
+    <section id="contact" className="relative overflow-hidden bg-gradient-to-br from-[#04140f] via-[#0a2e22] to-[#0d4d3a] py-12 md:py-24 text-white scroll-mt-24">
       <div className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-emerald-500/15 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 -right-16 h-80 w-80 rounded-full bg-emerald-400/10 blur-3xl" />
       <Container className="relative grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
