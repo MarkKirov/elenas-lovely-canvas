@@ -1611,7 +1611,14 @@ function Faq() {
 }
 
 function Footer() {
-  const nav = ["Программы", "Тренинги", "Вопросы", "Эксперты", "Контакты"];
+  const nav: Array<{ label: string; href: string; external?: boolean }> = [
+    { label: "Программы", href: "#programs" },
+    { label: "Тренинги", href: "#programs" },
+    { label: "Вопросы", href: "#faq" },
+    { label: "Эксперты", href: "#teachers" },
+    { label: "Образование", href: "https://project21335426.tilda.ws/", external: true },
+    { label: "Контакты", href: "#contact" },
+  ];
   return (
     <footer className="border-t border-border bg-secondary/40">
       <Container className="py-16">
@@ -1633,9 +1640,13 @@ function Footer() {
             </p>
             <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
               {nav.map((item) => (
-                <li key={item}>
-                  <a href="#" className="transition-colors hover:text-primary">
-                    {item}
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className="transition-colors hover:text-primary"
+                  >
+                    {item.label}
                   </a>
                 </li>
               ))}
@@ -1678,7 +1689,7 @@ function Footer() {
               Подпишитесь во ВКонтакте
             </p>
             <p className="mt-3 text-sm text-muted-foreground">
-              Новости цеха, разборы кейсов и анонсы программ — в группе Елены Кремневой.
+              Новости, разборы кейсов и анонсы программ — в группе Елены Кремневой.
             </p>
             <a
               href="https://vk.com/urist_kremneva"
@@ -1691,9 +1702,11 @@ function Footer() {
           </div>
           <div className="text-sm text-muted-foreground md:text-right">
             <p>© 2026 Тактика основателя. Все права защищены.</p>
-            <p className="mt-2 space-x-4">
-              <a href="#" className="hover:text-primary">Политика конфиденциальности</a>
-              <a href="#" className="hover:text-primary">Публичная оферта</a>
+            <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 md:justify-end">
+              <a href="/politika" className="hover:text-primary">Политика конфиденциальности</a>
+              <a href="/oferta" className="hover:text-primary">Публичная оферта</a>
+              <a href="/cookies" className="hover:text-primary">Обработка cookie</a>
+              <a href="/soglasie" className="hover:text-primary">Согласие на обработку ПДн</a>
             </p>
           </div>
         </div>
