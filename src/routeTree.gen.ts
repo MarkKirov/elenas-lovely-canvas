@@ -9,9 +9,15 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PolitikaRouteImport } from './routes/politika'
 import { Route as DiagnostikaRouteImport } from './routes/diagnostika'
 import { Route as IndexRouteImport } from './routes/index'
 
+const PolitikaRoute = PolitikaRouteImport.update({
+  id: '/politika',
+  path: '/politika',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DiagnostikaRoute = DiagnostikaRouteImport.update({
   id: '/diagnostika',
   path: '/diagnostika',
@@ -26,31 +32,42 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/diagnostika': typeof DiagnostikaRoute
+  '/politika': typeof PolitikaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/diagnostika': typeof DiagnostikaRoute
+  '/politika': typeof PolitikaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/diagnostika': typeof DiagnostikaRoute
+  '/politika': typeof PolitikaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/diagnostika'
+  fullPaths: '/' | '/diagnostika' | '/politika'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/diagnostika'
-  id: '__root__' | '/' | '/diagnostika'
+  to: '/' | '/diagnostika' | '/politika'
+  id: '__root__' | '/' | '/diagnostika' | '/politika'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DiagnostikaRoute: typeof DiagnostikaRoute
+  PolitikaRoute: typeof PolitikaRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/politika': {
+      id: '/politika'
+      path: '/politika'
+      fullPath: '/politika'
+      preLoaderRoute: typeof PolitikaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/diagnostika': {
       id: '/diagnostika'
       path: '/diagnostika'
@@ -71,6 +88,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DiagnostikaRoute: DiagnostikaRoute,
+  PolitikaRoute: PolitikaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
