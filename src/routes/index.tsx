@@ -572,8 +572,8 @@ function Container({ children, className = "" }: { children: React.ReactNode; cl
 }
 
 function ScrollToTop() {
-  const [visible, setVisible] = React.useState(false);
-  React.useEffect(() => {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 600);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
