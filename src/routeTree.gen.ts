@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PolitikaRouteImport } from './routes/politika'
+import { Route as OfertaRouteImport } from './routes/oferta'
 import { Route as DiagnostikaRouteImport } from './routes/diagnostika'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PolitikaRoute = PolitikaRouteImport.update({
   id: '/politika',
   path: '/politika',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfertaRoute = OfertaRouteImport.update({
+  id: '/oferta',
+  path: '/oferta',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DiagnostikaRoute = DiagnostikaRouteImport.update({
@@ -32,30 +38,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/diagnostika': typeof DiagnostikaRoute
+  '/oferta': typeof OfertaRoute
   '/politika': typeof PolitikaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/diagnostika': typeof DiagnostikaRoute
+  '/oferta': typeof OfertaRoute
   '/politika': typeof PolitikaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/diagnostika': typeof DiagnostikaRoute
+  '/oferta': typeof OfertaRoute
   '/politika': typeof PolitikaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/diagnostika' | '/politika'
+  fullPaths: '/' | '/diagnostika' | '/oferta' | '/politika'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/diagnostika' | '/politika'
-  id: '__root__' | '/' | '/diagnostika' | '/politika'
+  to: '/' | '/diagnostika' | '/oferta' | '/politika'
+  id: '__root__' | '/' | '/diagnostika' | '/oferta' | '/politika'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DiagnostikaRoute: typeof DiagnostikaRoute
+  OfertaRoute: typeof OfertaRoute
   PolitikaRoute: typeof PolitikaRoute
 }
 
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/politika'
       fullPath: '/politika'
       preLoaderRoute: typeof PolitikaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/oferta': {
+      id: '/oferta'
+      path: '/oferta'
+      fullPath: '/oferta'
+      preLoaderRoute: typeof OfertaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/diagnostika': {
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DiagnostikaRoute: DiagnostikaRoute,
+  OfertaRoute: OfertaRoute,
   PolitikaRoute: PolitikaRoute,
 }
 export const routeTree = rootRouteImport
