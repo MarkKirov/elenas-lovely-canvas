@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Plus, Search, Compass, UserCog, ShieldCheck, Users, X, Check, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Plus, Search, Compass, UserCog, ShieldCheck, Users, X, Check, ChevronLeft, ChevronRight, ArrowUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   Dialog,
@@ -562,6 +562,7 @@ function Index() {
       <Footer />
       <LeadDialog />
       <InvitePopup />
+      <ScrollToTop />
     </div>
   );
 }
