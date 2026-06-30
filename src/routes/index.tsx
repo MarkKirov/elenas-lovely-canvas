@@ -1628,7 +1628,7 @@ function Footer() {
               Тактика основателя
             </p>
             <h3 className="mt-3 text-2xl font-black leading-tight tracking-tight">
-              Школа практического роста бизнеса
+              Цех пересборки бизнеса
             </h3>
             <div className="mt-6 flex flex-wrap gap-3">
               <CtaButton>Оставить заявку</CtaButton>
