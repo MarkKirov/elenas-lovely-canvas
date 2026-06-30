@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PolitikaRouteImport } from './routes/politika'
 import { Route as OfertaRouteImport } from './routes/oferta'
 import { Route as DiagnostikaRouteImport } from './routes/diagnostika'
+import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PolitikaRoute = PolitikaRouteImport.update({
@@ -29,6 +30,11 @@ const DiagnostikaRoute = DiagnostikaRouteImport.update({
   path: '/diagnostika',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CookiesRoute = CookiesRouteImport.update({
+  id: '/cookies',
+  path: '/cookies',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cookies': typeof CookiesRoute
   '/diagnostika': typeof DiagnostikaRoute
   '/oferta': typeof OfertaRoute
   '/politika': typeof PolitikaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cookies': typeof CookiesRoute
   '/diagnostika': typeof DiagnostikaRoute
   '/oferta': typeof OfertaRoute
   '/politika': typeof PolitikaRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cookies': typeof CookiesRoute
   '/diagnostika': typeof DiagnostikaRoute
   '/oferta': typeof OfertaRoute
   '/politika': typeof PolitikaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/diagnostika' | '/oferta' | '/politika'
+  fullPaths: '/' | '/cookies' | '/diagnostika' | '/oferta' | '/politika'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/diagnostika' | '/oferta' | '/politika'
-  id: '__root__' | '/' | '/diagnostika' | '/oferta' | '/politika'
+  to: '/' | '/cookies' | '/diagnostika' | '/oferta' | '/politika'
+  id: '__root__' | '/' | '/cookies' | '/diagnostika' | '/oferta' | '/politika'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CookiesRoute: typeof CookiesRoute
   DiagnostikaRoute: typeof DiagnostikaRoute
   OfertaRoute: typeof OfertaRoute
   PolitikaRoute: typeof PolitikaRoute
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DiagnostikaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/cookies': {
+      id: '/cookies'
+      path: '/cookies'
+      fullPath: '/cookies'
+      preLoaderRoute: typeof CookiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CookiesRoute: CookiesRoute,
   DiagnostikaRoute: DiagnostikaRoute,
   OfertaRoute: OfertaRoute,
   PolitikaRoute: PolitikaRoute,
