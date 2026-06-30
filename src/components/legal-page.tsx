@@ -12,9 +12,37 @@ export function LegalPage({ source }: { source: string }) {
         </div>
       </div>
       <article className="mx-auto max-w-3xl px-6 py-16">
-        <div className="prose prose-neutral max-w-none prose-headings:font-black prose-headings:tracking-tight prose-h1:text-3xl md:prose-h1:text-4xl prose-h2:text-xl prose-h2:mt-10 prose-h2:text-primary prose-p:text-foreground/85 prose-p:leading-relaxed prose-li:text-foreground/85 prose-strong:text-foreground prose-a:text-primary">
-          <ReactMarkdown>{source}</ReactMarkdown>
-        </div>
+        <ReactMarkdown
+          components={{
+            h1: ({ children }) => (
+              <h1 className="mb-8 text-3xl font-black leading-tight tracking-tight md:text-4xl">{children}</h1>
+            ),
+            h2: ({ children }) => (
+              <h2 className="mt-12 mb-4 text-xl font-black tracking-tight text-primary md:text-2xl">{children}</h2>
+            ),
+            h3: ({ children }) => (
+              <h3 className="mt-8 mb-3 text-lg font-bold tracking-tight">{children}</h3>
+            ),
+            p: ({ children }) => (
+              <p className="my-4 text-[15px] leading-relaxed text-foreground/85">{children}</p>
+            ),
+            ul: ({ children }) => <ul className="my-4 space-y-2 pl-6">{children}</ul>,
+            ol: ({ children }) => <ol className="my-4 list-decimal space-y-2 pl-6">{children}</ol>,
+            li: ({ children }) => (
+              <li className="list-disc text-[15px] leading-relaxed text-foreground/85 marker:text-primary">
+                {children}
+              </li>
+            ),
+            strong: ({ children }) => <strong className="font-bold text-foreground">{children}</strong>,
+            a: ({ children, href }) => (
+              <a href={href} className="text-primary underline-offset-4 hover:underline" target="_blank" rel="noopener noreferrer">
+                {children}
+              </a>
+            ),
+          }}
+        >
+          {source}
+        </ReactMarkdown>
       </article>
     </div>
   );
