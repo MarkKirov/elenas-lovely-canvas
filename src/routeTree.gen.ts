@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SoglasieRouteImport } from './routes/soglasie'
 import { Route as PolitikaRouteImport } from './routes/politika'
 import { Route as OfertaRouteImport } from './routes/oferta'
 import { Route as DiagnostikaRouteImport } from './routes/diagnostika'
 import { Route as CookiesRouteImport } from './routes/cookies'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SoglasieRoute = SoglasieRouteImport.update({
+  id: '/soglasie',
+  path: '/soglasie',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PolitikaRoute = PolitikaRouteImport.update({
   id: '/politika',
   path: '/politika',
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/diagnostika': typeof DiagnostikaRoute
   '/oferta': typeof OfertaRoute
   '/politika': typeof PolitikaRoute
+  '/soglasie': typeof SoglasieRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/diagnostika': typeof DiagnostikaRoute
   '/oferta': typeof OfertaRoute
   '/politika': typeof PolitikaRoute
+  '/soglasie': typeof SoglasieRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,27 @@ export interface FileRoutesById {
   '/diagnostika': typeof DiagnostikaRoute
   '/oferta': typeof OfertaRoute
   '/politika': typeof PolitikaRoute
+  '/soglasie': typeof SoglasieRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cookies' | '/diagnostika' | '/oferta' | '/politika'
+  fullPaths:
+    | '/'
+    | '/cookies'
+    | '/diagnostika'
+    | '/oferta'
+    | '/politika'
+    | '/soglasie'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cookies' | '/diagnostika' | '/oferta' | '/politika'
-  id: '__root__' | '/' | '/cookies' | '/diagnostika' | '/oferta' | '/politika'
+  to: '/' | '/cookies' | '/diagnostika' | '/oferta' | '/politika' | '/soglasie'
+  id:
+    | '__root__'
+    | '/'
+    | '/cookies'
+    | '/diagnostika'
+    | '/oferta'
+    | '/politika'
+    | '/soglasie'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,10 +99,18 @@ export interface RootRouteChildren {
   DiagnostikaRoute: typeof DiagnostikaRoute
   OfertaRoute: typeof OfertaRoute
   PolitikaRoute: typeof PolitikaRoute
+  SoglasieRoute: typeof SoglasieRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/soglasie': {
+      id: '/soglasie'
+      path: '/soglasie'
+      fullPath: '/soglasie'
+      preLoaderRoute: typeof SoglasieRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/politika': {
       id: '/politika'
       path: '/politika'
@@ -125,6 +155,7 @@ const rootRouteChildren: RootRouteChildren = {
   DiagnostikaRoute: DiagnostikaRoute,
   OfertaRoute: OfertaRoute,
   PolitikaRoute: PolitikaRoute,
+  SoglasieRoute: SoglasieRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
