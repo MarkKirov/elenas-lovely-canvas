@@ -544,6 +544,7 @@ function scrollToPrograms(e: React.MouseEvent) {
 function Index() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <MobileBrandBar />
       <Header />
       <Hero />
       <Method />
