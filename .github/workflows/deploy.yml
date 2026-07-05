@@ -1,0 +1,109 @@
+name: Deploy to TimeWeb
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: tacticfound-production
+  cancel-in-progress: true
+
+env:
+  APP_NAME: tacticfound
+  APP_DIR: /var/www/app
+  APP_HOST: 5.129.220.101
+  APP_USER: root
+  APP_PORT: "3000"
+
+jobs:
+  deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun run build
+
+      - name: Pack release
+        run: tar -czf release.tar.gz .output package.json bun.lock
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.TIMEWEB_SSH_KEY }}
+        run: |
+          test -n "$SSH_PRIVATE_KEY"
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/timeweb_deploy_key
+          chmod 600 ~/.ssh/timeweb_deploy_key
+          ssh-keyscan -H "$APP_HOST" >> ~/.ssh/known_hosts
+
+      - name: Upload release
+        run: |
+          scp -i ~/.ssh/timeweb_deploy_key release.tar.gz "$APP_USER@$APP_HOST:/tmp/tacticfound-release.tar.gz"
+
+      - name: Activate release
+        run: |
+          ssh -i ~/.ssh/timeweb_deploy_key "$APP_USER@$APP_HOST" 'bash -s' <<'REMOTE'
+          set -euo pipefail
+
+          APP_NAME="tacticfound"
+          APP_DIR="/var/www/app"
+          APP_PORT="3000"
+          RELEASE_ARCHIVE="/tmp/tacticfound-release.tar.gz"
+
+          mkdir -p "$APP_DIR"
+          cd "$APP_DIR"
+
+          rm -rf .output package.json bun.lock
+          tar -xzf "$RELEASE_ARCHIVE" -C "$APP_DIR"
+          rm -f "$RELEASE_ARCHIVE"
+
+          if command -v bun >/dev/null 2>&1; then
+            bun install --production --frozen-lockfile || bun install --production
+          fi
+
+          if command -v pm2 >/dev/null 2>&1; then
+            if pm2 describe "$APP_NAME" >/dev/null 2>&1; then
+              PORT="$APP_PORT" pm2 reload "$APP_NAME" --update-env
+            else
+              PORT="$APP_PORT" pm2 start .output/server/index.mjs --name "$APP_NAME" --update-env
+            fi
+            pm2 save
+          else
+            cat > "/etc/systemd/system/$APP_NAME.service" <<SERVICE
+          [Unit]
+          Description=Tacticfound TanStack Start app
+          After=network.target
+
+          [Service]
+          Type=simple
+          WorkingDirectory=$APP_DIR
+          Environment=NODE_ENV=production
+          Environment=PORT=$APP_PORT
+          ExecStart=/usr/bin/env node $APP_DIR/.output/server/index.mjs
+          Restart=always
+          RestartSec=5
+
+          [Install]
+          WantedBy=multi-user.target
+          SERVICE
+
+            systemctl daemon-reload
+            systemctl enable "$APP_NAME"
+            systemctl restart "$APP_NAME"
+          fi
+          REMOTE
